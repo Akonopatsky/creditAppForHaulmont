@@ -11,11 +11,19 @@ public class Bank<T, S> {
 
     private Set<S> creditSet;
 
-    public void addClients(T client) {
-        clientSet.add(client);
+    public <U extends T> boolean addClients(U client) {
+        return clientSet.add(client);
     }
 
-    public void addCredit(S credit) {
-        creditSet.add(credit);
+    public <U extends S> boolean addCredit(U credit) {
+        return creditSet.add(credit);
+    }
+
+    public <U extends T> boolean removeClient(U client) {
+        return clientSet.remove(client);
+    }
+
+    public <U extends S> boolean removeCredit(U credit) {
+        return creditSet.remove(credit);
     }
 }

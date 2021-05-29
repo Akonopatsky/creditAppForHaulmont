@@ -9,4 +9,11 @@ public interface MonetaryAmount {
     MonetaryAmount divide(long amount);
     MonetaryAmount divide(double amount);
     MonetaryAmount divide(Number amount);
+    boolean isGreaterThan(MonetaryAmount amount);
+    boolean isGreaterThanOrEqualsTo(MonetaryAmount amount);
+    boolean isLessThan(MonetaryAmount amount);
+    boolean isLessThanOrEqualsTo(MonetaryAmount amount);
+    boolean isEqualTo(MonetaryAmount amount);
+    MonetaryAmount createCopy();
+
 }

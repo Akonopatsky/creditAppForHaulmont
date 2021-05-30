@@ -25,12 +25,45 @@ public class CreditOffer {
         paymentList = offerBuilder.paymentList;
     }
 
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Credit getCredit() {
+        return credit;
+    }
+
+    public Money getCreditAmount() {
+        return creditAmount;
+    }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
     public static class OfferBuilder {
         private Client client;
         private Credit credit;
         private Money creditAmount;
         private LocalDate beginDate;
         private List<Payment> paymentList;
+
+        public OfferBuilder() {
+            super();
+        }
+
+        public OfferBuilder beginDate(LocalDate date) {
+            this.beginDate = date;
+            return this;
+        }
 
         public OfferBuilder client(Client client) {
             this.client = client;
@@ -65,23 +98,28 @@ public class CreditOffer {
             int period = credit.getPeriod().getMonths();
             List<Payment> paymentList = new ArrayList<>(period+1);
             double coeff = (rate)/(1-Math.pow(1+rate, -period));
+            logger.info("coeff= {}", coeff);
             Money monthPayment = creditAmount.multiply(coeff);
             Money body = Money.from(creditAmount);
-            for (int i = 1; i < period; i++) {
+            for (int i = 0; i < period-1; i++) {
                 Money interest = body.multiply(rate);
                 Money bodyPayment  = monthPayment.subtract(interest);
                 paymentList.add(i, new Payment(beginDate.plusMonths(i), monthPayment, bodyPayment, interest));
-                body = body.subtract(monthPayment);
+                logger.info("body = {}", body);
+                logger.info("monthPaymant= {}" , monthPayment);
+                body = body.subtract(bodyPayment);
+                logger.info("остаток долга= {}", body);
             }
             Money interest = body.multiply(rate);
-            paymentList.add(period, new Payment(beginDate.plusMonths(period), body.add(interest), body, interest));
+            paymentList.add(period-1, new Payment(beginDate.plusMonths(period), body.add(interest), body, interest));
             return paymentList;
         }
 
         private boolean validateBuilder() {
-            return (client != null && credit != null && creditAmount != null);
+            return (client != null
+                    && credit != null
+                    && creditAmount != null
+                    && beginDate != null);
         }
-
-
     }
 }

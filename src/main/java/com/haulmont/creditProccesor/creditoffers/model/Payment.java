@@ -17,5 +17,19 @@ public class Payment {
         this.amountOfInterest = amountOfInterest;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
 
+    public Money getAmountOfPayment() {
+        return amountOfPayment;
+    }
+
+    public Money getAmountOfBody() {
+        return amountOfBody;
+    }
+
+    public Money getAmountOfInterest() {
+        return amountOfInterest;
+    }
 }

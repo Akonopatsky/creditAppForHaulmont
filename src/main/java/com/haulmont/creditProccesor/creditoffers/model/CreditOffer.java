@@ -98,17 +98,13 @@ public class CreditOffer {
             int period = credit.getPeriod().getMonths();
             List<Payment> paymentList = new ArrayList<>(period+1);
             double coeff = (rate)/(1-Math.pow(1+rate, -period));
-            logger.info("coeff= {}", coeff);
             Money monthPayment = creditAmount.multiply(coeff);
             Money body = Money.from(creditAmount);
             for (int i = 0; i < period-1; i++) {
                 Money interest = body.multiply(rate);
                 Money bodyPayment  = monthPayment.subtract(interest);
                 paymentList.add(i, new Payment(beginDate.plusMonths(i), monthPayment, bodyPayment, interest));
-                logger.info("body = {}", body);
-                logger.info("monthPaymant= {}" , monthPayment);
                 body = body.subtract(bodyPayment);
-                logger.info("остаток долга= {}", body);
             }
             Money interest = body.multiply(rate);
             paymentList.add(period-1, new Payment(beginDate.plusMonths(period), body.add(interest), body, interest));

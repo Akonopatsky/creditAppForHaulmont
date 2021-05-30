@@ -1,16 +1,16 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.creditoffers.money.MonetaryAmount;
+import org.javamoney.moneta.Money;
 
 import java.time.LocalDate;
 
 public class Payment {
     private LocalDate date;
-    private MonetaryAmount amountOfPayment;
-    private MonetaryAmount amountOfBody;
-    private MonetaryAmount amountOfInterest;
+    private Money amountOfPayment;
+    private Money amountOfBody;
+    private Money amountOfInterest;
 
-    public Payment(LocalDate date, MonetaryAmount amountOfPayment, MonetaryAmount amountOfBody, MonetaryAmount amountOfInterest) {
+    public Payment(LocalDate date, Money amountOfPayment, Money amountOfBody, Money amountOfInterest) {
         this.date = date;
         this.amountOfPayment = amountOfPayment;
         this.amountOfBody = amountOfBody;

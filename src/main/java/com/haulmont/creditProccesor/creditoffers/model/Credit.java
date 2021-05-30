@@ -1,6 +1,6 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.creditoffers.money.MonetaryAmount;
+import org.javamoney.moneta.Money;
 
 import java.time.Period;
 import java.util.UUID;
@@ -9,13 +9,13 @@ public class Credit {
 
     private UUID uuid;
 
-    private MonetaryAmount creditLimit;
+    private Money creditLimit;
 
     private double interestRate;
 
     private Period period;
 
-    public Credit(MonetaryAmount creditLimit, double interestRate, Period period) {
+    public Credit(Money creditLimit, double interestRate, Period period) {
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
         this.period = period;
@@ -25,7 +25,7 @@ public class Credit {
         return uuid;
     }
 
-    public MonetaryAmount getCreditLimit() {
+    public Money getCreditLimit() {
         return creditLimit;
     }
 

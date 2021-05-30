@@ -1,6 +1,6 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.creditoffers.money.MonetaryAmount;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class CreditOffer {
     private UUID uuid;
     private Client client;
     private Credit credit;
-    private MonetaryAmount creditAmount;
+    private Money creditAmount;
     private List<Payment> paymentList;
 
     public CreditOffer(OfferBuilder offerBuilder) {
@@ -28,7 +28,7 @@ public class CreditOffer {
     public static class OfferBuilder {
         private Client client;
         private Credit credit;
-        private MonetaryAmount creditAmount;
+        private Money creditAmount;
         private LocalDate beginDate;
         private List<Payment> paymentList;
 
@@ -42,7 +42,7 @@ public class CreditOffer {
             return this;
         }
 
-        public OfferBuilder creditAmount(MonetaryAmount amount) {
+        public OfferBuilder creditAmount(Money amount) {
             this.creditAmount = amount;
             return this;
         }
@@ -65,15 +65,15 @@ public class CreditOffer {
             int period = credit.getPeriod().getMonths();
             List<Payment> paymentList = new ArrayList<>(period+1);
             double coeff = (rate)/(1-Math.pow(1+rate, -period));
-            MonetaryAmount monthPayment = creditAmount.multiply(coeff);
-            MonetaryAmount body = creditAmount.createCopy();
+            Money monthPayment = creditAmount.multiply(coeff);
+            Money body = Money.from(creditAmount);
             for (int i = 1; i < period; i++) {
-                MonetaryAmount interest = body.multiply(rate);
-                MonetaryAmount bodyPayment  = monthPayment.subtract(interest);
+                Money interest = body.multiply(rate);
+                Money bodyPayment  = monthPayment.subtract(interest);
                 paymentList.add(i, new Payment(beginDate.plusMonths(i), monthPayment, bodyPayment, interest));
                 body = body.subtract(monthPayment);
             }
-            MonetaryAmount interest = body.multiply(rate);
+            Money interest = body.multiply(rate);
             paymentList.add(period, new Payment(beginDate.plusMonths(period), body.add(interest), body, interest));
             return paymentList;
         }

@@ -30,6 +30,7 @@ class CreditOfferTest {
                 .credit(credit)
                 .creditAmount(creditAmount)
                 .client(client)
+                .payStrategy(new PayStrategyАnnuity())
                 .build();
         Money monthAmount = Money.of(14676.33, "RUB");
         List<Payment> paymentList = creditOffer.getPaymentList();

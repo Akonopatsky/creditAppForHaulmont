@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -50,6 +49,7 @@ public class CreditOffer {
     }
 
     public static class OfferBuilder {
+        private PayStrategy payStrategy;
         private Client client;
         private Credit credit;
         private Money creditAmount;
@@ -80,10 +80,15 @@ public class CreditOffer {
             return this;
         }
 
+        public OfferBuilder payStrategy(PayStrategy payStrategy) {
+            this.payStrategy = payStrategy;
+            return this;
+        }
+
         public CreditOffer build() {
             CreditOffer creditOffer = null;
             if (validateBuilder()) {
-                paymentList = calcPayments();
+                paymentList = payStrategy.calculate(credit, creditAmount, beginDate);
                 creditOffer = new CreditOffer(this);
             } else {
                 logger.error("There is no valid data for CreditOffer building");
@@ -91,28 +96,9 @@ public class CreditOffer {
             return creditOffer;
         }
 
-        private List<Payment> calcPayments(){
-            // TODO: 29.05.2021  strategy
-
-            double rate = credit.getInterestRate()/1200d;
-            int period = credit.getPeriod().getMonths();
-            List<Payment> paymentList = new ArrayList<>(period+1);
-            double coeff = (rate)/(1-Math.pow(1+rate, -period));
-            Money monthPayment = creditAmount.multiply(coeff);
-            Money body = Money.from(creditAmount);
-            for (int i = 0; i < period-1; i++) {
-                Money interest = body.multiply(rate);
-                Money bodyPayment  = monthPayment.subtract(interest);
-                paymentList.add(i, new Payment(beginDate.plusMonths(i), monthPayment, bodyPayment, interest));
-                body = body.subtract(bodyPayment);
-            }
-            Money interest = body.multiply(rate);
-            paymentList.add(period-1, new Payment(beginDate.plusMonths(period), body.add(interest), body, interest));
-            return paymentList;
-        }
-
         private boolean validateBuilder() {
-            return (client != null
+            return (payStrategy != null
+                    && client != null
                     && credit != null
                     && creditAmount != null
                     && beginDate != null);

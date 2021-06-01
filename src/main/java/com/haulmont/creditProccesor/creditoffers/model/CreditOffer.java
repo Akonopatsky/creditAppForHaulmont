@@ -12,10 +12,10 @@ public class CreditOffer {
     private static final Logger logger = LoggerFactory.getLogger(CreditOffer.class);
 
     private UUID uuid;
-    private Client client;
-    private Credit credit;
-    private Money creditAmount;
-    private List<Payment> paymentList;
+    private final Client client;
+    private final Credit credit;
+    private final Money creditAmount;
+    private final List<Payment> paymentList;
 
     public CreditOffer(OfferBuilder offerBuilder) {
         this.client = offerBuilder.client;

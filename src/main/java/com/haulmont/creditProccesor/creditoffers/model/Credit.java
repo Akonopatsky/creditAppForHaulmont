@@ -9,11 +9,11 @@ public class Credit {
 
     private UUID uuid;
 
-    private Money creditLimit;
+    private final Money creditLimit;
 
-    private double interestRate;
+    private final double interestRate;
 
-    private Period period;
+    private final Period period;
 
     public Credit(Money creditLimit, double interestRate, Period period) {
         this.creditLimit = creditLimit;

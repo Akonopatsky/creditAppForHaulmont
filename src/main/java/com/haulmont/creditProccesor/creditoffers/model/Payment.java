@@ -5,10 +5,10 @@ import org.javamoney.moneta.Money;
 import java.time.LocalDate;
 
 public class Payment {
-    private LocalDate date;
-    private Money amountOfPayment;
-    private Money amountOfBody;
-    private Money amountOfInterest;
+    private final LocalDate date;
+    private final Money amountOfPayment;
+    private final Money amountOfBody;
+    private final Money amountOfInterest;
 
     public Payment(LocalDate date, Money amountOfPayment, Money amountOfBody, Money amountOfInterest) {
         this.date = date;

@@ -1,5 +1,6 @@
-package com.haulmont.creditProccesor.creditoffers.model;
+package com.haulmont.creditProccesor.business.model;
 
+import com.haulmont.creditProccesor.business.PayStrategy;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

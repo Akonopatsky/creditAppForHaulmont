@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.creditoffers.model;
+package com.haulmont.creditProccesor.business.model;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -1,12 +1,15 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
+import com.haulmont.creditProccesor.business.*;
+import com.haulmont.creditProccesor.business.model.Client;
+import com.haulmont.creditProccesor.business.model.Credit;
+import com.haulmont.creditProccesor.business.model.CreditOffer;
+import com.haulmont.creditProccesor.business.model.Payment;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 
-import javax.money.Monetary;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.stream.Collectors;
@@ -30,7 +33,7 @@ class CreditOfferTest {
                 .credit(credit)
                 .creditAmount(creditAmount)
                 .client(client)
-                .payStrategy(new PayStrategyАnnuity())
+                .payStrategy(new PayStrategyAnnuity())
                 .build();
         Money monthAmount = Money.of(14676.33, "RUB");
         List<Payment> paymentList = creditOffer.getPaymentList();

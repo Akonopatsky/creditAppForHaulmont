@@ -1,13 +1,14 @@
-package com.haulmont.creditProccesor.creditoffers.model;
+package com.haulmont.creditProccesor.business;
 
+import com.haulmont.creditProccesor.business.model.Credit;
+import com.haulmont.creditProccesor.business.model.Payment;
 import org.javamoney.moneta.Money;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PayStrategyАnnuity implements PayStrategy {
+public class PayStrategyAnnuity implements PayStrategy {
     @Override
     public List<Payment> calculate(Credit credit, Money amount, LocalDate date) {
         double rate = credit.getInterestRate()/1200d;

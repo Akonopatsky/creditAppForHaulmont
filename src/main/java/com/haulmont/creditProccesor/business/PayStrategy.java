@@ -1,10 +1,10 @@
-package com.haulmont.creditProccesor.creditoffers.model;
+package com.haulmont.creditProccesor.business;
 
-import jdk.jfr.Percentage;
+import com.haulmont.creditProccesor.business.model.Credit;
+import com.haulmont.creditProccesor.business.model.Payment;
 import org.javamoney.moneta.Money;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 public interface PayStrategy {

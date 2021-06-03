@@ -5,11 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-Bank  src/main/resources/WEB-INF/templates/bank.html <br>
-<p th:text="${bank.uuid}">uu</p> <br>
-
-
-
-
+<div th:insert="bank_list.html :: bankList"></div>
+<div th:insert="bank_create.html :: bankCreate"></div>
 </body>
 </html>

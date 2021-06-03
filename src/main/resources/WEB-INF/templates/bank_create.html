@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="bankCreate">
+    <h1>New Bank</h1>
+    <form id="create-form" method="post"
+          th:action="@{/bank/save}"
+          th:object="${bankNew}"
+          accept-charset="utf-8">
+        <div class="row">
+            <label for="name-input">Name:</label>
+            <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+        </div>
+        <br>
+        <div class="row">
+            <button type="submit" style="width:100px">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

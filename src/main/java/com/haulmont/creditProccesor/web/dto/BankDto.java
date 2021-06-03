@@ -14,8 +14,9 @@ public class BankDto {
     public BankDto() {
     }
 
-    public BankDto(String uuid, Set<String> clientSet, Set<String> creditSet) {
+    public BankDto(String uuid, String name, Set<String> clientSet, Set<String> creditSet) {
         this.uuid = uuid;
+        this.name = name;
         this.clientSet = clientSet;
         this.creditSet = creditSet;
     }

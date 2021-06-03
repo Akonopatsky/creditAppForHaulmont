@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="bankList">
+    <h1>Bank list</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        <tr th:each="bank : ${bankList}">
+            <th><a th:href="@{/bank/{id}(id=${bank.uuid})}"
+                   target="_blank"
+                   th:text=" ${bank.name}"> bank name </a></th>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

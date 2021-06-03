@@ -7,6 +7,8 @@ public class Bank<T, S> {
 
     private UUID uuid;
 
+    private String name;
+
     private Set<T> clientSet;
 
     private Set<S> creditSet;
@@ -26,4 +28,5 @@ public class Bank<T, S> {
     public <U extends S> boolean removeCredit(U credit) {
         return creditSet.remove(credit);
     }
+
 }

@@ -9,6 +9,8 @@ public class CreditDto {
 
     private int period;
 
+    private String bankId;
+
     public CreditDto() {
     }
 

@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BankServiceImpl implements BankService<BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
@@ -15,6 +17,11 @@ public class BankServiceImpl implements BankService<BankDto> {
 
     @Override
     public BankDto getById(Object id) {
+        return null;
+    }
+
+    @Override
+    public List<BankDto> getAll() {
         return null;
     }
 }

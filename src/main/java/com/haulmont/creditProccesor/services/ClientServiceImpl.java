@@ -13,16 +13,18 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     @Override
     public void save(ClientDto client) {
-
+        logger.info("save client {}", client);
     }
 
     @Override
     public ClientDto findById(Object id) {
+        logger.info("find client by id {}", id);
         return null;
     }
 
     @Override
     public List<ClientDto> findByBank(BankDto bank) {
+        logger.info("find all client of bank {}", bank);
         return null;
     }
 }

@@ -11,17 +11,21 @@ import java.util.List;
 public class BankServiceImpl implements BankService<BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
     @Override
-    public void save(BankDto bankDto) {
+    public void save(BankDto bank) {
+        logger.info("save bank {}", bank);
 
     }
 
     @Override
     public BankDto getById(Object id) {
+
+        logger.info("get by id {}", id);
         return null;
     }
 
     @Override
     public List<BankDto> getAll() {
+        logger.info("get all banks");
         return null;
     }
 }

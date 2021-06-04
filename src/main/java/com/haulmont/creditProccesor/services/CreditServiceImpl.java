@@ -9,18 +9,21 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class CreditServiceImpl implements CreditService<CreditDto, BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(CreditServiceImpl.class);
+
     @Override
     public void save(CreditDto credit) {
-
+        logger.info("save credit {}", credit);
     }
 
     @Override
     public CreditDto findAllByBank(BankDto bank) {
+        logger.info("find all credit of bank {}", bank);
         return null;
     }
 
     @Override
     public CreditDto findById(Object id) {
+        logger.info("find credit by id {}", id);
         return null;
     }
 }

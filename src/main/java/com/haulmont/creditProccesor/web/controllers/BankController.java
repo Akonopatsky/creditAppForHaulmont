@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,9 +24,9 @@ public class BankController {
     public BankController(BankService<BankDto> bankService) {
         this.bankService = bankService;
     }
-    
+
     @GetMapping({"/bank/list"})
-    public String bankView(Model model) {
+    public String bankListView(Model model) {
         List<BankDto> bankList = new ArrayList<>();
         bankList.add(new BankDto("uuid1", "BankName1", Collections.singleton("client1"), Collections.singleton("credit1")));
         bankList.add(new BankDto("uuid2", "BankName2", Collections.singleton("client2"), Collections.singleton("credit2")));
@@ -38,5 +39,15 @@ public class BankController {
         logger.info("new bank {}", bankNew.getName());
         bankService.save(bankNew);
         return new RedirectView("/", true);
+    }
+
+    @GetMapping({"/bank/{id}}"})
+    public String bankView(
+            Model model,
+            @PathVariable(name = "id") String id
+    ) {
+        BankDto bank = bankService.getById(id);
+        model.addAttribute("bank", bank);
+        return "bank.html";
     }
 }

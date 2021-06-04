@@ -3,7 +3,7 @@ package com.haulmont.creditProccesor.web.dto;
 import java.util.Set;
 
 public class BankDto {
-    private String uuid;
+    private String id;
 
     private String name;
 
@@ -14,19 +14,19 @@ public class BankDto {
     public BankDto() {
     }
 
-    public BankDto(String uuid, String name, Set<String> clientSet, Set<String> creditSet) {
-        this.uuid = uuid;
+    public BankDto(String id, String name, Set<String> clientSet, Set<String> creditSet) {
+        this.id = id;
         this.name = name;
         this.clientSet = clientSet;
         this.creditSet = creditSet;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Set<String> getClientSet() {

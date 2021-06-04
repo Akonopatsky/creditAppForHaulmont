@@ -1,7 +1,7 @@
 package com.haulmont.creditProccesor.web.dto;
 
 public class CreditDto {
-    private String uuid;
+    private String id;
 
     private double creditLimit;
 
@@ -14,12 +14,12 @@ public class CreditDto {
     public CreditDto() {
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getCreditLimit() {

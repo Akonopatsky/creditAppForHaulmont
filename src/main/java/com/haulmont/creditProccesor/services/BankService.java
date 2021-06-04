@@ -1,11 +1,13 @@
 package com.haulmont.creditProccesor.services;
 
-import java.util.List;
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+
+import java.util.Set;
 
 public interface BankService<BankDto> {
     void save(BankDto bankDto);
 
-    BankDto getById(Object id);
+    BankDto getById(Object id) throws CreditProcessorException;
 
-    List<BankDto> getAll();
+    Set<com.haulmont.creditProccesor.web.dto.BankDto> getAll();
 }

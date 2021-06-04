@@ -1,20 +1,16 @@
 package com.haulmont.creditProccesor.web.controllers;
 
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.services.BankService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 @Controller
 public class BankController {
@@ -26,11 +22,7 @@ public class BankController {
     }
 
     @GetMapping({"/bank/list"})
-    public String bankListView(Model model) {
-        List<BankDto> bankList = new ArrayList<>();
-        bankList.add(new BankDto("uuid1", "BankName1", Collections.singleton("client1"), Collections.singleton("credit1")));
-        bankList.add(new BankDto("uuid2", "BankName2", Collections.singleton("client2"), Collections.singleton("credit2")));
-        model.addAttribute("bankList", bankList);
+    public String bankListView() {
         return "bank_list.html";
     }
 
@@ -45,9 +37,14 @@ public class BankController {
     public String bankView(
             Model model,
             @PathVariable(name = "id") String id
-    ) {
+    ) throws CreditProcessorException {
         BankDto bank = bankService.getById(id);
         model.addAttribute("bank", bank);
         return "bank.html";
+    }
+
+    @ModelAttribute("bankList")
+    Set<BankDto> getAllBanks() {
+        return bankService.getAll();
     }
 }

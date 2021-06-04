@@ -1,31 +1,42 @@
 package com.haulmont.creditProccesor.services;
 
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.dao.BankDao;
+import com.haulmont.creditProccesor.dao.Entities.BankEntity;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class BankServiceImpl implements BankService<BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
-    @Override
-    public void save(BankDto bank) {
-        logger.info("save bank {}", bank);
 
+    private final DtoMapper mapper;
+    private final BankDao<BankEntity> bankDao;
+
+    public BankServiceImpl(DtoMapper mapper, BankDao<BankEntity> bankDao) {
+        this.mapper = mapper;
+        this.bankDao = bankDao;
     }
 
     @Override
-    public BankDto getById(Object id) {
+    public void save(BankDto bankDto) {
+        logger.info("save bank {}", bankDto);
+        bankDao.save(mapper.saveForm(bankDto));
+    }
 
+    @Override
+    public BankDto getById(Object id) throws CreditProcessorException {
         logger.info("get by id {}", id);
-        return null;
+        return mapper.findById(bankDao.findById(id));
     }
 
     @Override
-    public List<BankDto> getAll() {
+    public Set<BankDto> getAll() {
         logger.info("get all banks");
-        return null;
+        return mapper.findAll(bankDao.findAll());
     }
 }

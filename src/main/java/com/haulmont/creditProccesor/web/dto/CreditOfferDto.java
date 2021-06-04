@@ -4,9 +4,9 @@ import java.util.List;
 
 public class CreditOfferDto {
 
-    private String uuid;
+    private String id;
     private String client;
-    private String credit;
+    private CreditDto credit;
     private double creditAmount;
     private List<PaymentDto> paymentList;
 }

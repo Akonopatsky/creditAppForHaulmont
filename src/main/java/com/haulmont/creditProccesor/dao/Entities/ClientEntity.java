@@ -48,6 +48,10 @@ public class ClientEntity {
         return passportNumber;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

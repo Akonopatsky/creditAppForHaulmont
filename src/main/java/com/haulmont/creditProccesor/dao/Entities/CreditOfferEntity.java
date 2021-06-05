@@ -27,4 +27,24 @@ public class CreditOfferEntity {
 
     @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<PaymentEntity> paymentList;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public ClientEntity getClient() {
+        return client;
+    }
+
+    public CreditEntity getCredit() {
+        return credit;
+    }
+
+    public BigDecimal getCreditAmount() {
+        return creditAmount;
+    }
+
+    public List<PaymentEntity> getPaymentList() {
+        return paymentList;
+    }
 }

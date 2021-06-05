@@ -19,6 +19,29 @@ public class CreditEntity {
     @Column(name = "interestRate")
     private double interestRate;
 
+    @Column(name = "period")
+    private int period;
+
     @ManyToOne()
     private BankEntity bank;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public BigDecimal getCreditLimit() {
+        return creditLimit;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public BankEntity getBank() {
+        return bank;
+    }
+
+    public int getPeriod() {
+        return period;
+    }
 }

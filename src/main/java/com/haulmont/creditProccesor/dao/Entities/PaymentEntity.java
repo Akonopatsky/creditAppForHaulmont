@@ -31,4 +31,24 @@ public class PaymentEntity {
     @ManyToOne
     @JoinColumn(name = "creditOffer_id", nullable = false)
     private CreditOfferEntity creditOffer;
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public BigDecimal getAmountOfPaymant() {
+        return amountOfPaymant;
+    }
+
+    public BigDecimal getAmountOfBody() {
+        return amountOfBody;
+    }
+
+    public BigDecimal getAmountOfInterest() {
+        return amountOfInterest;
+    }
+
+    public CreditOfferEntity getCreditOffer() {
+        return creditOffer;
+    }
 }

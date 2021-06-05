@@ -21,6 +21,14 @@ public class BankController {
         this.bankService = bankService;
     }
 
+    @GetMapping({"/"})
+    public String mainView(
+            Model model,
+            @ModelAttribute("bankNew") BankDto bankNew
+    ) {
+        return "index.html";
+    }
+
     @GetMapping({"/bank/list"})
     public String bankListView() {
         return "bank_list.html";
@@ -33,7 +41,7 @@ public class BankController {
         return new RedirectView("/", true);
     }
 
-    @GetMapping({"/bank/{id}}"})
+    @GetMapping({"/bank/{id}"})
     public String bankView(
             Model model,
             @PathVariable(name = "id") String id

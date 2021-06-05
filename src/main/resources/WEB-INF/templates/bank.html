@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<div th : th:object="bank">
+<div th:object="${bank}">
     <p>Name: <span th:text="*{name}"> client name </span> </p>
 </div>
 </body>

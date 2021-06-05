@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<h1>New Bank</h1>
 <div th:fragment="bankCreate">
-    <h1>New Bank</h1>
     <form id="create-form" method="post"
           th:action="@{/bank/save}"
-          th:object="${bankNew}"
+          th:object="${newBank}"
           accept-charset="utf-8">
         <div class="row">
             <label for="name-input">Name:</label>

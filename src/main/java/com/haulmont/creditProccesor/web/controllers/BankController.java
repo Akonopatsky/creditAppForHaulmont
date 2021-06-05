@@ -35,9 +35,9 @@ public class BankController {
     }
 
     @PostMapping({"/bank/save"})
-    public RedirectView bankSave(@ModelAttribute BankDto bankNew) {
-        logger.info("new bank {}", bankNew.getName());
-        bankService.save(bankNew);
+    public RedirectView bankSave(@ModelAttribute BankDto newBank) {
+        logger.info("new bank {}", newBank.getName());
+        bankService.save(newBank);
         return new RedirectView("/", true);
     }
 

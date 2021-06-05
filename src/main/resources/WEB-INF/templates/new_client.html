@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>New client</h1>
+<div th:fragment="bankCreate">
+    <form id="create-form" method="post"
+          th:action="@{/client/save}"
+          th:object="${newClient}"
+          accept-charset="utf-8">
+        <div class="row">
+            <label for="name-input">Name:</label>
+            <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+            <label for="name-input">Passport:</label>
+            <input id="name-input" type="text" th:field="*{passportNumber}" th:placeholder="*{passportNumber}"/>
+            <label for="name-input">phoneNumber:</label>
+            <input id="name-input" type="text" th:field="*{phoneNumber}" th:placeholder="*{phoneNumber}"/>
+        </div>
+        <br>
+        <div class="row">
+            <button type="submit" style="width:100px">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

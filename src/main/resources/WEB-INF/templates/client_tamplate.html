@@ -5,8 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+
+<h1>Client</h1>
+<div th:fragment="client">
+    <div th:object="${client}">
+        <p>Name: <span th:text="*{name}"> client name </span></p>
+        <p>Name: <span th:text="*{phonenumber}"> client phonenumber </span></p>
+        <p>Name: <span th:text="*{passportNumber}"> client passportNumber </span></p>
+    </div>
+</div>
+
 <h1>New client</h1>
-<div th:fragment="bankCreate">
+<div th:fragment="clientCreate">
     <form id="create-form" method="post"
           th:action="@{/client/save}"
           th:object="${newClient}"
@@ -24,6 +34,20 @@
             <button type="submit" style="width:100px">Save</button>
         </div>
     </form>
+</div>
+<h1> Client List</h1>
+<div th:fragment="clientList">
+    <h1>Bank list</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        <tr th:each="client : ${clientList}">
+            <th><a th:href="@{/client/{id}(id=${client.id})}"
+                   target="_blank"
+                   th:text=" ${client.name}"> bank name </a></th>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 package com.haulmont.creditProccesor.dao;
 
 
-import com.haulmont.creditProccesor.dao.Entities.ClientEntity;
+import com.haulmont.creditProccesor.dao.Entities.Client;
 import com.haulmont.creditProccesor.dao.repositities.ClientRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,9 +16,9 @@ class CreditApplicationTests {
 ClientRepository clientRepository;
 	@Test
 	void contextLoads() {
-		clientRepository.save(new ClientEntity("dfsd", "fdsfsd","fsddf"));
-		clientRepository.save(new ClientEntity("dfsddfs", "fdsfsdfd","fsddf"));
-		clientRepository.save(new ClientEntity("dfdfsd", "fdsfgdfsd","fsgtrhgddf"));
+		clientRepository.save(new Client("dfsd", "fdsfsd","fsddf"));
+		clientRepository.save(new Client("dfsddfs", "fdsfsdfd","fsddf"));
+		clientRepository.save(new Client("dfdfsd", "fdsfgdfsd","fsgtrhgddf"));
 		System.out.println("wwwww");
 		System.out.println("all" + clientRepository.findAll());
 		clientRepository.findAll().forEach(System.out::println);

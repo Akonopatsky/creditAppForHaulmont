@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<!--<link rel="stylesheet" type="text/css" th : href="@{/style.css}"/>-->
+<link rel="stylesheet" th:href="@{/static/css/style.css}"/>
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div th:insert="bank_list.html"></div>
-<div th:insert="new_bank.html :: bankCreate"></div>
+<div th:insert="bank_tamplate.html :: bankCreate"></div>
+<div th:insert="bank_tamplate.html :: bankList"></div>
+<a th:href="@{/client/}">clientService</a>
 
 <p> test css style</p>
 
 </head>
-<body>
-<a href="#" class="c">Комментировать</a>
-</body>
+
 </body>
 </html>

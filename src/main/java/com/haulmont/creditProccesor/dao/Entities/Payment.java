@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payments")
-public class PaymentEntity {
+public class Payment {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class PaymentEntity {
 
     @ManyToOne
     @JoinColumn(name = "creditOffer_id", nullable = false)
-    private CreditOfferEntity creditOffer;
+    private CreditOffer creditOffer;
 
     public LocalDate getDate() {
         return date;
@@ -48,7 +48,7 @@ public class PaymentEntity {
         return amountOfInterest;
     }
 
-    public CreditOfferEntity getCreditOffer() {
+    public CreditOffer getCreditOffer() {
         return creditOffer;
     }
 }

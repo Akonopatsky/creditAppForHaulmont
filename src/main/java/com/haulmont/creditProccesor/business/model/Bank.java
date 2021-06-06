@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Bank<Client, Credit> {
 
-    private UUID uuid;
+    private UUID id;
 
     private String name;
 
@@ -29,4 +29,19 @@ public class Bank<Client, Credit> {
         return creditSet.remove(credit);
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<Client> getClientSet() {
+        return clientSet;
+    }
+
+    public Set<Credit> getCreditSet() {
+        return creditSet;
+    }
 }

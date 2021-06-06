@@ -21,8 +21,13 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @GetMapping({"/client/"})
+    public String clientsView(Model model) {
+        return "clientservice.html";
+    }
+
     @GetMapping({"/client/{id}"})
-    String userView(
+    public String clientView(
             Model model,
             @PathVariable(name = "id") String id
     ) {
@@ -31,9 +36,15 @@ public class ClientController {
     }
 
     @PostMapping({"/client/save"})
-    String clientSave(@ModelAttribute ClientDto newClient) {
+    public String clientSave(@ModelAttribute ClientDto newClient) {
         logger.info("new client {}", newClient);
         clientService.save(newClient);
         return "client.html";
+    }
+
+    @ModelAttribute("newClient")
+    public ClientDto getEmptyClientDto() {
+        logger.info("create empty client object");
+        return new ClientDto();
     }
 }

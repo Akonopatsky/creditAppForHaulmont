@@ -20,7 +20,7 @@ public class BankEntity {
             name = "bank_client",
             joinColumns = @JoinColumn(name = "bank_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id"))
-    private Set<ClientEntity> clientSet;
+    private Set<Client> clientSet;
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CreditEntity> creditSet;
@@ -38,7 +38,7 @@ public class BankEntity {
         return id;
     }
 
-    public Set<ClientEntity> getClientSet() {
+    public Set<Client> getClientSet() {
         return clientSet;
     }
 

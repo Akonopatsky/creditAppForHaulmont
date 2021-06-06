@@ -7,9 +7,9 @@ public class BankDto {
 
     private String name;
 
-    private Set<String> clientSet;
+/*    private Set<String> clientSet;
 
-    private Set<String> creditSet;
+    private Set<String> creditSet;*/
 
     public BankDto() {
     }
@@ -17,8 +17,8 @@ public class BankDto {
     public BankDto(String id, String name, Set<String> clientSet, Set<String> creditSet) {
         this.id = id;
         this.name = name;
-        this.clientSet = clientSet;
-        this.creditSet = creditSet;
+/*        this.clientSet = clientSet;
+        this.creditSet = creditSet;*/
     }
 
     public String getId() {
@@ -29,7 +29,7 @@ public class BankDto {
         this.id = id;
     }
 
-    public Set<String> getClientSet() {
+/*    public Set<String> getClientSet() {
         return clientSet;
     }
 
@@ -43,7 +43,7 @@ public class BankDto {
 
     public void setCreditSet(Set<String> creditSet) {
         this.creditSet = creditSet;
-    }
+    }*/
 
     public String getName() {
         return name;

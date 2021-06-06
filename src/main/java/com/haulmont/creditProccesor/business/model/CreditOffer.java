@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CreditOffer {
     private static final Logger logger = LoggerFactory.getLogger(CreditOffer.class);
 
-    private UUID uuid;
+    private UUID id;
     private final Client client;
     private final Credit credit;
     private final Money creditAmount;
@@ -29,8 +29,8 @@ public class CreditOffer {
         return logger;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public Client getClient() {

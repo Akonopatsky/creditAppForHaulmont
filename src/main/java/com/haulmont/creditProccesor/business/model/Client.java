@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Client {
 
-    private UUID uuid;
+    private UUID id;
 
     private String name;
 
@@ -19,8 +19,8 @@ public class Client {
         this.passportNumber = passportNumber;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public String getName() {
@@ -52,18 +52,18 @@ public class Client {
         if (this == o) return true;
         if (!(o instanceof Client)) return false;
         Client client = (Client) o;
-        return Objects.equals(uuid, client.uuid) && name.equals(client.name) && passportNumber.equals(client.passportNumber);
+        return Objects.equals(id, client.id) && name.equals(client.name) && passportNumber.equals(client.passportNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, name, passportNumber);
+        return Objects.hash(id, name, passportNumber);
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "uuid=" + uuid +
+                "uuid=" + id +
                 ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +

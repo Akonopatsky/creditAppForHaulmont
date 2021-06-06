@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "clients")
-public class ClientEntity {
+public class Client {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,10 +27,10 @@ public class ClientEntity {
     @ManyToMany(mappedBy = "clientSet")
     private Set<BankEntity> bankSet;
 
-    public ClientEntity() {
+    public Client() {
     }
 
-    public ClientEntity(String name, String phoneNumber, String passportNumber) {
+    public Client(String name, String phoneNumber, String passportNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
@@ -55,8 +55,8 @@ public class ClientEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ClientEntity)) return false;
-        ClientEntity client = (ClientEntity) o;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
         return name.equals(client.name) && Objects.equals(phoneNumber, client.phoneNumber) && passportNumber.equals(client.passportNumber);
     }
 

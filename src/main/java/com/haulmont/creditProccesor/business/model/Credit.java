@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Credit {
 
-    private UUID uuid;
+    private UUID id;
 
     private final Money creditLimit;
 
@@ -21,8 +21,8 @@ public class Credit {
         this.period = period;
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
     public Money getCreditLimit() {

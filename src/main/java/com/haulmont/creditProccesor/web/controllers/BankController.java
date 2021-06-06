@@ -55,4 +55,9 @@ public class BankController {
     Set<BankDto> getAllBanks() {
         return bankService.getAll();
     }
+
+    @ModelAttribute("newBank")
+    BankDto getEmptyBank() {
+        return new BankDto();
+    }
 }

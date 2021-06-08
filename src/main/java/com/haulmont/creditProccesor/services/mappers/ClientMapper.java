@@ -25,7 +25,7 @@ public class ClientMapper {
         return clientDto;
     }
 
-    public List<ClientDto> getAll(Set<Client> clientSet) {
+    public List<ClientDto> getAll(List<Client> clientSet) {
         return clientSet.stream().map(this::getById).collect(Collectors.toList());
     }
 

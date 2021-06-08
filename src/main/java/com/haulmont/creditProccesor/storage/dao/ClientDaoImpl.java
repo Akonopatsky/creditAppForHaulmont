@@ -37,7 +37,7 @@ public class ClientDaoImpl implements ClientDao<Client, Bank> {
     }
 
     @Override
-    public Set<Client> findByBank(Bank bank) {
+    public List<Client> findByBank(Bank bank) {
         return null;
     }
 }

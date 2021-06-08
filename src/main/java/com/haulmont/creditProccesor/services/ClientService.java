@@ -8,4 +8,6 @@ public interface ClientService<ClientDto, BankDto> {
     void save(ClientDto client);
     ClientDto findById(Object id) throws CreditProcessorException;
     List<ClientDto> findByBank(BankDto bank) throws CreditProcessorException;
+
+    List<ClientDto> findAll();
 }

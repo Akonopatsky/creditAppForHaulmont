@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.model;
 
+import com.haulmont.creditProccesor.model.converters.MoneyConverter;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +30,10 @@ public class CreditOffer {
     private final Credit credit;
 
     @Column(name = "creditAmount")
+    @Convert(converter = MoneyConverter.class)
     private final Money creditAmount;
 
-    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private final List<Payment> paymentList;
 
     public CreditOffer() {
@@ -70,6 +72,17 @@ public class CreditOffer {
 
     public List<Payment> getPaymentList() {
         return paymentList;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditOffer{" +
+                "id=" + id +
+                ", client=" + client +
+                ", credit=" + credit +
+                ", creditAmount=" + creditAmount +
+                ", paymentList=" + paymentList +
+                '}';
     }
 
     public static class OfferBuilder {

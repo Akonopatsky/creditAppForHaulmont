@@ -1,5 +1,7 @@
 package com.haulmont.creditProccesor.model;
 
+import com.haulmont.creditProccesor.model.converters.MoneyConverter;
+import com.haulmont.creditProccesor.model.converters.PeriodConverter;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
@@ -16,12 +18,14 @@ public class Credit {
     private UUID id;
 
     @Column(name = "creditLimit")
+    @Convert(converter = MoneyConverter.class)
     private final Money creditLimit;
 
     @Column(name = "interestRate")
     private final double interestRate;
 
     @Column(name = "period")
+    @Convert(converter = PeriodConverter.class)
     private final Period period;
 
     @ManyToOne()

@@ -36,7 +36,7 @@ public class Bank {
         this.creditSet = new HashSet<>();
     }
 
-    public boolean addClients(Client client) {
+    public boolean addClient(Client client) {
         return clientSet.add(client);
     }
 

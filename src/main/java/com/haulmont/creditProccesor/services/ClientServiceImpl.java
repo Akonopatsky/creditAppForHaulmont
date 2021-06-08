@@ -45,5 +45,10 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
         logger.info("find all client of bank {}", bankDto);
         return mapper.getAll(clientDao.findByBank(bankDao.findById(bankDto.getId())));
     }
+
+    @Override
+    public List<ClientDto> findAll() {
+        return mapper.getAll((clientDao.findAll()));
+    }
 }
 

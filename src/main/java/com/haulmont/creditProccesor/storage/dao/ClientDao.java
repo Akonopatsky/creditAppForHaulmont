@@ -14,5 +14,5 @@ public interface ClientDao<T,U> {
 
     List<T> findAll();
 
-    Set<T> findByBank(U bank);
+    List<T> findByBank(U bank);
 }

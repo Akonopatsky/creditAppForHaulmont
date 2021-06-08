@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.model;
 
+import com.haulmont.creditProccesor.model.converters.MoneyConverter;
 import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
@@ -19,16 +20,19 @@ public class Payment {
     private final LocalDate date;
 
     @Column(name = "amountOfPaymant")
+    @Convert(converter = MoneyConverter.class)
     private final Money amountOfPayment;
 
     @Column(name = "amountOfBody")
+    @Convert(converter = MoneyConverter.class)
     private final Money amountOfBody;
 
     @Column(name = "amountOfInterest")
+    @Convert(converter = MoneyConverter.class)
     private final Money amountOfInterest;
 
     @ManyToOne
-    @JoinColumn(name = "creditOffer_id", nullable = false)
+    @JoinColumn(name = "creditOffer_id")
     private CreditOffer creditOffer;
 
     public Payment() {

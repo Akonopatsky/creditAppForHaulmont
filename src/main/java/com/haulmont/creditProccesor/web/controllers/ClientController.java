@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Controller
 public class ClientController {
@@ -22,8 +25,9 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping({"/client/"})
+    @GetMapping({"/clientService/"})
     public String clientsView(Model model) {
+        logger.info("clientsView ");
         return "clientservice.html";
     }
 
@@ -32,20 +36,27 @@ public class ClientController {
             Model model,
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
+        logger.info("get client by id {}", id);
         model.addAttribute("client", clientService.findById(id));
         return "client.html";
     }
 
     @PostMapping({"/client/save"})
-    public String clientSave(@ModelAttribute ClientDto newClient) {
+    public RedirectView clientSave(@ModelAttribute ClientDto newClient) {
         logger.info("new client {}", newClient);
         clientService.save(newClient);
-        return "client.html";
+        return new RedirectView("/clientService/", true);
     }
 
     @ModelAttribute("newClient")
     public ClientDto getEmptyClientDto() {
         logger.info("create empty client object");
         return new ClientDto();
+    }
+
+    @ModelAttribute("clientList")
+    public List<ClientDto> getClientList() {
+        logger.info("get client list");
+        return clientService.findAll();
     }
 }

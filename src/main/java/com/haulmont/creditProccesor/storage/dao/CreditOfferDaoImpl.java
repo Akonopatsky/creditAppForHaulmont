@@ -1,13 +1,14 @@
 package com.haulmont.creditProccesor.storage.dao;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
-import com.haulmont.creditProccesor.storage.Domain.CreditOfferData;
+import com.haulmont.creditProccesor.model.CreditOffer;
 import com.haulmont.creditProccesor.storage.repositities.CreditOfferRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
-
-public class CreditOfferDaoImpl implements CreditOfferDao<CreditOfferData> {
+@Component
+public class CreditOfferDaoImpl implements CreditOfferDao<CreditOffer> {
     private final CreditOfferRepository creditOfferRepository;
 
     public CreditOfferDaoImpl(CreditOfferRepository creditOfferRepository) {
@@ -15,19 +16,19 @@ public class CreditOfferDaoImpl implements CreditOfferDao<CreditOfferData> {
     }
 
     @Override
-    public void save(CreditOfferData creditOffer) {
+    public void save(CreditOffer creditOffer) {
         creditOfferRepository.save(creditOffer);
     }
 
     @Override
-    public CreditOfferData findById(Object id) throws CreditProcessorException {
+    public CreditOffer findById(Object id) throws CreditProcessorException {
         UUID uuid  = UUID.fromString(id.toString());
         return creditOfferRepository.findById(uuid).orElseThrow(
                 () -> new CreditProcessorException("there is no creditOffer uuid " + uuid));
     }
 
     @Override
-    public List<CreditOfferData> findAll() {
-        return (List<CreditOfferData>)creditOfferRepository.findAll();
+    public List<CreditOffer> findAll() {
+        return (List<CreditOffer>)creditOfferRepository.findAll();
     }
 }

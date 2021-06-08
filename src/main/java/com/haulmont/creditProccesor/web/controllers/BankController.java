@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Set;
+import java.util.List;
 
 @Controller
 public class BankController {
@@ -52,7 +52,7 @@ public class BankController {
     }
 
     @ModelAttribute("bankList")
-    Set<BankDto> getAllBanks() {
+    List<BankDto> getAllBanks() {
         return bankService.getAll();
     }
 

@@ -1,7 +1,5 @@
-package com.haulmont.creditProccesor.business.model;
+package com.haulmont.creditProccesor.model;
 
-import com.haulmont.creditProccesor.business.model.Credit;
-import com.haulmont.creditProccesor.business.model.Payment;
 import org.javamoney.moneta.Money;
 
 import java.time.LocalDate;

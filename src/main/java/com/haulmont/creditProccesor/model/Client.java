@@ -1,17 +1,35 @@
-package com.haulmont.creditProccesor.business.model;
+package com.haulmont.creditProccesor.model;
 
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
+@Entity
+@Table(name = "clients")
 public class Client {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private UUID id;
 
+    @Column(name = "name")
     private String name;
 
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @Column(name = "passportNumber")
     private String passportNumber;
+
+    @ManyToMany(mappedBy = "clientSet")
+    private Set<Bank> bankSet;
+
+    public Client() {
+    }
 
     public Client(String name, String phoneNumber, String passportNumber) {
         this.name = name;
@@ -59,12 +77,12 @@ public class Client {
         if (this == o) return true;
         if (!(o instanceof Client)) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id) && name.equals(client.name) && passportNumber.equals(client.passportNumber);
+        return id.equals(client.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, passportNumber);
+        return Objects.hash(id);
     }
 
     @Override

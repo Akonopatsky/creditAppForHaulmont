@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.business.model;
+package com.haulmont.creditProccesor.model;
 
 import org.javamoney.moneta.Money;
 

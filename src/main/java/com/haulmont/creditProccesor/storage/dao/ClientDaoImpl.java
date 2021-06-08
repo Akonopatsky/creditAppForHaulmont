@@ -1,15 +1,16 @@
 package com.haulmont.creditProccesor.storage.dao;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
-import com.haulmont.creditProccesor.storage.Domain.ClientData;
+
+import com.haulmont.creditProccesor.model.Client;
 import com.haulmont.creditProccesor.storage.repositities.ClientRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-public class ClientDaoImpl implements ClientDao<ClientData> {
+@Component
+public class ClientDaoImpl implements ClientDao<Client> {
     private final ClientRepository clientRepository;
 
     public ClientDaoImpl(ClientRepository clientRepository) {
@@ -17,19 +18,19 @@ public class ClientDaoImpl implements ClientDao<ClientData> {
     }
 
     @Override
-    public void save(ClientData client) {
+    public void save(Client client) {
         clientRepository.save(client);
     }
 
     @Override
-    public ClientData findById(Object id) throws CreditProcessorException {
+    public Client findById(Object id) throws CreditProcessorException {
         UUID uuid  = UUID.fromString(id.toString());
         return clientRepository.findById(uuid).orElseThrow(
                 () -> new CreditProcessorException("there is no client uuid " + uuid));
     }
 
     @Override
-    public List<ClientData> findAll() {
-        return (List<ClientData>)clientRepository.findAll();
+    public List<Client> findAll() {
+        return (List<Client>)clientRepository.findAll();
     }
 }

@@ -1,21 +1,45 @@
-package com.haulmont.creditProccesor.business.model;
+package com.haulmont.creditProccesor.model;
 
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "creditOffers")
 public class CreditOffer {
     private static final Logger logger = LoggerFactory.getLogger(CreditOffer.class);
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private UUID id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
     private final Client client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "credit_id")
     private final Credit credit;
+
+    @Column(name = "creditAmount")
     private final Money creditAmount;
+
+    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private final List<Payment> paymentList;
+
+    public CreditOffer() {
+        client = null;
+        credit = null;
+        creditAmount = null;
+        paymentList = null;
+    }
 
     public CreditOffer(OfferBuilder offerBuilder) {
         this.client = offerBuilder.client;

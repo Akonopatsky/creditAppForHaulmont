@@ -1,27 +1,37 @@
 package com.haulmont.creditProccesor.services.mappers;
 
-
-import com.haulmont.creditProccesor.business.model.*;
+import com.haulmont.creditProccesor.model.*;
 import com.haulmont.creditProccesor.storage.dao.CreditDao;
 import com.haulmont.creditProccesor.web.dto.*;
 import org.javamoney.moneta.Money;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.time.Period;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+@Component
 public class DtoToModelMapper {
-    private final CreditDao<CreditDto> creditDao;
+/*    private final CreditDao<CreditDto> creditDao;
 
     public DtoToModelMapper(CreditDao<CreditDto> creditDao) {
         this.creditDao = creditDao;
-    }
+    }*/
 
     public Bank getNewBank(BankDto bankDto) {
         return new Bank(bankDto.getName());
+    }
+
+    public List<BankDto> getAll(Set<Bank> bankEntitySet) {
+        return bankEntitySet.stream().map(bankEntity -> getById(bankEntity)).collect(Collectors.toList());
+    }
+
+    public BankDto getById(Bank bank) {
+        BankDto bankDto = new BankDto();
+        bankDto.setId(bank.getId().toString());
+        bankDto.setName(bank.getName());
+        return bankDto;
     }
 
     public Client getNewClient(ClientDto clientDto) {
@@ -44,16 +54,7 @@ public class DtoToModelMapper {
     }
 */
 
-    public List<BankDto> getAll(Set<Bank> bankEntitySet) {
-        return bankEntitySet.stream().map(bankEntity -> getById(bankEntity)).collect(Collectors.toList());
-    }
 
-    public BankDto getById(Bank bank) {
-        BankDto bankDto = new BankDto();
-        bankDto.setId(bank.getId().toString());
-        bankDto.setName(bank.getName());
-        return bankDto;
-    }
 
     public ClientDto getById(Client client) {
         ClientDto clientDto = new ClientDto();

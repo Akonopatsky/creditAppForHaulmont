@@ -1,6 +1,6 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.business.model.*;
+import com.haulmont.creditProccesor.model.*;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +57,5 @@ class CreditOfferTest {
                 creditOffer.getPaymentList().get(period-1).getAmountOfBody()
                         .subtract(bodyAmountPaymentList.get(period - 1)).abs()
                         .isLessThan(Money.of(0.01, "RUB").multiply(period)));
-        System.out.println(creditOffer.getPaymentList().get(0).getAmountOfPayment().getNumberStripped().doubleValue());
     }
 }

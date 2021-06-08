@@ -1,3 +1,4 @@
+/*
 package com.haulmont.creditProccesor.services.mappers;
 
 import com.haulmont.creditProccesor.model.*;
@@ -11,15 +12,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
-public class DtoToModelMapper {
+*/
+/*@Component
+public class DtoToModelMapper {*//*
+
+*/
 /*    private final CreditDao<CreditDto> creditDao;
 
     public DtoToModelMapper(CreditDao<CreditDto> creditDao) {
         this.creditDao = creditDao;
-    }*/
+    }*//*
 
-    public Bank getNewBank(BankDto bankDto) {
+
+*/
+/*    public Bank getNewBank(BankDto bankDto) {
         return new Bank(bankDto.getName());
     }
 
@@ -32,29 +38,15 @@ public class DtoToModelMapper {
         bankDto.setId(bank.getId().toString());
         bankDto.setName(bank.getName());
         return bankDto;
-    }
+    }*//*
 
-    public Client getNewClient(ClientDto clientDto) {
+
+*/
+/*    public Client getNewClient(ClientDto clientDto) {
         return new Client(clientDto.getName(),
                 clientDto.getPhoneNumber(),
                 clientDto.getPassportNumber());
     }
-
-    public Credit getNewCredit(CreditDto creditDto) {
-        return new Credit(Money.of(creditDto.getCreditLimit(), "RUB"),
-                creditDto.getCreditLimit(),
-                Period.ofMonths(creditDto.getPeriod()));
-    }
-
-/*
-    public  CreditOffer getNewCreditOffer(CreditOfferDto creditOfferDto) {
-        Credit credit = cre
-        CreditOffer creditOffer = new CreditOffer.OfferBuilder()
-                .credit(getById(UUID.fromString(creditOfferDto.getCredit().getId()));
-    }
-*/
-
-
 
     public ClientDto getById(Client client) {
         ClientDto clientDto = new ClientDto();
@@ -65,16 +57,45 @@ public class DtoToModelMapper {
         return clientDto;
     }
 
-    public CreditDto getById(Credit credit) {
+    public List<ClientDto> getAll(Set<Client> clientSet) {
+        return clientSet.stream().map(this::getById).collect(Collectors.toList());
+    }
+
+    public Credit getNewCredit(CreditDto creditDto) {
+        return new Credit(Money.of(creditDto.getCreditLimit(), "RUB"),
+                creditDto.getCreditLimit(),
+                Period.ofMonths(creditDto.getPeriod()));
+    }
+    *//*
+
+
+*/
+/*
+    public  CreditOffer getNewCreditOffer(CreditOfferDto creditOfferDto) {
+        Credit credit = cre
+        CreditOffer creditOffer = new CreditOffer.OfferBuilder()
+                .credit(getById(UUID.fromString(creditOfferDto.getCredit().getId()));
+    }
+*//*
+
+
+
+
+
+
+*/
+/*    public CreditDto getById(Credit credit) {
         CreditDto creditDto = new CreditDto();
         creditDto.setId(credit.getId().toString());
         creditDto.setCreditLimit(credit.getCreditLimit().getNumberStripped().doubleValue());
         creditDto.setInterestRate(credit.getInterestRate());
         creditDto.setPeriod(credit.getPeriod().getMonths());
         return creditDto;
-    }
+    }*//*
 
-    public CreditOfferDto getById(CreditOffer creditOffer) {
+
+*/
+/*    public CreditOfferDto getById(CreditOffer creditOffer) {
         CreditOfferDto creditOfferDto = new CreditOfferDto();
         creditOfferDto.setId(creditOffer.getId().toString());
         creditOfferDto.setClient(getById(creditOffer.getClient()));
@@ -94,7 +115,9 @@ public class DtoToModelMapper {
         paymentDto.setAmountOfPayment(payment.getAmountOfPayment().getNumberStripped().doubleValue());
         paymentDto.setDate(payment.getDate());
         return paymentDto;
-    }
+    }*//*
+
 
 
 }
+*/

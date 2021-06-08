@@ -2,7 +2,7 @@ package com.haulmont.creditProccesor.services;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.model.Bank;
-import com.haulmont.creditProccesor.services.mappers.DtoToModelMapper;
+import com.haulmont.creditProccesor.services.mappers.BankMapper;
 import com.haulmont.creditProccesor.storage.dao.BankDao;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 
@@ -16,10 +16,10 @@ import java.util.List;
 public class BankServiceImpl implements BankService<BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
 
-    private final DtoToModelMapper mapper;
+    private final BankMapper mapper;
     private final BankDao<Bank> bankDao;
 
-    public BankServiceImpl(DtoToModelMapper mapper, BankDao<Bank> bankDao) {
+    public BankServiceImpl(BankMapper mapper, BankDao<Bank> bankDao) {
         this.mapper = mapper;
         this.bankDao = bankDao;
     }

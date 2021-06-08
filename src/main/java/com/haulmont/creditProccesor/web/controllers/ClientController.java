@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.web.controllers;
 
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.services.ClientService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
@@ -30,7 +31,7 @@ public class ClientController {
     public String clientView(
             Model model,
             @PathVariable(name = "id") String id
-    ) {
+    ) throws CreditProcessorException {
         model.addAttribute("client", clientService.findById(id));
         return "client.html";
     }

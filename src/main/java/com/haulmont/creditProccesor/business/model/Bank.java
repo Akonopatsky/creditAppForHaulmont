@@ -13,6 +13,10 @@ public class Bank<Client, Credit> {
 
     private Set<Credit> creditSet;
 
+    public Bank(String name) {
+        this.name = name;
+    }
+
     public <U extends Client> boolean addClients(U client) {
         return clientSet.add(client);
     }

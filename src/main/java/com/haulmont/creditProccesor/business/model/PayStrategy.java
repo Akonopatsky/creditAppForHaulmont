@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.business;
+package com.haulmont.creditProccesor.business.model;
 
 import com.haulmont.creditProccesor.business.model.Credit;
 import com.haulmont.creditProccesor.business.model.Payment;

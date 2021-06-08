@@ -1,11 +1,11 @@
-package com.haulmont.creditProccesor.dao.Entities;
+package com.haulmont.creditProccesor.storage.Domain;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "banks")
-public class BankEntity {
+public class BankData {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
@@ -20,15 +20,15 @@ public class BankEntity {
             name = "bank_client",
             joinColumns = @JoinColumn(name = "bank_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id"))
-    private Set<Client> clientSet;
+    private Set<ClientData> clientSet;
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<CreditEntity> creditSet;
+    private Set<CreditData> creditSet;
 
-    public BankEntity() {
+    public BankData() {
     }
 
-    public BankEntity(String name) {
+    public BankData(String name) {
         this.name = name;
         this.clientSet = new HashSet<>();
         this.creditSet = new HashSet<>();
@@ -38,11 +38,11 @@ public class BankEntity {
         return id;
     }
 
-    public Set<Client> getClientSet() {
+    public Set<ClientData> getClientSet() {
         return clientSet;
     }
 
-    public Set<CreditEntity> getCreditList() {
+    public Set<CreditData> getCreditList() {
         return creditSet;
     }
 

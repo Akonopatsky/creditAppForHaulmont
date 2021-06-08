@@ -1,5 +1,7 @@
 package com.haulmont.creditProccesor.services;
 
+import com.haulmont.creditProccesor.storage.dao.ClientDao;
+import com.haulmont.creditProccesor.services.mappers.ClientMapper;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.slf4j.Logger;
@@ -11,9 +13,20 @@ import java.util.List;
 @Service
 public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
     private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
+
+    private final ClientDao clientDao;
+    private final ClientMapper mapper;
+
+    public ClientServiceImpl(ClientDao clientDao, ClientDao mapper) {
+        this.clientDao = clientDao;
+        this.mapper = mapper.saveForm();
+    }
+
     @Override
     public void save(ClientDto client) {
         logger.info("save client {}", client);
+        clientDao.save(mapper.s);
+
     }
 
     @Override

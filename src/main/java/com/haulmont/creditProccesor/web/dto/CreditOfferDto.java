@@ -4,6 +4,7 @@ import java.util.List;
 
 public class CreditOfferDto {
     private String id;
+    private String payStrategy;
     private ClientDto client;
     private CreditDto credit;
     private double creditAmount;
@@ -15,6 +16,14 @@ public class CreditOfferDto {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPayStrategy() {
+        return payStrategy;
+    }
+
+    public void setPayStrategy(String payStrategy) {
+        this.payStrategy = payStrategy;
     }
 
     public ClientDto getClient() {

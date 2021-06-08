@@ -1,10 +1,6 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.business.*;
-import com.haulmont.creditProccesor.business.model.Client;
-import com.haulmont.creditProccesor.business.model.Credit;
-import com.haulmont.creditProccesor.business.model.CreditOffer;
-import com.haulmont.creditProccesor.business.model.Payment;
+import com.haulmont.creditProccesor.business.model.*;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 

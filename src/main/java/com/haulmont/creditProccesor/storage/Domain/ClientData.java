@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.dao.Entities;
+package com.haulmont.creditProccesor.storage.Domain;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "clients")
-public class Client {
+public class ClientData {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -25,15 +25,23 @@ public class Client {
     private String passportNumber;
 
     @ManyToMany(mappedBy = "clientSet")
-    private Set<BankEntity> bankSet;
+    private Set<BankData> bankSet;
 
-    public Client() {
+    public ClientData() {
     }
 
-    public Client(String name, String phoneNumber, String passportNumber) {
+    public ClientData(String name, String phoneNumber, String passportNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
+    }
+
+    public ClientData(UUID id, String name, String phoneNumber, String passportNumber, Set<BankData> bankSet) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.passportNumber = passportNumber;
+        this.bankSet = bankSet;
     }
 
     public String getName() {
@@ -55,8 +63,8 @@ public class Client {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Client)) return false;
-        Client client = (Client) o;
+        if (!(o instanceof ClientData)) return false;
+        ClientData client = (ClientData) o;
         return name.equals(client.name) && Objects.equals(phoneNumber, client.phoneNumber) && passportNumber.equals(client.passportNumber);
     }
 

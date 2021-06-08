@@ -19,6 +19,13 @@ public class Client {
         this.passportNumber = passportNumber;
     }
 
+    public Client(UUID id, String name, String phoneNumber, String passportNumber) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.passportNumber = passportNumber;
+    }
+
     public UUID getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.dao.Entities;
+package com.haulmont.creditProccesor.storage.Domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "creditOffers")
-public class CreditOffer {
+public class CreditOfferData {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
@@ -16,27 +16,27 @@ public class CreditOffer {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    private Client client;
+    private ClientData client;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "credit_id")
-    private CreditEntity credit;
+    private CreditData credit;
 
     @Column(name = "creditAmount")
     private BigDecimal creditAmount;
 
     @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Payment> paymentList;
+    private List<PaymentData> paymentList;
 
     public UUID getId() {
         return id;
     }
 
-    public Client getClient() {
+    public ClientData getClient() {
         return client;
     }
 
-    public CreditEntity getCredit() {
+    public CreditData getCredit() {
         return credit;
     }
 
@@ -44,7 +44,7 @@ public class CreditOffer {
         return creditAmount;
     }
 
-    public List<Payment> getPaymentList() {
+    public List<PaymentData> getPaymentList() {
         return paymentList;
     }
 }

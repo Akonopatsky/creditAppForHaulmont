@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.dao.Entities;
+package com.haulmont.creditProccesor.storage.Domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "payments")
-public class Payment {
+public class PaymentData {
 
     @Id
     @GeneratedValue
@@ -30,7 +30,7 @@ public class Payment {
 
     @ManyToOne
     @JoinColumn(name = "creditOffer_id", nullable = false)
-    private CreditOffer creditOffer;
+    private CreditOfferData creditOffer;
 
     public LocalDate getDate() {
         return date;
@@ -48,7 +48,7 @@ public class Payment {
         return amountOfInterest;
     }
 
-    public CreditOffer getCreditOffer() {
+    public CreditOfferData getCreditOffer() {
         return creditOffer;
     }
 }

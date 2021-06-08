@@ -1,4 +1,4 @@
-package com.haulmont.creditProccesor.dao.Entities;
+package com.haulmont.creditProccesor.storage.Domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "credits")
-public class CreditEntity {
+public class CreditData {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
@@ -23,7 +23,7 @@ public class CreditEntity {
     private int period;
 
     @ManyToOne()
-    private BankEntity bank;
+    private BankData bank;
 
     public UUID getId() {
         return id;
@@ -37,7 +37,7 @@ public class CreditEntity {
         return interestRate;
     }
 
-    public BankEntity getBank() {
+    public BankData getBank() {
         return bank;
     }
 

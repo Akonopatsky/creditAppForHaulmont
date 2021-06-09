@@ -1,21 +1,83 @@
-/*
-<style>
-.c {
-    border: 1px solid #333; !* Рамка *!
+
+.main_button {
+    width: 100px;
+    height: 25px;
+    border: 2px solid #777;
     display: inline-block;
-    padding: 5px 15px; !* Поля *!
-    text-decoration: none; !* Убираем подчёркивание *!
-    color: #000; !* Цвет текста *!
+    padding: 5px 15px;
+    text-decoration: none;
+    text-align: center;
+    color: #500;
+
 }
-.c:hover {
-    box-shadow: 0 0 5px rgba(0,0,0,0.3); !* Тень *!
-    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); !* Градиент *!
+
+.main_button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
     color: #a00;
 }
-</style>*/
 
-p {
-    font-weight: bold;
-    color: #1E824C;
-    font-size: 1em;
+.top_button {
+/*    width: 50px;
+    height: 15px;*/
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #fff;
+    display: inline-block;
+    padding: 5px 35px;
+    text-decoration: none;
+    text-align: center;
+    color: #500;
+
 }
+
+.top_button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    color: #a00;
+}
+
+.main_menu {
+    list-style: none;
+    margin: 20px 0 5px;
+    padding: 25px 0 5px;
+    text-align: center;
+    background: white;
+    display: inline-block;
+}
+
+.main_menu li {
+    display: inline-block;
+}
+
+.main_menu li:after {
+    content: "|";
+    color: #606060;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.main_menu a {
+    text-decoration: none;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 20px;
+    margin: 0 34px 0 30px;
+    font-size: 17px;
+    text-transform: uppercase;
+    display: inline-block;
+ /*   transition: color .2s;*/
+}
+
+.main_menu a
+.main_menu a:visited {
+    color: #9d999d;
+}
+
+.main_menu a.current,
+.main_menu a:hover {
+    color: #feb386;
+}
+
+

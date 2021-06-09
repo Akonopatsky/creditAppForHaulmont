@@ -29,6 +29,12 @@ public class BankController {
         return "index.html";
     }
 
+    @GetMapping({"/bankService/"})
+    public String clientsView(Model model) {
+        logger.info("bankView ");
+        return "bankservice.html";
+    }
+
     @GetMapping({"/bank/list"})
     public String bankListView() {
         return "bank_list.html";

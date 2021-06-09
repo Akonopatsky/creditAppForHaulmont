@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" th:href="@{../static/css/style.css}"/>
-
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <div th:insert="/blanks/main_tamplate.html :: top_menu"></div>
 </head>
 <body>
-<div th:insert="/blanks/client_tamplate.html :: clientCreate"></div>
-<div th:insert="/blanks/client_tamplate.html :: clientList"></div>
-
-<p> test css style</p>
-
-</head>
-
+<div class="wrapper">
+    <div th:insert="/blanks/main_tamplate.html :: top_menu"></div>
+    <h1>New client Новый клиент</h1>
+    <div th:insert="/blanks/client_tamplate.html :: clientCreate"></div>
+    <h1>List of client</h1>
+    <div class="list" th:insert="/blanks/client_tamplate.html :: clientList"></div>
+</div>
 </body>
 </html>

@@ -5,7 +5,7 @@ import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import java.util.List;
 
 public interface ClientService<ClientDto, BankDto> {
-    void save(ClientDto client);
+    void save(ClientDto client) throws CreditProcessorException;
     ClientDto findById(Object id) throws CreditProcessorException;
     List<ClientDto> findByBank(BankDto bank) throws CreditProcessorException;
 

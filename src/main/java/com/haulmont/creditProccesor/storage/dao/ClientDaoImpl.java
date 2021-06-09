@@ -8,6 +8,7 @@ import com.haulmont.creditProccesor.storage.repositities.ClientRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -29,6 +30,11 @@ public class ClientDaoImpl implements ClientDao<Client, Bank> {
         UUID uuid  = UUID.fromString(id.toString());
         return clientRepository.findById(uuid).orElseThrow(
                 () -> new CreditProcessorException("there is no client uuid " + uuid));
+    }
+
+    @Override
+    public Optional<Client> findByPassportNumber(String passport) {
+        return clientRepository.findByPassportNumber(passport);
     }
 
     @Override

@@ -1,5 +1,6 @@
 
 package com.haulmont.creditProccesor.services;
+
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.model.Bank;
 import com.haulmont.creditProccesor.model.Client;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
@@ -29,8 +31,11 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
     }
 
     @Override
-    public void save(ClientDto clientDto) {
+    public void save(ClientDto clientDto) throws CreditProcessorException {
         logger.info("save client {}", clientDto);
+        if (clientDao.findByPassportNumber(clientDto.getPassportNumber()).isPresent()) {
+            throw new CreditProcessorException("passport number " + clientDto.getPassportNumber() + " is present in base");
+        }
         clientDao.save(mapper.getNewClient(clientDto));
     }
 

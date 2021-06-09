@@ -18,8 +18,8 @@
 }
 
 .top_button {
-/*    width: 50px;
-    height: 15px;*/
+    /*    width: 50px;
+        height: 15px;*/
     margin-left: 20px;
     margin-right: 20px;
     border: 1px solid #fff;
@@ -67,7 +67,7 @@
     font-size: 17px;
     text-transform: uppercase;
     display: inline-block;
- /*   transition: color .2s;*/
+    /*   transition: color .2s;*/
 }
 
 .main_menu a
@@ -78,6 +78,30 @@
 .main_menu a.current,
 .main_menu a:hover {
     color: #feb386;
+}
+
+.wrapper {
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.list {
+    alignment: left;
+}
+.list ul{
+    list-style-type:circle;
+}
+
+h1 {
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 15px;
+}
+
+p {
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 14px;
+    color: black;
 }
 
 

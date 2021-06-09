@@ -10,8 +10,9 @@
 <div th:fragment="client">
     <div th:object="${client}">
         <p>Name: <span th:text="*{name}"> client name </span></p>
-        <p>Name: <span th:text="*{phonenumber}"> client phonenumber </span></p>
-        <p>Name: <span th:text="*{passportNumber}"> client passportNumber </span></p>
+        <p>phone number: <span th:text="*{phoneNumber}"> client phonenumber </span></p>
+        <p>e-mail: <span th:text="*{email}"> client e-mail </span></p>
+        <p>passport: <span th:text="*{passportNumber}"> client passportNumber </span></p>
     </div>
 </div>
 
@@ -21,7 +22,7 @@
           th:action="@{/client/save}"
           th:object="${newClient}"
           accept-charset="utf-8">
-        <div class="row">
+        <div>
             <label for="name-input">Name:</label>
             <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
             <label for="name-input">Passport:</label>
@@ -39,17 +40,12 @@
 </div>
 <h1> Client List</h1>
 <div th:fragment="clientList">
-    <h1>Client list</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-        </tr>
-        <tr th:each="client : ${clientList}">
-            <th><a th:href="@{/client/{id}(id=${client.id})}"
+        <ul th:each="client : ${clientList}">
+            <li><a th:href="@{/client/{id}(id=${client.id})}"
                    target="_blank"
                    th:text=" ${client.name}"> bank name </a></th>
-        </tr>
-    </table>
+            </li>
+        </ul>
 </div>
 </body>
 </html>

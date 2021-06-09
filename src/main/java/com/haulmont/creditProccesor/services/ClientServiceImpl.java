@@ -44,6 +44,7 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
         logger.info("find client by id {}", id);
         return mapper.getById(clientDao.findById(id));
     }
+    
 
     @Override
     public List<ClientDto> findByBank(BankDto bankDto) throws CreditProcessorException {

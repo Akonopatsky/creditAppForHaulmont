@@ -28,6 +28,8 @@
             <input id="name-input" type="text" th:field="*{passportNumber}" th:placeholder="*{passportNumber}"/>
             <label for="name-input">phoneNumber:</label>
             <input id="name-input" type="text" th:field="*{phoneNumber}" th:placeholder="*{phoneNumber}"/>
+            <label for="name-input">e-mail:</label>
+            <input id="name-input" type="text" th:field="*{email}" th:placeholder="*{email}"/>
         </div>
         <br>
         <div class="row">
@@ -37,7 +39,7 @@
 </div>
 <h1> Client List</h1>
 <div th:fragment="clientList">
-    <h1>Bank list</h1>
+    <h1>Client list</h1>
     <table>
         <tr>
             <th>Name</th>

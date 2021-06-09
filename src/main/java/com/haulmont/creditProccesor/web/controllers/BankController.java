@@ -51,6 +51,13 @@ public class BankController {
         return "bank.html";
     }
 
+    @PutMapping({"/bank/{bankId}/client/{clientId}"})
+    public String bankAddClient(@PathVariable(name = "bankId") String bankId,
+                                @PathVariable(name = "clientId") String clientId) {
+        logger.info("bank {} add client {}", bankId);
+        return "bank_client.html";
+    }
+
     @ModelAttribute("bankList")
     List<BankDto> getAllBanks() {
         return bankService.getAll();

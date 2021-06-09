@@ -22,6 +22,9 @@ public class Client {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "passportNumber")
     private String passportNumber;
 

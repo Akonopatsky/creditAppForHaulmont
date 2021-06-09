@@ -8,6 +8,8 @@ public class ClientDto {
 
     private String phoneNumber;
 
+    private String email;
+
     private String passportNumber;
 
     public ClientDto() {
@@ -43,5 +45,13 @@ public class ClientDto {
 
     public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

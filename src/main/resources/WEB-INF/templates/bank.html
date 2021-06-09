@@ -7,11 +7,12 @@
     <title>Title</title>
 </head>
 <body>
-<div th:insert="/blanks/bank_tamplate.html :: bankCreate"></div>
-<div th:insert="/blanks/bank_tamplate.html :: bankList"></div>
+<div th:insert="/blanks/bank_tamplate.html :: bank"></div>
 <a th:href="@{/clientService/}">clientService</a>
 
-<p> test css style</p>
+<a th:href="@{/bank/{bankid}(bankid=${bank.id})/client/{clientid}(clientid=${client.id})}"
+   target="_blank"
+   th:text=" ${bank.name} +' add ' + ${client.name}"> bank add client </a>
 
 </head>
 

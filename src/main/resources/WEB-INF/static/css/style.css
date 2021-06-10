@@ -10,13 +10,27 @@
     color: #500;
 
 }
-
 .main_button:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
     color: #a00;
 }
+.act_button {
+    width: 80px;
+    height: 17px;
+    border: 1px solid #100;
+    display: inline-block;
+    padding: 5px 15px;
+    text-decoration: none;
+    text-align: center;
+    color: #500;
 
+}
+.act_button:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #fcfff0, #e9e9c0);
+    color: #4008;
+}
 .top_button {
     /*    width: 50px;
         height: 15px;*/

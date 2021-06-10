@@ -1,7 +1,9 @@
 package com.haulmont.creditProccesor.storage.dao;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.model.Client;
 
+import java.util.List;
 import java.util.Set;
 
 public interface BankDao<T> {
@@ -10,5 +12,5 @@ public interface BankDao<T> {
 
     T findById(Object id) throws CreditProcessorException;
 
-    Set<T> findAll();
+    List<T> findAll();
 }

@@ -5,7 +5,6 @@ import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -16,17 +15,18 @@ public class ClientMapper {
                 clientDto.getPassportNumber());
     }
 
-    public ClientDto getById(Client client) {
+    public ClientDto convertToDto(Client client) {
         ClientDto clientDto = new ClientDto();
         clientDto.setId(client.getId().toString());
         clientDto.setName(client.getName());
         clientDto.setPhoneNumber(client.getPhoneNumber());
         clientDto.setPassportNumber(client.getPassportNumber());
+        clientDto.setEmail(client.getEmail());
         return clientDto;
     }
 
-    public List<ClientDto> getAll(List<Client> clientSet) {
-        return clientSet.stream().map(this::getById).collect(Collectors.toList());
+    public List<ClientDto> convertToDtoList(List<Client> clientSet) {
+        return clientSet.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
 }

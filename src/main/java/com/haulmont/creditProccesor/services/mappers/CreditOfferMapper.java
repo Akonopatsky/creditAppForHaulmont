@@ -21,7 +21,7 @@ public class CreditOfferMapper {
     public CreditOfferDto getById(CreditOffer creditOffer) {
         CreditOfferDto creditOfferDto = new CreditOfferDto();
         creditOfferDto.setId(creditOffer.getId().toString());
-        creditOfferDto.setClient(clientMapper.getById(creditOffer.getClient()));
+        creditOfferDto.setClient(clientMapper.convertToDto(creditOffer.getClient()));
         creditOfferDto.setCredit(creditMapper.getById(creditOffer.getCredit()));
         creditOfferDto.setCreditAmount(creditOffer.getCreditAmount()
                 .getNumberStripped().doubleValue());

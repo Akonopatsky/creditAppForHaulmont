@@ -17,27 +17,27 @@ public class Bank {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "bank_client",
             joinColumns = @JoinColumn(name = "bank_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id"))
-    private Set<Client> clientSet;
+    private Set<Client> clientSet = new HashSet<>();
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Credit> creditSet;
+    private Set<Credit> creditSet = new HashSet<>();
+
 
     public Bank() {
     }
 
     public Bank(String name) {
         this.name = name;
-        this.clientSet = new HashSet<>();
-        this.creditSet = new HashSet<>();
     }
 
     public boolean addClient(Client client) {
-        return clientSet.add(client);
+        clientSet.add(client);
+        return client.addBank(this);
     }
 
     public boolean addCredit(Credit credit) {
@@ -67,4 +67,5 @@ public class Bank {
     public Set<Credit> getCreditSet() {
         return creditSet;
     }
+
 }

@@ -2,13 +2,11 @@ package com.haulmont.creditProccesor.storage.dao;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.model.Bank;
+import com.haulmont.creditProccesor.model.Client;
 import com.haulmont.creditProccesor.storage.repositities.BankRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class BankDaoImpl implements BankDao<Bank> {
@@ -31,7 +29,7 @@ public class BankDaoImpl implements BankDao<Bank> {
     }
 
     @Override
-    public Set<Bank> findAll() {
-        return new HashSet<Bank>((Collection<? extends Bank>) bankRepository.findAll());
+    public List<Bank> findAll() {
+        return new ArrayList<>((Collection<? extends Bank>) bankRepository.findAll());
     }
 }

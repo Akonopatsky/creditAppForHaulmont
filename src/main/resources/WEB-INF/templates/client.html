@@ -8,10 +8,14 @@
     <title>Title</title>
 </head>
 <body>
-<div class="list" th:insert="/blanks/client_tamplate.html :: client"></div>
-<a class="act_button" th:href="@{/client/{client_id}/bank(client_id=${client.id})}">add bank</a>
-<!--<form id="addBank" th:method="put"
-th:action="@{/client/{client_id}(client_id = ${client.id})/bank">-->
+<div class="wrapper">
+    <div class="list" th:insert="/blanks/client_tamplate.html :: client"></div>
+    <a class="act_button" th:href="@{/client/{client_id}/bank(client_id=${client.id})}">add bank</a>
+    <h1>List of banks</h1>
+    <div th:insert="/blanks/bank_tamplate.html :: bankList"></div>
+    <!--<form id="addBank" th:method="put"
+    th:action="@{/client/{client_id}(client_id = ${client.id})/bank">-->
+</div>
 </body>
 </html>
 

@@ -47,6 +47,7 @@ public class ClientDto {
         this.passportNumber = passportNumber;
     }
 
+
     public String getEmail() {
         return email;
     }

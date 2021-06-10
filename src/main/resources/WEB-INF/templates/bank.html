@@ -7,6 +7,12 @@
     <title>Title</title>
 </head>
 <body>
-<div th:insert="/blanks/bank_tamplate.html :: bank"></div>
+<div class="wrapper">
+    <h1>Bank</h1>
+    <div class="list" th:insert="/blanks/bank_tamplate.html :: bank"></div>
+    <h1>List of client</h1>
+    <div class="list" th:insert="/blanks/client_tamplate.html :: clientList"></div>
+    <a class="act_button" th:href="@{/bank/{bank_id}/bank(bank_id=${bank.id})}">add client</a>
+</div>
 </body>
 </html>

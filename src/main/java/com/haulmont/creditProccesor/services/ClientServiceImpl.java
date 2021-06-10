@@ -12,9 +12,10 @@ import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
@@ -42,19 +43,19 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
     @Override
     public ClientDto findById(Object id) throws CreditProcessorException {
         logger.info("find client by id {}", id);
-        return mapper.getById(clientDao.findById(id));
-    }
-    
-
-    @Override
-    public List<ClientDto> findByBank(BankDto bankDto) throws CreditProcessorException {
-        logger.info("find all client of bank {}", bankDto);
-        return mapper.getAll(clientDao.findByBank(bankDao.findById(bankDto.getId())));
+        return mapper.convertToDto(clientDao.findById(id));
     }
 
     @Override
     public List<ClientDto> findAll() {
-        return mapper.getAll((clientDao.findAll()));
+        return mapper.convertToDtoList((clientDao.findAll()));
+    }
+
+    @Override
+    @Transactional()
+    public List<ClientDto> findByBank(BankDto bank) throws CreditProcessorException {
+        return mapper.convertToDtoList(
+                new ArrayList<>(bankDao.findById(bank.getId()).getClientSet()));
     }
 }
 

@@ -2,7 +2,9 @@ package com.haulmont.creditProccesor.web.controllers;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.services.BankService;
+import com.haulmont.creditProccesor.services.ClientService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
+import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import java.util.List;
 public class BankController {
     private static final Logger logger = LoggerFactory.getLogger(BankController.class);
     private final BankService<BankDto> bankService;
+    private final ClientService<ClientDto, BankDto> clientService;
 
-    public BankController(BankService<BankDto> bankService) {
+    public BankController(BankService<BankDto> bankService, ClientService clientService) {
         this.bankService = bankService;
+        this.clientService = clientService;
     }
 
     @GetMapping({"/"})
@@ -52,8 +56,10 @@ public class BankController {
             Model model,
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
-        BankDto bank = bankService.getById(id);
+        BankDto bank = bankService.findById(id);
         model.addAttribute("bank", bank);
+        List<ClientDto> clientList = clientService.findByBank(bank);
+        model.addAttribute("clientList", clientList);
         return "bank.html";
     }
 
@@ -64,9 +70,11 @@ public class BankController {
         return "bank_client.html";
     }
 
+
+
     @ModelAttribute("bankList")
     List<BankDto> getAllBanks() {
-        return bankService.getAll();
+        return bankService.findAll();
     }
 
     @ModelAttribute("newBank")

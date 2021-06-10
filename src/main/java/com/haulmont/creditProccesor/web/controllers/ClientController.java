@@ -1,6 +1,7 @@
 package com.haulmont.creditProccesor.web.controllers;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.services.BankService;
 import com.haulmont.creditProccesor.services.ClientService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
@@ -17,9 +18,11 @@ import java.util.List;
 public class ClientController {
     private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
     private final ClientService<ClientDto, BankDto> clientService;
+    private final BankService<BankDto> bankService;
 
-    public ClientController(ClientService<ClientDto, BankDto> clientService) {
+    public ClientController(ClientService<ClientDto, BankDto> clientService, BankService<BankDto> bankService) {
         this.clientService = clientService;
+        this.bankService = bankService;
     }
 
     @GetMapping({"/clientService/"})
@@ -34,7 +37,10 @@ public class ClientController {
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
         logger.info("get client by id {}", id);
-        model.addAttribute("client", clientService.findById(id));
+        ClientDto client = clientService.findById(id);
+        model.addAttribute("client", client);
+        List<BankDto> bankList = bankService.findByClient(client);
+        model.addAttribute("bankList", bankList);
         return "client.html";
     }
 

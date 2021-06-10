@@ -1,6 +1,7 @@
 package com.haulmont.creditProccesor.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -29,7 +30,7 @@ public class Client {
     private String passportNumber;
 
     @ManyToMany(mappedBy = "clientSet")
-    private Set<Bank> bankSet;
+    private Set<Bank> bankSet = new HashSet<>();
 
     public Client() {
     }
@@ -75,6 +76,26 @@ public class Client {
         this.passportNumber = passportNumber;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean addBank(Bank bank) {
+        if (bankSet.contains(bank)) {
+            return true;
+        }
+        this.bankSet.add(bank);
+        return bank.addClient(this);
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Set<Bank> getBankSet() {
+        return bankSet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,7 +106,7 @@ public class Client {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, phoneNumber, email, passportNumber, bankSet);
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.haulmont.creditProccesor.services;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,5 +14,6 @@ public interface BankService<BankDto> {
 
     List<BankDto> findAll();
 
-    List<BankDto> findByClient(ClientDto client) throws CreditProcessorException;
+    @Transactional
+    List<BankDto> findByClient(String client_id) throws CreditProcessorException;
 }

@@ -12,20 +12,6 @@
         <p>Bank name: <span th:text="*{name}"> client name </span></p>
     </div>
 </div>
-<h1>Bank List</h1>
-<div th:fragment="bankList">
-    <h1>Bank list</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-        </tr>
-        <tr th:each="bank : ${bankList}">
-            <th><a th:href="@{/bank/{id}(id=${bank.id})}"
-                   target="_blank"
-                   th:text=" ${bank.name}"> bank name </a></th>
-        </tr>
-    </table>
-</div>
 <h1>New Bank</h1>
 <div th:fragment="bankCreate">
     <form id="create-form" method="post"
@@ -41,6 +27,32 @@
             <button type="submit" style="width:100px">Create</button>
         </div>
     </form>
+</div>
+<h1>Bank List</h1>
+<div th:fragment="bankList">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/bank/{id}(id=${bank.id})}"
+               target="_blank"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+</div>
+<h1>Choose bank</h1>
+<!--<div th:fragment="chooseBank">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/client/{client_id}/bank/{bank_id}(client_id=${client.id}, bank_id=${bank.id})}"
+               target="_blank"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+</div>-->
+<div th:fragment="chooseBank">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}}"
+               target="_blank"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

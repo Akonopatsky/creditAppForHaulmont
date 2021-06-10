@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -34,13 +35,15 @@ public class ClientController {
     @GetMapping({"/client/{id}"})
     public String clientView(
             Model model,
+/*            RedirectAttributes redirectAttributes,*/
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
         logger.info("get client by id {}", id);
         ClientDto client = clientService.findById(id);
         model.addAttribute("client", client);
-        List<BankDto> bankList = bankService.findByClient(client);
+        List<BankDto> bankList = bankService.findByClient(client.getId());
         model.addAttribute("bankList", bankList);
+/*        redirectAttributes.addFlashAttribute("client", client);*/
         return "client.html";
     }
 
@@ -51,9 +54,14 @@ public class ClientController {
         return new RedirectView("/clientService/", true);
     }
 
-    @PutMapping({"/client/{id}/bank"})
-    public String chooseBank(Model model, @ModelAttribute ClientDto client){
-        logger.info("client {} choose a bank ", client.getId());
+    @GetMapping({"/client/{id}/bank"})
+    public String chooseBank(Model model,
+                             @PathVariable(name = "id") String id) throws CreditProcessorException {
+        logger.info("client {} choose a bank ", id);
+        ClientDto client = clientService.findById(id);
+        model.addAttribute("client", client);
+        List<BankDto> bankList = bankService.findByClient(id);
+        model.addAttribute("bankList", bankList);
         return "chooseBank.html";
     }
 

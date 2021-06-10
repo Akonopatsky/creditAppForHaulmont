@@ -63,14 +63,18 @@ public class BankController {
         return "bank.html";
     }
 
+    @GetMapping({"/bank/{id}/client"})
+    public String chooseBank(Model model, @ModelAttribute ClientDto client){
+        logger.info("client {} choose a bank ", client.getId());
+        return "chooseClient.html";
+    }
+
     @PutMapping({"/bank/{bankId}/client/{clientId}"})
     public String bankAddClient(@PathVariable(name = "bankId") String bankId,
                                 @PathVariable(name = "clientId") String clientId) {
         logger.info("bank {} add client {}", bankId);
         return "bank_client.html";
     }
-
-
 
     @ModelAttribute("bankList")
     List<BankDto> getAllBanks() {

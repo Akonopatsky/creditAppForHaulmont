@@ -8,7 +8,6 @@ import com.haulmont.creditProccesor.storage.dao.BankDao;
 import com.haulmont.creditProccesor.storage.dao.ClientDao;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 
-import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class BankServiceImpl implements BankService<BankDto> {
@@ -57,4 +55,13 @@ public class BankServiceImpl implements BankService<BankDto> {
                 new ArrayList<>(clientDao.findById(client_id).getBankSet()));
     }
 
+    @Override
+    public boolean bankAddClient(String bankId, String clientId) throws CreditProcessorException {
+        Bank bank = bankDao.findById(bankId);
+        Client client = clientDao.findById(clientId);
+        boolean result = bank.addClient(client);
+        bankDao.save(bank);
+        clientDao.save(client);
+        return result;
+    }
 }

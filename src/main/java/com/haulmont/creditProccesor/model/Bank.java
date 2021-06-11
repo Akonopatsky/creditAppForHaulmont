@@ -2,6 +2,7 @@ package com.haulmont.creditProccesor.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -68,4 +69,16 @@ public class Bank {
         return creditSet;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Bank)) return false;
+        Bank bank = (Bank) o;
+        return id.equals(bank.id) && name.equals(bank.name) && Objects.equals(clientSet, bank.clientSet) && Objects.equals(creditSet, bank.creditSet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
 }

@@ -58,22 +58,31 @@ public class BankController {
     ) throws CreditProcessorException {
         BankDto bank = bankService.findById(id);
         model.addAttribute("bank", bank);
-        List<ClientDto> clientList = clientService.findByBank(bank);
+        List<ClientDto> clientList = clientService.findByBank(id);
         model.addAttribute("clientList", clientList);
         return "bank.html";
     }
 
     @GetMapping({"/bank/{id}/client"})
-    public String chooseBank(Model model, @ModelAttribute ClientDto client){
-        logger.info("client {} choose a bank ", client.getId());
+    public String chooseClient(
+            Model model,
+            @PathVariable(name = "id") String id
+    ) throws CreditProcessorException {
+        BankDto bank = bankService.findById(id);
+        model.addAttribute("bank", bank);
+        List<ClientDto> clientList = clientService.findAll();
+        model.addAttribute("clientList", clientList);
         return "chooseClient.html";
     }
 
-    @PutMapping({"/bank/{bankId}/client/{clientId}"})
-    public String bankAddClient(@PathVariable(name = "bankId") String bankId,
-                                @PathVariable(name = "clientId") String clientId) {
+    @GetMapping({"/bank/{bankId}/client/{clientId}"})
+    public RedirectView bankAddClient(
+            @PathVariable(name = "bankId") String bankId,
+            @PathVariable(name = "clientId") String clientId
+    ) throws CreditProcessorException {
         logger.info("bank {} add client {}", bankId);
-        return "bank_client.html";
+        bankService.bankAddClient(bankId, clientId);
+        return new RedirectView("/bank/"+bankId, true);
     }
 
     @ModelAttribute("bankList")

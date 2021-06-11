@@ -43,7 +43,6 @@ public class ClientController {
         model.addAttribute("client", client);
         List<BankDto> bankList = bankService.findByClient(client.getId());
         model.addAttribute("bankList", bankList);
-/*        redirectAttributes.addFlashAttribute("client", client);*/
         return "client.html";
     }
 

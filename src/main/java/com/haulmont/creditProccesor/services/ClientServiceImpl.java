@@ -53,9 +53,9 @@ public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
 
     @Override
     @Transactional()
-    public List<ClientDto> findByBank(BankDto bank) throws CreditProcessorException {
+    public List<ClientDto> findByBank(String id) throws CreditProcessorException {
         return mapper.convertToDtoList(
-                new ArrayList<>(bankDao.findById(bank.getId()).getClientSet()));
+                new ArrayList<>(bankDao.findById(id).getClientSet()));
     }
 }
 

@@ -13,5 +13,5 @@ public interface ClientService<ClientDto, BankDto> {
 
     List<ClientDto> findAll();
 
-    List<com.haulmont.creditProccesor.web.dto.ClientDto> findByBank(com.haulmont.creditProccesor.web.dto.BankDto bank) throws CreditProcessorException;
+    List<ClientDto> findByBank(String id) throws CreditProcessorException;
 }

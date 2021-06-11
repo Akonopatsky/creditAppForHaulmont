@@ -59,10 +59,21 @@ public class ClientController {
         logger.info("client {} choose a bank ", id);
         ClientDto client = clientService.findById(id);
         model.addAttribute("client", client);
-        List<BankDto> bankList = bankService.findByClient(id);
+        List<BankDto> bankList = bankService.findAll();
         model.addAttribute("bankList", bankList);
         return "chooseBank.html";
     }
+
+    @GetMapping({"/client/{clientId}/bank/{bankId}"})
+    public RedirectView clientAddClient(
+            @PathVariable(name = "clientId") String clientId,
+            @PathVariable(name = "bankId") String bankId
+    ) throws CreditProcessorException {
+        logger.info("client {} add bank {}", clientId);
+        bankService.bankAddClient(bankId, clientId);
+        return new RedirectView("/client/"+clientId, true);
+    }
+
 
     @ModelAttribute("newClient")
     public ClientDto getEmptyClientDto() {

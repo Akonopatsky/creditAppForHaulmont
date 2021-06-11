@@ -51,7 +51,7 @@
 <div th:fragment="chooseClient">
     <ul th:each="client : ${clientList}">
         <li><a th:href="@{/bank/__${bank.id}__/client/__${client.id}__}"
-               target="_blank"
+               target="_self"
                th:text="${client.name}"> client name </a></th>
         </li>
     </ul>

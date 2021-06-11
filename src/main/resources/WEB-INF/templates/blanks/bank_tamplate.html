@@ -48,8 +48,8 @@
 </div>-->
 <div th:fragment="chooseBank">
     <ul th:each="bank : ${bankList}">
-        <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}}"
-               target="_blank"
+        <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}__}"
+               target="_self"
                th:text=" ${bank.name}"> bank name </a></th>
         </li>
     </ul>

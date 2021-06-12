@@ -22,7 +22,7 @@ public class CreditOfferMapper {
         CreditOfferDto creditOfferDto = new CreditOfferDto();
         creditOfferDto.setId(creditOffer.getId().toString());
         creditOfferDto.setClient(clientMapper.convertToDto(creditOffer.getClient()));
-        creditOfferDto.setCredit(creditMapper.getById(creditOffer.getCredit()));
+        creditOfferDto.setCredit(creditMapper.convertToDto(creditOffer.getCredit()));
         creditOfferDto.setCreditAmount(creditOffer.getCreditAmount()
                 .getNumberStripped().doubleValue());
         creditOfferDto.setPaymentList(creditOffer.getPaymentList().stream()

@@ -45,4 +45,12 @@ public class CreditDto {
     public void setPeriod(int period) {
         this.period = period;
     }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
 }

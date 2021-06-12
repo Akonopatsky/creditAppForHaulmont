@@ -10,11 +10,13 @@
     color: #500;
 
 }
+
 .main_button:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
     color: #a00;
 }
+
 .act_button {
     width: 80px;
     height: 17px;
@@ -24,13 +26,14 @@
     text-decoration: none;
     text-align: center;
     color: #500;
-
 }
+
 .act_button:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #fcfff0, #e9e9c0);
     color: #4008;
 }
+
 .top_button {
     /*    width: 50px;
         height: 15px;*/
@@ -42,7 +45,6 @@
     text-decoration: none;
     text-align: center;
     color: #500;
-
 }
 
 .top_button:hover {
@@ -81,7 +83,7 @@
     font-size: 17px;
     text-transform: uppercase;
     display: inline-block;
-    /*   transition: color .2s;*/
+    transition: color .2s;
 }
 
 .main_menu a
@@ -95,38 +97,30 @@
 }
 
 .wrapper {
-    max-width: 600px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     padding-right: 10px;
-    padding-left:  10px;
-    color: #4CAF50;
-    background-color: #9d999d;
-    align-items: center;
+    padding-left: 10px;
+    alignment: left;
+    color: slategray;
+    color: darkslateblue;
 }
 
 .list {
     alignment: left;
 }
-.list ul{
-    list-style-type:circle;
+
+.list ul {
+    list-style-type: circle;
 }
 
 h1 {
-    font-family: 'Ubuntu Condensed', sans-serif;
-    font-size: 15px;
+    font-size: 17px;
     color: darkslateblue;
-
 }
 
-p {
-    font-family: 'Ubuntu Condensed', sans-serif;
-    font-size: 14px;
-    color: midnightblue;
-}
-
-
-input[type=text], select, textarea{
+input[type=text], select, textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -135,15 +129,12 @@ input[type=text], select, textarea{
     resize: vertical;
 }
 
-
 label {
     padding: 12px 12px 12px 0;
     display: inline-block;
 }
 
-
 input[type=submit] {
-    background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -152,20 +143,19 @@ input[type=submit] {
     float: right;
 }
 
-
 .container {
+    max-width: 800px;
     border-radius: 5px;
     background-color: #f2f2f2;
-    padding: 20px;
+    padding: 10px;
+    color: darkgreen;
 }
-
 
 .col-25 {
     float: left;
     width: 25%;
     margin-top: 6px;
 }
-
 
 .col-75 {
     float: left;
@@ -177,9 +167,14 @@ input[type=submit] {
     float: left;
     width: 45%;
     margin-top: 6px;
-    background-color: #feb386;
     padding: 2%;
-    border-radius: 4px ;
+}
+
+.col-100 {
+    float: left;
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px;
 }
 
 .row:after {
@@ -187,7 +182,6 @@ input[type=submit] {
     display: table;
     clear: both;
 }
-
 
 @media screen and (max-width: 600px) {
     .col-25, .col-75, input[type=submit] {

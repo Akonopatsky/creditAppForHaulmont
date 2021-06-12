@@ -13,8 +13,8 @@ public class BankMapper {
         return new Bank(bankDto.getName());
     }
 
-    public List<BankDto> convertToDtoList(List<Bank> bankEntitySet) {
-        return bankEntitySet.stream().map(bankEntity -> convertToDto(bankEntity)).collect(Collectors.toList());
+    public List<BankDto> convertToDtoList(List<Bank> bankList) {
+        return bankList.stream().map(bank -> convertToDto(bank)).collect(Collectors.toList());
     }
 
     public BankDto convertToDto(Bank bank) {

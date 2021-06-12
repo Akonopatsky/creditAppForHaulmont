@@ -5,6 +5,7 @@ import com.haulmont.creditProccesor.services.BankService;
 import com.haulmont.creditProccesor.services.ClientService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
+import com.haulmont.creditProccesor.web.dto.CreditDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,16 +27,14 @@ public class BankController {
     }
 
     @GetMapping({"/"})
-    public String mainView(
-            Model model,
-            @ModelAttribute("bankNew") BankDto bankNew
-    ) {
+    public String mainView(Model model, @ModelAttribute("bankNew") BankDto bankNew) {
         return "index.html";
     }
 
     @GetMapping({"/bankService"})
     public String clientsView(Model model) {
         logger.info("bankView ");
+        model.addAttribute("newBank", new BankDto());
         return "bankservice.html";
     }
 
@@ -59,7 +58,9 @@ public class BankController {
         BankDto bank = bankService.findById(id);
         model.addAttribute("bank", bank);
         List<ClientDto> clientList = clientService.findByBank(id);
+        List<CreditDto> creditList = bankService.findByBank(id);
         model.addAttribute("clientList", clientList);
+        model.addAttribute("creditList", creditList);
         return "bank.html";
     }
 
@@ -82,7 +83,36 @@ public class BankController {
     ) throws CreditProcessorException {
         logger.info("bank {} add client {}", bankId);
         bankService.bankAddClient(bankId, clientId);
-        return new RedirectView("/bank/"+bankId, true);
+        return new RedirectView("/bank/" + bankId, true);
+    }
+
+    @GetMapping({"/bank/{bankId}/credit/create"})
+    public String createCredit(Model model, @PathVariable(name = "bankId") String bankId) throws CreditProcessorException {
+        logger.info("create credit page");
+        BankDto bank = bankService.findById(bankId);
+        model.addAttribute("bank", bank);
+        return "createCredit.html";
+    }
+
+    @PostMapping({"/bank/{bankId}/credit/save"})
+    public RedirectView creditSave(
+            @ModelAttribute CreditDto newCredit,
+            @PathVariable(name = "bankId") String bankId
+    ) throws CreditProcessorException {
+        newCredit.setBankId(bankId);
+        logger.info("new credit {} , {}, {}", newCredit);
+        bankService.saveCredit(newCredit);
+        return new RedirectView("/bank/" + bankId, true);
+    }
+
+    @GetMapping({"/credit/{id}"})
+    public String creditView(
+            Model model,
+            @PathVariable(name = "id") String id
+    ) throws CreditProcessorException {
+        CreditDto credit = bankService.findCreditById(id);
+        model.addAttribute("credit", credit);
+        return "credit.html";
     }
 
     @ModelAttribute("bankList")
@@ -93,5 +123,10 @@ public class BankController {
     @ModelAttribute("newBank")
     BankDto getEmptyBank() {
         return new BankDto();
+    }
+
+    @ModelAttribute("newCredit")
+    CreditDto getEmptyCredit() {
+        return new CreditDto();
     }
 }

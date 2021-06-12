@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/static/css/style.css}"/>
-<link rel="stylesheet" href="../static/css/style.css"/>
+<link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
 <head>
     <meta charset="UTF-8">
     <title>Client service</title>
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="/blanks/main_tamplate.html :: top_menu"></div>
+    <div th:insert="/blanks/main_template.html :: top_menu"></div>
     <h1>New client</h1>
-    <div th:insert="/blanks/client_tamplate.html :: clientCreate"></div>
+    <div th:insert="/blanks/client_template.html :: clientCreate"></div>
     <div class="col-50">
         <h1>List of client</h1>
-        <div class="list" th:insert="/blanks/client_tamplate.html :: clientList"></div>
+        <div class="list" th:insert="/blanks/client_template.html :: clientList"></div>
     </div>
-    <div class="col-50"> fdgdfgdfgddgd <br> efsdfdsfsdfd</div>
 </div>
 </body>
 </html>

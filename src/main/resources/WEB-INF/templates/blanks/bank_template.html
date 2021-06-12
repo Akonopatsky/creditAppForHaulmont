@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bank View</h1>
+<div th:fragment="bank">
+    <div th:object="${bank}">
+        <p>Bank name: <span th:text="*{name}"> client name </span></p>
+    </div>
+</div>
+<h1>New Bank</h1>
+<div th:fragment="bankCreate">
+    <div class="container">
+        <form id="create-form" method="post"
+              th:action="@{/bank/save}"
+              th:object="${newBank}"
+              accept-charset="utf-8">
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Name:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button type="submit" style="width:100px">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+<h1>Bank List</h1>
+<div th:fragment="bankList">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/bank/{id}(id=${bank.id})}"
+
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+</div>
+<h1>Choose bank</h1>
+<div th:fragment="chooseBank">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}__}"
+               target="_self"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+    <!--    <div th:each="bank : ${bankList}">
+            <form id="addBank" th:method="put"
+                  th:action="@{/client/__${client.id}__/bank/__${bank.id}__}">
+                <div class="act_button">
+                    <button width= 100% type="submit" ><span th:text="${bank.name}">bank</span></button>
+                </div>
+            </form>
+        </div>-->
+</div>
+<h1>Credit List</h1>
+<div th:fragment="creditList">
+    <ul th:each="credit : ${creditList}">
+        <li><a th:href="@{/credit/{id}(id=${credit.id})}"
+               target="_self"
+               th:text="${credit.period} + ' ' + ${credit.creditLimit} + ' ' + ${credit.interestRate}"> credit </a></th>
+        </li>
+    </ul>
+</div>
+
+<h1>Credit View</h1>
+<div th:fragment="credit">
+    <div th:object="${credit}">
+        <p>Credit limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
+        <p>Credit interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
+        <p>Credit period: <span th:text="*{period}"> 15 </span>month</p>
+    </div>
+</div>
+
+<div th:fragment="createCredit">
+    <div class="container">
+        <form id="create-form" method="post"
+              th:action="@{/bank/__${bank.id}__/credit/save}"
+              th:object="${newCredit}"
+              accept-charset="utf-8">
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Limit:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{creditLimit}" th:placeholder="*{creditLimit}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Interest rate:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{interestRate}" th:placeholder="*{interestRate}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Period:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{period}" th:placeholder="*{period}"/>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button type="submit" style="width:100px">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

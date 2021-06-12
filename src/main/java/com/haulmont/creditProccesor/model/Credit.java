@@ -19,28 +19,33 @@ public class Credit {
 
     @Column(name = "creditLimit")
     @Convert(converter = MoneyConverter.class)
-    private final Money creditLimit;
+    private Money creditLimit;
 
     @Column(name = "interestRate")
-    private final double interestRate;
+    private double interestRate;
 
     @Column(name = "period")
     @Convert(converter = PeriodConverter.class)
-    private final Period period;
+    private Period period;
 
     @ManyToOne()
     private Bank bank;
 
     public Credit() {
-        creditLimit = null;
-        this.interestRate = 0d;
-        period = null;
+        super();
     }
 
     public Credit(Money creditLimit, double interestRate, Period period) {
         this.creditLimit = creditLimit;
         this.interestRate = interestRate;
         this.period = period;
+    }
+
+    public Credit(Money creditLimit, double interestRate, Period period, Bank bank) {
+        this.creditLimit = creditLimit;
+        this.interestRate = interestRate;
+        this.period = period;
+        this.bank = bank;
     }
 
     public UUID getId() {
@@ -59,4 +64,11 @@ public class Credit {
         return period;
     }
 
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
 }

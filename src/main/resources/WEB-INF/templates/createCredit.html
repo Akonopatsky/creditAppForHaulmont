@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
+
 <head>
     <meta charset="UTF-8">
-    <title>Choose bank</title>
+    <title>Credit</title>
 </head>
 <body>
 <div class="wrapper">
     <div th:insert="/blanks/main_template.html :: top_menu"></div>
-    <h1>Choose bank</h1>
-    <div th:insert="/blanks/bank_template.html :: chooseBank"></div>
+        <h1>Create new credit</h1>
+        <div class="list" th:insert="/blanks/bank_template.html :: createCredit"></div>
 </div>
 </body>
-
 </html>

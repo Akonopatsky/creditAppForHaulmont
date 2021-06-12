@@ -26,7 +26,7 @@ public class ClientController {
         this.bankService = bankService;
     }
 
-    @GetMapping({"/clientService/"})
+    @GetMapping({"/clientService"})
     public String clientsView(Model model) {
         logger.info("clientsView ");
         return "clientservice.html";

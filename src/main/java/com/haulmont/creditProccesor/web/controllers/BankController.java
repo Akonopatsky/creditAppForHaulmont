@@ -33,7 +33,7 @@ public class BankController {
         return "index.html";
     }
 
-    @GetMapping({"/bankService/"})
+    @GetMapping({"/bankService"})
     public String clientsView(Model model) {
         logger.info("bankView ");
         return "bankservice.html";
@@ -48,7 +48,7 @@ public class BankController {
     public RedirectView bankSave(@ModelAttribute BankDto newBank) {
         logger.info("new bank {}", newBank.getName());
         bankService.save(newBank);
-        return new RedirectView("/", true);
+        return new RedirectView("/bankService", true);
     }
 
     @GetMapping({"/bank/{id}"})

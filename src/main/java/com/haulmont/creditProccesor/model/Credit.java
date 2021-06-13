@@ -6,7 +6,7 @@ import org.javamoney.moneta.Money;
 
 import javax.persistence.*;
 import java.time.Period;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "credits")
@@ -30,6 +30,9 @@ public class Credit {
 
     @ManyToOne()
     private Bank bank;
+
+    @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private final List<CreditOffer> creditOfferList = new ArrayList<>();
 
     public Credit() {
         super();

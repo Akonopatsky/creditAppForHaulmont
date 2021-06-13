@@ -23,24 +23,21 @@ public class CreditOffer {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    private final Client client;
+    private Client client = null;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "credit_id")
-    private final Credit credit;
+    private Credit credit = null;
 
     @Column(name = "creditAmount")
     @Convert(converter = MoneyConverter.class)
-    private final Money creditAmount;
+    private Money creditAmount = null;
 
     @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private final List<Payment> paymentList;
+    private List<Payment> paymentList = null;
 
     public CreditOffer() {
-        client = null;
-        credit = null;
-        creditAmount = null;
-        paymentList = null;
+        super();
     }
 
     public CreditOffer(OfferBuilder offerBuilder) {

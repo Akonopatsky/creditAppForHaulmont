@@ -35,7 +35,6 @@ public class ClientController {
     @GetMapping({"/client/{id}"})
     public String clientView(
             Model model,
-/*            RedirectAttributes redirectAttributes,*/
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
         logger.info("get client by id {}", id);

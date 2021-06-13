@@ -79,7 +79,7 @@ public class BankServiceImpl implements BankService<BankDto> {
         Client client = clientDao.findById(clientId);
         boolean result = bank.addClient(client);
         bankDao.save(bank);
-        clientDao.save(client);
+/*        clientDao.save(client);*/
         return result;
     }
 

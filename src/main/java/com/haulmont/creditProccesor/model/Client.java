@@ -30,7 +30,7 @@ public class Client {
     private String passportNumber;
 
     @ManyToMany(mappedBy = "clientSet")
-    private Set<Bank> bankSet = new HashSet<>();
+    private final Set<Bank> bankSet = new HashSet<>();
 
     public Client() {
     }

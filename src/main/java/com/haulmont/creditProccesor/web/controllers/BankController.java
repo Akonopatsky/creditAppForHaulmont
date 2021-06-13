@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @Controller
@@ -77,9 +79,10 @@ public class BankController {
     }
 
     @GetMapping({"/bank/{bankId}/client/{clientId}"})
-    public RedirectView bankAddClient(
+    public RedirectView bindBankAndClient(
             @PathVariable(name = "bankId") String bankId,
-            @PathVariable(name = "clientId") String clientId
+            @PathVariable(name = "clientId") String clientId,
+            HttpServletRequest request
     ) throws CreditProcessorException {
         logger.info("bank {} add client {}", bankId);
         bankService.bankAddClient(bankId, clientId);

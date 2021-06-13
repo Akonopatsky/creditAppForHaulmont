@@ -86,7 +86,6 @@
     transition: color .2s;
 }
 
-.main_menu a
 .main_menu a:visited {
     color: #9d999d;
 }

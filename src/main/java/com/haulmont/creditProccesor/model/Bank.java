@@ -18,15 +18,15 @@ public class Bank {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "bank_client",
             joinColumns = @JoinColumn(name = "bank_id"),
             inverseJoinColumns = @JoinColumn(name = "client_id"))
-    private Set<Client> clientSet = new HashSet<>();
+    private final Set<Client> clientSet = new HashSet<>();
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Credit> creditSet = new HashSet<>();
+    private final Set<Credit> creditSet = new HashSet<>();
 
 
     public Bank() {

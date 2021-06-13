@@ -15,10 +15,36 @@
     <div class="col-50">
         <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
         <h1>List of banks</h1>
-        <div th:insert="/blanks/bank_blanks.html :: addBankList"></div>
+        <div class="list">
+            <ul th:each="bank : ${bankList}">
+                <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}__/credit}"
+                       th:text=" ${bank.name}">bank name </a></th>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="col-50">
-        <a class="act_button" th:href="@{/client/{client_id}/newCditOffer}">make offer</a>
+
+        <a class="act_button" th:href="@{/client/__${client.id}__/newCditOffer}">make offer</a>
+
+        <div th:if="${choosenCredit}">
+            <div th:object="${choosenCredit}">
+                <p>limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
+                <p>interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
+                <p>period: <span th:text="*{period}"> 15 </span> month</p>
+            </div>
+        </div>
+        <div class="list" th:unless="${#lists.isEmpty(creditList)}">
+            <h1 th:text="'Bank: ' + ${bank.name}+ ' credits: '"> available credits </h1>
+            <ul th:each="credit : ${creditList}">
+                <li><a th:href="@{/client/__${client.id}__/credit/__${credit.id}__}"
+                       th:object="${choosenCredit}"
+                       target="_self"
+                       th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.creditLimit} + ' rate: ' + ${credit.interestRate}">
+                    credit </a></th>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>

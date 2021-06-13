@@ -37,7 +37,7 @@
     </div>
 </div>
 <h1>Bank List</h1>
-<div th:fragment="addBankList">
+<div th:fragment="BankList">
     <ul th:each="bank : ${bankList}">
         <li><a th:href="@{/bank/{id}(id=${bank.id})}"
                th:text=" ${bank.name}"> bank name </a></th>

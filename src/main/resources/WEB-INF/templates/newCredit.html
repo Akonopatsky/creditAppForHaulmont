@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
-
 <head>
     <meta charset="UTF-8">
     <title>Credit</title>
@@ -9,10 +8,8 @@
 <body>
 <div class="wrapper">
     <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
-    <div class="col-100">
-        <h1>Credit</h1>
-        <div class="list" th:insert="/blanks/credit_blanks.html :: credit"></div>
-    </div>
+    <h1>Create new credit</h1>
+    <div class="list" th:insert="/blanks/credit_blanks.html :: createCredit"></div>
 </div>
 </body>
 </html>

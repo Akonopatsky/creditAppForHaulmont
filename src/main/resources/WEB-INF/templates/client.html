@@ -8,18 +8,18 @@
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="/blanks/main_template.html :: top_menu"></div>
-    <div class="list" th:insert="/blanks/client_template.html :: client"></div>
-    <a class="act_button" th:href="@{/client/{client_id}/bank(client_id=${client.id})}">add bank</a>
-    <h1>List of banks</h1>
-    <div th:insert="/blanks/bank_template.html :: bankList"></div>
-<!--    <a class="act_button" th:href="@{/client/{client_id}(client_id = ${client.id})/bank}">add bank</a>-->
-<!--    <form id="addBank" th:method="put"
-    th:action="@{/client/{client_id}(client_id = ${client.id})/bank}">
-        <div class="act_button">
-        <button type="submit" class="act_button">Choose bank</button>
-        </div>
-    </form>-->
+    <div class="col-100">
+        <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+        <div class="list" th:insert="/blanks/client_blanks.html :: client"></div>
+    </div>
+    <div class="col-50">
+        <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
+        <h1>List of banks</h1>
+        <div th:insert="/blanks/bank_blanks.html :: addBankList"></div>
+    </div>
+    <div class="col-50">
+        <a class="act_button" th:href="@{/client/{client_id}/newCditOffer}">make offer</a>
+    </div>
 </div>
 </body>
 </html>

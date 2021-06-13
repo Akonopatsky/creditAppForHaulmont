@@ -6,7 +6,7 @@ import com.haulmont.creditProccesor.web.dto.ClientDto;
 
 import java.util.List;
 
-public interface ClientService<ClientDto, BankDto> {
+public interface ClientService<ClientDto> {
     void save(ClientDto client) throws CreditProcessorException;
 
     ClientDto findById(Object id) throws CreditProcessorException;

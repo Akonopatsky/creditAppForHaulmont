@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bank View</h1>
+<div th:fragment="bank">
+    <div th:object="${bank}">
+        <p>Bank name: <span th:text="*{name}"> client name </span></p>
+    </div>
+</div>
+<h1>New Bank</h1>
+<div th:fragment="bankCreate">
+    <div class="container">
+        <form id="create-form" method="post"
+              th:action="@{/bank/save}"
+              th:object="${newBank}"
+              accept-charset="utf-8">
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Name:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button type="submit" style="width:100px">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+<h1>Bank List</h1>
+<div th:fragment="addBankList">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/bank/{id}(id=${bank.id})}"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+</div>
+<h1>Choose bank</h1>
+<div th:fragment="chooseBank">
+    <ul th:each="bank : ${bankList}">
+        <li><a th:href="@{/bind/client/__${client.id}__/bank/__${bank.id}__}"
+               target="_self"
+               th:text=" ${bank.name}"> bank name </a></th>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

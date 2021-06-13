@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
-
 <head>
     <meta charset="UTF-8">
-    <title>Credit</title>
+    <title>Credit offer</title>
 </head>
 <body>
 <div class="wrapper">
     <div th:insert="/blanks/main_template.html :: top_menu"></div>
-        <h1>Create new credit</h1>
-        <div class="list" th:insert="/blanks/bank_template.html :: createCredit"></div>
+    <div class="col-100">
+        <h1>Available credits</h1>
+        <div class="list" th:insert="/blanks/credit_blanks.html :: creditList"></div>
+    </div>
+<form if="newCreditOffer" method="post"
+      th:action="@{/save_offer/}"
+
 </div>
 </body>
 </html>

@@ -64,40 +64,14 @@ public class BankServiceImpl implements BankService<BankDto> {
     }
 
     @Override
-    public List<CreditDto> findByBank(String id) throws CreditProcessorException {
-        logger.info("!!!! before convert");
-        List<CreditDto> creditDtoList = creditMapper.convertToDtoList(new ArrayList<Credit>(bankDao.findById(id).getCreditSet()));
-        logger.info("!!!! after convert");
-        return creditDtoList;
-
-    }
-
-    @Override
     @Transactional
     public boolean bankAddClient(String bankId, String clientId) throws CreditProcessorException {
         Bank bank = bankDao.findById(bankId);
         Client client = clientDao.findById(clientId);
         boolean result = bank.addClient(client);
         bankDao.save(bank);
-/*        clientDao.save(client);*/
         return result;
     }
 
-    @Override
-    @Transactional
-    public void saveCredit(CreditDto creditDto) throws CreditProcessorException {
-        logger.info("save credit {}", creditDto);
-        Bank bank = bankDao.findById(creditDto.getBankId());
-        Credit credit = creditMapper.getNewCredit(creditDto);
-        bank.addCredit(credit);
-        credit.setBank(bank);
-        creditDao.save(credit);
-        bank.addCredit(credit);
 
-    }
-
-    @Override
-    public CreditDto findCreditById(String id) throws CreditProcessorException {
-        return creditMapper.convertToDto(creditDao.findById(id));
-    }
 }

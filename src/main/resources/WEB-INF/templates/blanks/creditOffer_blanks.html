@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="../../static/css/style.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Credit offer List</h1>
+<div th:fragment="creditList">
+    <ul th:each="creditOffer : ${creditOfferList}">
+        <li><a th:href="@{/creditOffer/__${creditOffer.id}__}"
+               target="_self"
+               th:text="'amount: ' + ${creditOffer.creditAmount} + ' limit: ' + ${creditOffer.creditLimit} + ' rate: ' + ${creditOffer.interestRate}"> credit </a></th>
+        </li>
+    </ul>
+</div>
+
+<h1>Credit View</h1>
+<div th:fragment="credit">
+    <div th:object="${creditOffer}">
+        <p>pay dtrategy: <span th:text="*{payStrategy}"> annuitant </span></p>
+        <p>client: <span th:text="${client.name}"> Petrov </span>%</p>
+        <p>credit: <span th:text="*{period}"> 15 </span>month</p>
+    </div>
+</div>
+<h1>create offer</h1>
+<div th:fragment="createCreditOffer">
+    <div class="container">
+        <form id="create-form" method="post"
+              th:action="@{/save/credit/bank/__${bank.id}__}"
+              th:object="${newCredit}"
+              accept-charset="utf-8">
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Limit:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{creditLimit}" th:placeholder="*{creditLimit}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Interest rate:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{interestRate}" th:placeholder="*{interestRate}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Period:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{period}" th:placeholder="*{period}"/>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <button type="submit" style="width:100px" name="save" >Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -7,12 +7,12 @@
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="/blanks/main_template.html :: top_menu"></div>
+    <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
     <h1>New client</h1>
-    <div th:insert="/blanks/client_template.html :: clientCreate"></div>
+    <div th:insert="/blanks/client_blanks.html :: clientCreate"></div>
     <div class="col-50">
         <h1>List of client</h1>
-        <div class="list" th:insert="/blanks/client_template.html :: clientList"></div>
+        <div class="list" th:insert="/blanks/client_blanks.html :: clientList"></div>
     </div>
 </div>
 </body>

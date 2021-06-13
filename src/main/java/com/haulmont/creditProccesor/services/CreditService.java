@@ -1,10 +1,17 @@
 package com.haulmont.creditProccesor.services;
 
-public interface CreditService<CreditDto, BankDto> {
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.web.dto.CreditDto;
+import org.springframework.transaction.annotation.Transactional;
 
-    void save(CreditDto credit);
+import java.util.List;
 
-    CreditDto findAllByBank(BankDto bank);
+public interface CreditService<CreditDto> {
 
-    CreditDto findById(Object id);
+    @Transactional
+    void saveCredit(com.haulmont.creditProccesor.web.dto.CreditDto creditDto) throws CreditProcessorException;
+
+    CreditDto findById(String id) throws CreditProcessorException;
+
+    List<com.haulmont.creditProccesor.web.dto.CreditDto> findByBank(String id) throws CreditProcessorException;
 }

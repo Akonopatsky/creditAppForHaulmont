@@ -18,10 +18,10 @@ import java.util.List;
 @Controller
 public class ClientController {
     private static final Logger logger = LoggerFactory.getLogger(ClientController.class);
-    private final ClientService<ClientDto, BankDto> clientService;
+    private final ClientService<ClientDto> clientService;
     private final BankService<BankDto> bankService;
 
-    public ClientController(ClientService<ClientDto, BankDto> clientService, BankService<BankDto> bankService) {
+    public ClientController(ClientService<ClientDto> clientService, BankService<BankDto> bankService) {
         this.clientService = clientService;
         this.bankService = bankService;
     }
@@ -63,7 +63,7 @@ public class ClientController {
         return "chooseBank.html";
     }
 
-    @GetMapping({"/client/{clientId}/bank/{bankId}"})
+    @GetMapping({"/bind/client/{clientId}/bank/{bankId}"})
     public RedirectView clientAddClient(
             @PathVariable(name = "clientId") String clientId,
             @PathVariable(name = "bankId") String bankId
@@ -73,6 +73,10 @@ public class ClientController {
         return new RedirectView("/client/"+clientId, true);
     }
 
+/*
+    @GetMapping({"/client/{clientId}/newCreditOffer"})
+    public
+*/
 
     @ModelAttribute("newClient")
     public ClientDto getEmptyClientDto() {

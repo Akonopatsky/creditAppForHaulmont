@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientServiceImpl implements ClientService<ClientDto, BankDto> {
+public class ClientServiceImpl implements ClientService<ClientDto> {
     private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     private final ClientMapper mapper;

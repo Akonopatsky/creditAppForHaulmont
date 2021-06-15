@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PayStrategyAnnuity implements PayStrategy {
+
+    private final static String name = "ANNUITY";
+
     @Override
     public List<Payment> calculate(Credit credit, Money amount, LocalDate date) {
         double rate = credit.getInterestRate()/1200d;
@@ -24,5 +27,10 @@ public class PayStrategyAnnuity implements PayStrategy {
         Money interest = body.multiply(rate);
         paymentList.add(quantity-1, new Payment(date.plusMonths(quantity), body.add(interest), body, interest));
         return paymentList;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

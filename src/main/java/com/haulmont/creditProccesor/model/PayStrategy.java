@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PayStrategy {
     List<Payment> calculate(Credit credit, Money amount, LocalDate date);
+
+    String getName();
 }

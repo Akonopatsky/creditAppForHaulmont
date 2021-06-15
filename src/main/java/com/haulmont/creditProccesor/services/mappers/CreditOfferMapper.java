@@ -22,13 +22,15 @@ public class CreditOfferMapper {
     public CreditOfferDto convertToDto(CreditOffer creditOffer) {
         CreditOfferDto creditOfferDto = new CreditOfferDto();
         creditOfferDto.setId(creditOffer.getId().toString());
-        creditOfferDto.setClient(clientMapper.convertToDto(creditOffer.getClient()));
-        creditOfferDto.setCredit(creditMapper.convertToDto(creditOffer.getCredit()));
+        creditOfferDto.setClientId(creditOffer.getClient().getId().toString());
+        creditOfferDto.setCreditId(creditOffer.getCredit().getId().toString());
         creditOfferDto.setCreditAmount(creditOffer.getCreditAmount()
                 .getNumberStripped().doubleValue());
         creditOfferDto.setPaymentList(creditOffer.getPaymentList().stream()
                 .map(payment -> convertToDto(payment))
                 .collect(Collectors.toList()));
+        creditOfferDto.setBeginDate(creditOffer.getBeginDate());
+        creditOfferDto.setPayStrategy(creditOffer.getPayStrategyName());
         return creditOfferDto;
     }
 
@@ -44,6 +46,8 @@ public class CreditOfferMapper {
         paymentDto.setDate(payment.getDate());
         return paymentDto;
     }
+
+
 
 
 }

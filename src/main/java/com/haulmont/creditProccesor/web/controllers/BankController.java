@@ -20,22 +20,22 @@ import java.util.List;
 @Controller
 public class BankController {
     private static final Logger logger = LoggerFactory.getLogger(BankController.class);
-    private final BankService<BankDto> bankService;
-    private final ClientService<ClientDto> clientService;
-    private final CreditService<CreditDto> creditService;
+    private final BankService bankService;
+    private final ClientService clientService;
+    private final CreditService creditService;
 
-    public BankController(BankService<BankDto> bankService, ClientService clientService, CreditService<CreditDto> creditService) {
+    public BankController(BankService bankService, ClientService clientService, CreditService creditService) {
         this.bankService = bankService;
         this.clientService = clientService;
         this.creditService = creditService;
     }
 
-    @GetMapping({"/"})
+/*    @GetMapping({"/"})
     public String mainView(Model model, @ModelAttribute("bankNew") BankDto bankNew) {
         return "index.html";
-    }
+    }*/
 
-    @GetMapping({"/bankService"})
+    @GetMapping({"/","/bankService"})
     public String clientsView(Model model) {
         logger.info("bankView ");
         model.addAttribute("newBank", new BankDto());

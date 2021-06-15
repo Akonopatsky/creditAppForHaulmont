@@ -21,16 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class BankServiceImpl implements BankService<BankDto> {
+public class BankServiceImpl implements BankService{
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
 
     private final BankMapper bankMapper;
     private final CreditMapper creditMapper;
     private final BankDao<Bank> bankDao;
-    private final ClientDao<Client, Bank> clientDao;
+    private final ClientDao<Client> clientDao;
     private final CreditDao<Credit> creditDao;
 
-    public BankServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client, Bank> clientDao, CreditDao<Credit> creditDao) {
+    public BankServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client> clientDao, CreditDao<Credit> creditDao) {
         this.bankMapper = bankMapper;
         this.creditMapper = creditMapper;
         this.bankDao = bankDao;

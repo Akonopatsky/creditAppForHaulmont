@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class ClientDaoImpl implements ClientDao<Client, Bank> {
+public class ClientDaoImpl implements ClientDao<Client> {
     private final ClientRepository clientRepository;
 
     public ClientDaoImpl(ClientRepository clientRepository) {

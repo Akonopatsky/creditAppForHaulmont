@@ -1,13 +1,18 @@
 package com.haulmont.creditProccesor.services;
 
+import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.web.dto.ClientDto;
+import com.haulmont.creditProccesor.web.dto.CreditOfferDto;
+
 import java.util.List;
 
-public interface CreditOfferService<CreditOfferDto, CreditDto> {
+public interface CreditOfferService {
 
-    CreditOfferDto findById(Object id);
+    CreditOfferDto findById(Object id) throws CreditProcessorException;
 
-    void save(CreditOfferDto creditOffer);
+    CreditOfferDto save(CreditOfferDto creditOffer) throws CreditProcessorException;
 
-    List<CreditOfferDto> findAllByCredit(CreditDto credit);
+    List<CreditOfferDto> findByClient(ClientDto client) throws CreditProcessorException;
 
+    void delete(CreditOfferDto offer) throws CreditProcessorException;
 }

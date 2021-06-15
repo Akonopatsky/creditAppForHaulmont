@@ -1,6 +1,10 @@
 package com.haulmont.creditProccesor.dao;
 
 import com.haulmont.creditProccesor.model.*;
+import com.haulmont.creditProccesor.storage.dao.BankDao;
+import com.haulmont.creditProccesor.storage.dao.ClientDao;
+import com.haulmont.creditProccesor.storage.dao.CreditDao;
+import com.haulmont.creditProccesor.storage.dao.CreditOfferDao;
 import com.haulmont.creditProccesor.storage.repositities.*;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
@@ -8,55 +12,55 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
+import java.util.logging.LogManager;
 
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class DaoTests {
     @Autowired
-    private ClientRepository clientRepository;
+    private CreditOfferDao<CreditOffer> creditOfferDao;
     @Autowired
-    private BankRepository bankRepository;
+    private ClientDao<Client> clientDao;
     @Autowired
-    private CreditRepository creditRepository;
+    private CreditDao<Credit> creditDao;
     @Autowired
-    private CreditOfferRepository creditOfferRepository;
-    @Autowired
-    private PaymentRepository paymentRepository;
+    private BankDao<Bank> bankDao;
+
 
     @Test
+    @Transactional
     void storageSave() {
-        Bank bank = new Bank("bank 2");
-        bankRepository.save(bank);
-        Client client1 = new Client("Client 1", "111 111  111", "1111 111111");
-        Client client2 = new Client("Client 2", "222 222  222", "2222 222222");
-        clientRepository.save(client1);
-        clientRepository.save(client2);
-        bank.addClient(client1);
-        bank.addClient(client2);
-        Credit credit1 = new Credit(Money.of(1111, "RUB"), 0.11d, Period.ofMonths(11));
-        Credit credit2 = new Credit(Money.of(2222, "RUB"), 0.22d, Period.ofMonths(22));
-        creditRepository.save(credit1);
-        creditRepository.save(credit2);
-        bank.addCredit(credit1);
-        bank.addCredit(credit2);
+        LogManager.getLogManager().reset();
+        Bank bank = new Bank("bank1");
+        bankDao.save(bank);
+        Money creditAmount = Money.of(100_000, "RUB");
+        Credit credit = new Credit(
+                creditAmount,
+                120,
+                Period.ofMonths(12));
+        creditDao.save(credit);
+        bank.addCredit(credit);
+        Client client = new Client("testClient", "33333 33", "2322214124");
+        clientDao.save(client);
+        bank.addClient(client);
+        bankDao.save(bank);
         CreditOffer creditOffer = new CreditOffer.OfferBuilder()
+                .beginDate(LocalDate.of(2021, 5, 29))
+                .credit(credit)
+                .creditAmount(creditAmount)
+                .client(client)
                 .payStrategy(new PayStrategyAnnuity())
-                .credit(credit2)
-                .creditAmount(Money.of(2221, "RUB"))
-                .client(client2)
-                .beginDate(LocalDate.of(2021, 06, 06))
                 .build();
-        paymentRepository.saveAll(creditOffer.getPaymentList());
-        creditOfferRepository.save(creditOffer);
-        bankRepository.save(bank);
-        System.out.println(bankRepository.findAll());
-        System.out.println(clientRepository.findAll());
-        System.out.println(creditOfferRepository.findAll());
-        System.out.println(creditOfferRepository.findAll());
+        Money monthAmount = Money.of(14676.33, "RUB");
+        List<Payment> paymentList = creditOffer.getPaymentList();
+        creditOfferDao.save(creditOffer);
+        List<CreditOffer> creditOfferList = creditOfferDao.findAll();
     }
 
 }

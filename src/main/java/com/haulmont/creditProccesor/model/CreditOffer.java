@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,28 +24,38 @@ public class CreditOffer {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
-    private Client client = null;
+    private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "credit_id")
-    private Credit credit = null;
+/*    @JoinColumn(name = "credit_id")*/
+    private Credit credit;
 
     @Column(name = "creditAmount")
     @Convert(converter = MoneyConverter.class)
-    private Money creditAmount = null;
+    private Money creditAmount;
 
-    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    private List<Payment> paymentList = null;
+    @Column(name = "beginDate")
+    private LocalDate beginDate;
+
+    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Payment> paymentList = new ArrayList<>();
+
+    @Column(name = "payStrategy")
+    private String payStrategyName;
 
     public CreditOffer() {
-        super();
+
     }
 
     public CreditOffer(OfferBuilder offerBuilder) {
         this.client = offerBuilder.client;
         this.credit = offerBuilder.credit;
         this.creditAmount = offerBuilder.creditAmount;
+        this.beginDate = offerBuilder.beginDate;
+        offerBuilder.paymentList.forEach(payment -> payment.setCreditOffer(this));
         paymentList = offerBuilder.paymentList;
+
+        payStrategyName = offerBuilder.payStrategy.getName();
     }
 
     public static Logger getLogger() {
@@ -67,17 +78,25 @@ public class CreditOffer {
         return creditAmount;
     }
 
+    public LocalDate getBeginDate() {
+        return beginDate;
+    }
+
     public List<Payment> getPaymentList() {
         return paymentList;
+    }
+
+    public String getPayStrategyName() {
+        return payStrategyName;
     }
 
     @Override
     public String toString() {
         return "CreditOffer{" +
-                "id=" + id +
-                ", client=" + client +
+                "client=" + client +
                 ", credit=" + credit +
                 ", creditAmount=" + creditAmount +
+                ", beginDate=" + beginDate +
                 ", paymentList=" + paymentList +
                 '}';
     }

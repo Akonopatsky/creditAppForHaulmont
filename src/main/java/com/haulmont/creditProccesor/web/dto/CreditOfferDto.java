@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.web.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CreditOfferDto {
@@ -8,11 +9,13 @@ public class CreditOfferDto {
 
     private String payStrategy;
 
-    private ClientDto client;
+    private String clientId;
 
-    private CreditDto credit;
+    private String creditId;
 
     private double creditAmount;
+
+    private LocalDate beginDate;
 
     private List<PaymentDto> paymentList;
 
@@ -32,20 +35,20 @@ public class CreditOfferDto {
         this.payStrategy = payStrategy;
     }
 
-    public ClientDto getClient() {
-        return client;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setClient(ClientDto client) {
-        this.client = client;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public CreditDto getCredit() {
-        return credit;
+    public String getCreditId() {
+        return creditId;
     }
 
-    public void setCredit(CreditDto credit) {
-        this.credit = credit;
+    public void setCreditId(String creditId) {
+        this.creditId = creditId;
     }
 
     public double getCreditAmount() {
@@ -54,6 +57,14 @@ public class CreditOfferDto {
 
     public void setCreditAmount(double creditAmount) {
         this.creditAmount = creditAmount;
+    }
+
+    public LocalDate getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(LocalDate beginDate) {
+        this.beginDate = beginDate;
     }
 
     public List<PaymentDto> getPaymentList() {

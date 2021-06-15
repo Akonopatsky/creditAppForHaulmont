@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CreditService<CreditDto> {
+public interface CreditService {
 
     @Transactional
     void saveCredit(com.haulmont.creditProccesor.web.dto.CreditDto creditDto) throws CreditProcessorException;

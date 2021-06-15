@@ -9,11 +9,9 @@ import com.haulmont.creditProccesor.services.mappers.CreditMapper;
 import com.haulmont.creditProccesor.storage.dao.BankDao;
 import com.haulmont.creditProccesor.storage.dao.ClientDao;
 import com.haulmont.creditProccesor.storage.dao.CreditDao;
-import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.CreditDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +25,10 @@ public class CreditServiceImpl implements CreditService {
     private final BankMapper bankMapper;
     private final CreditMapper creditMapper;
     private final BankDao<Bank> bankDao;
-    private final ClientDao<Client, Bank> clientDao;
+    private final ClientDao<Client> clientDao;
     private final CreditDao<Credit> creditDao;
 
-    public CreditServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client, Bank> clientDao, CreditDao<Credit> creditDao) {
+    public CreditServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client> clientDao, CreditDao<Credit> creditDao) {
         this.bankMapper = bankMapper;
         this.creditMapper = creditMapper;
         this.bankDao = bankDao;
@@ -48,7 +46,6 @@ public class CreditServiceImpl implements CreditService {
         credit.setBank(bank);
         creditDao.save(credit);
         bank.addCredit(credit);
-
     }
 
     @Override

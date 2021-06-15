@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientServiceImpl implements ClientService<ClientDto> {
+public class ClientServiceImpl implements ClientService {
     private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
 
     private final ClientMapper mapper;
     private final BankDao<Bank> bankDao;
-    private final ClientDao<Client, Bank> clientDao;
+    private final ClientDao<Client> clientDao;
 
-    public ClientServiceImpl(ClientMapper mapper, BankDao<Bank> bankDao, ClientDao<Client, Bank> clientDao) {
+    public ClientServiceImpl(ClientMapper mapper, BankDao<Bank> bankDao, ClientDao<Client> clientDao) {
         this.mapper = mapper;
         this.bankDao = bankDao;
         this.clientDao = clientDao;

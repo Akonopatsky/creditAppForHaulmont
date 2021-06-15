@@ -11,10 +11,10 @@
     <h1>Client</h1>
     <div th:fragment="client">
         <div th:object="${client}">
-            <p>Name: <span th:text="*{name}"> client name </span></p>
-            <p>phone number: <span th:text="*{phoneNumber}"> client phonenumber </span></p>
-            <p>e-mail: <span th:text="*{email}"> client e-mail </span></p>
-            <p>passport: <span th:text="*{passportNumber}"> client passportNumber </span></p>
+            <p><span class="field">Client name: </span><span th:text="*{name}"> client name </span></p>
+            <p><span class="field">phone number: </span> <span th:text="*{phoneNumber}"> client phonenumber </span></p>
+            <p><span class="field">e-mail: </span><span th:text="*{email}"> client e-mail </span></p>
+            <p><span class="field">passport number: </span><span class="entity" th:text="*{passportNumber}"> client passportNumber </span></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div class="wrapper">
             <div class="container">
                 <form id="create-form" method="post"
-                      th:action="@{/client/save}"
+                      th:action="@{/save/client}"
                       th:object="${newClient}"
                       accept-charset="utf-8">
                     <div class="row">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="name-input">Passport:</label>
+                            <label for="name-input">Passport number:</label>
                         </div>
                         <div class="col-75">
                             <input id="name-input" type="text" th:field="*{passportNumber}"
@@ -45,7 +45,7 @@
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="name-input">phoneNumber:</label>
+                            <label for="name-input">Phone number:</label>
                         </div>
                         <div class="col-75">
                             <input id="name-input" type="text" th:field="*{phoneNumber}"
@@ -54,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-25">
-                            <label for="name-input">e-mail:</label>
+                            <label for="name-input">E-mail:</label>
                         </div>
                         <div class="col-75">
                             <input id="name-input" type="text" th:field="*{email}" th:placeholder="*{email}"/>
@@ -74,8 +74,6 @@
                    target="_self"
                    th:text=" ${client.name}"> bank name </a></th>
             </li>
-
-
         </ul>
     </div>
     <h1>chooseClient</h1>

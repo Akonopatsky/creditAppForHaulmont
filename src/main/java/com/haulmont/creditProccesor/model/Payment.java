@@ -17,29 +17,25 @@ public class Payment {
     private UUID id;
 
     @Column(name = "date")
-    private final LocalDate date;
+    private LocalDate date;
 
     @Column(name = "amountOfPaymant")
     @Convert(converter = MoneyConverter.class)
-    private final Money amountOfPayment;
+    private Money amountOfPayment;
 
     @Column(name = "amountOfBody")
     @Convert(converter = MoneyConverter.class)
-    private final Money amountOfBody;
+    private Money amountOfBody;
 
     @Column(name = "amountOfInterest")
     @Convert(converter = MoneyConverter.class)
-    private final Money amountOfInterest;
+    private Money amountOfInterest;
 
-    @ManyToOne
-    @JoinColumn(name = "creditOffer_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "offer_id")
     private CreditOffer creditOffer;
 
     public Payment() {
-        date = null;
-        amountOfPayment = null;
-        amountOfBody = null;
-        amountOfInterest = null;
     }
 
     public Payment(LocalDate date, Money amountOfPayment, Money amountOfBody, Money amountOfInterest) {
@@ -47,6 +43,10 @@ public class Payment {
         this.amountOfPayment = amountOfPayment;
         this.amountOfBody = amountOfBody;
         this.amountOfInterest = amountOfInterest;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public LocalDate getDate() {
@@ -63,5 +63,13 @@ public class Payment {
 
     public Money getAmountOfInterest() {
         return amountOfInterest;
+    }
+
+    public CreditOffer getCreditOffer() {
+        return creditOffer;
+    }
+
+    public void setCreditOffer(CreditOffer creditOffer) {
+        this.creditOffer = creditOffer;
     }
 }

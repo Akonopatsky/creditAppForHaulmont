@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public interface ClientDao<T,U> {
+public interface ClientDao<T> {
 
     void save(T client);
 
     T findById(Object id) throws CreditProcessorException;
 
-    Optional<Client> findByPassportNumber(String passport);
+    Optional<T> findByPassportNumber(String passport);
 
     List<T> findAll();
 

@@ -32,4 +32,9 @@ public class CreditDaoImpl implements CreditDao<Credit> {
     public List<Credit> findAll() {
         return (List<Credit>)creditRepository.findAll();
     }
+
+    @Override
+    public void delete(Credit credit) {
+        creditRepository.delete(credit);
+    }
 }

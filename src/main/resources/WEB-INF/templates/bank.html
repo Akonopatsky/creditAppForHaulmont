@@ -12,7 +12,11 @@
 
     <div class="col-100">
         <h1>Bank</h1>
-        <div class="list" th:insert="/blanks/bank_blanks.html :: bank"></div>
+        <div th:fragment="bank">
+            <div th:object="${bank}">
+                <p><span class="field">Bank name: </span><span th:text="*{name}"> client name </span></p>
+            </div>
+        </div>
 
         <div th:if="${newName}">
             <div class="container">

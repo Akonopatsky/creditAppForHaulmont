@@ -9,7 +9,14 @@
 <div class="wrapper">
     <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
     <h1>Choose bank</h1>
-    <div th:insert="/blanks/bank_blanks.html :: chooseBank"></div>
+    <div th:fragment="chooseBank">
+        <ul th:each="bank : ${bankList}">
+            <li><a th:href="@{/bind/client/__${client.id}__/bank/__${bank.id}__}"
+                   target="_self"
+                   th:text=" ${bank.name}"> bank name </a></th>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 

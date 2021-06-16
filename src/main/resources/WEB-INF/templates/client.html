@@ -15,9 +15,10 @@
 
         <div th:object="${client}">
             <p><span class="field">Client name: </span><span th:text="*{name}"> client name </span></p>
-            <p><span class="field">phone number: </span> <span th:text="*{phoneNumber}"> client phonenumber </span></p>
-            <p><span class="field">e-mail: </span><span th:text="*{email}"> client e-mail </span></p>
             <p><span class="field">passport number: </span><span class="entity" th:text="*{passportNumber}"> client passportNumber </span>
+            <p><span class="field">phone number: </span> <span th:text="*{phoneNumber}"> client phone number </span></p>
+            <p><span class="field">e-mail: </span><span th:text="*{email}"> client e-mail </span></p>
+
             </p>
         </div>
     </div>
@@ -72,8 +73,8 @@
     </div>
 
     <div class="col-100">
-        <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</d></a>
         <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
+        <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</d></a>
         <a class="act_button" th:href="@{/delete/client/__${client.id}__}">delete</a>
     </div>
 

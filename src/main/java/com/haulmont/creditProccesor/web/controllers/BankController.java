@@ -7,7 +7,6 @@ import com.haulmont.creditProccesor.services.CreditService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
 import com.haulmont.creditProccesor.web.dto.CreditDto;
-import com.haulmont.creditProccesor.web.dto.CreditOfferDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -110,7 +109,7 @@ public class BankController {
     ) throws CreditProcessorException {
         newCredit.setBankId(bankId);
         logger.info("new credit {} , {}, {}", newCredit);
-        creditService.saveCredit(newCredit);
+        creditService.createCredit(newCredit);
         return new RedirectView("/bank/" + bankId, true);
     }
 

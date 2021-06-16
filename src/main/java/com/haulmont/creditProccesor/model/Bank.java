@@ -28,7 +28,7 @@ public class Bank {
             inverseJoinColumns = @JoinColumn(name = "client_id"))
     private final Set<Client> clientSet = new HashSet<>();
 
-    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bank", cascade = {CascadeType.REMOVE}, fetch = FetchType.EAGER)
     private final Set<Credit> creditSet = new HashSet<>();
 
 

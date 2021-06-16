@@ -35,7 +35,6 @@ public class Credit {
     private final List<CreditOffer> creditOfferList = new ArrayList<>();
 
     public Credit() {
-        super();
     }
 
     public Credit(Money creditLimit, double interestRate, Period period) {
@@ -73,5 +72,17 @@ public class Credit {
 
     public Bank getBank() {
         return bank;
+    }
+
+    public void setCreditLimit(Money creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 }

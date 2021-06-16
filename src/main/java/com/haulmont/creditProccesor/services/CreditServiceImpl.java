@@ -10,11 +10,13 @@ import com.haulmont.creditProccesor.storage.dao.BankDao;
 import com.haulmont.creditProccesor.storage.dao.ClientDao;
 import com.haulmont.creditProccesor.storage.dao.CreditDao;
 import com.haulmont.creditProccesor.web.dto.CreditDto;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     @Transactional
-    public void saveCredit(CreditDto creditDto) throws CreditProcessorException {
+    public void createCredit(CreditDto creditDto) throws CreditProcessorException {
         logger.info("save credit {}", creditDto);
         Bank bank = bankDao.findById(creditDto.getBankId());
         Credit credit = creditMapper.getNewCredit(creditDto);
@@ -59,5 +61,21 @@ public class CreditServiceImpl implements CreditService {
         List<CreditDto> creditDtoList = creditMapper.convertToDtoList(
                 new ArrayList<Credit>(bankDao.findById(id).getCreditSet()));
         return creditDtoList;
+    }
+
+    @Override
+    @Transactional
+    public void save(CreditDto creditDto) throws CreditProcessorException {
+        Credit credit = creditDao.findById(creditDto.getId());
+        credit.setCreditLimit(Money.of(creditDto.getCreditLimit(), "RUB"));
+        credit.setInterestRate(creditDto.getInterestRate());
+        credit.setPeriod(Period.ofMonths(creditDto.getPeriod()));
+        creditDao.save(credit);
+    }
+
+    @Override
+    public void delete(CreditDto creditDto) throws CreditProcessorException {
+        Credit credit = creditDao.findById(creditDto.getId());
+        creditDao.delete(credit);
     }
 }

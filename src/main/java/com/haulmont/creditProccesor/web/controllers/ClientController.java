@@ -49,8 +49,7 @@ public class ClientController {
     @GetMapping({"/client/{id}"})
     public String clientView(
             Model model,
-            @PathVariable(name = "id") String id,
-            RedirectAttributes attributes
+            @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
         logger.info("get client by id {}", id);
         ClientDto client = clientService.findById(id);
@@ -71,11 +70,12 @@ public class ClientController {
 
     @PostMapping({"/save/client/{id}"})
     public RedirectView clientSave(@ModelAttribute ClientDto editClient,
-                                   @PathVariable(name = "id") String id) throws CreditProcessorException {
+                                   @PathVariable(name = "id") String id,
+                                   HttpServletRequest request) throws CreditProcessorException {
         editClient.setId(id);
         logger.info("new client {}", editClient);
         clientService.save(editClient);
-        return new RedirectView("/client", true);
+        return new RedirectView(request.getHeader("referer"), true);
     }
 
     @GetMapping({"/client/{id}/bank"})
@@ -156,14 +156,14 @@ public class ClientController {
 
 
     @GetMapping({"/edit/client/{id}"})
-    public RedirectView editBank(
+    public RedirectView editClient(
             Model model,
             @PathVariable(name = "id") String id,
             RedirectAttributes attributes,
             HttpServletRequest request
     ) throws CreditProcessorException {
         logger.info("edit client  {}", id);
-        attributes.addFlashAttribute("editClient", new ClientDto());
+        attributes.addFlashAttribute("editClient", clientService.findById(id));
         return new RedirectView(request.getHeader("referer"), true);
     }
 

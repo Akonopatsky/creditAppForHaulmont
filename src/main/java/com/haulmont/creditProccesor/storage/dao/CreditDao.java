@@ -10,4 +10,6 @@ public interface CreditDao<T> {
     T findById(Object id) throws CreditProcessorException;
 
     List<T> findAll();
+
+    void delete(T credit);
 }

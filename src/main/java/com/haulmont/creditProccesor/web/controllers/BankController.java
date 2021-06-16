@@ -33,17 +33,29 @@ public class BankController {
     }
 
     @GetMapping({"/", "/bank"})
-    public String clientsView(Model model) {
+    public String banks(Model model) {
         logger.info("bankView ");
         model.addAttribute("newBank", new BankDto());
         return "bankservice.html";
     }
 
     @PostMapping({"/new/bank"})
-    public RedirectView bankSave(@ModelAttribute BankDto newBank) throws CreditProcessorException {
+    public RedirectView createBank(@ModelAttribute BankDto newBank) throws CreditProcessorException {
         logger.info("new bank {}", newBank.getName());
         bankService.create(newBank);
         return new RedirectView("/bank", true);
+    }
+
+    @GetMapping({"/edit/bank/{id}"})
+    public RedirectView editBank(
+            Model model,
+            @PathVariable(name = "id") String id,
+            RedirectAttributes attributes,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
+        logger.info("edit bank  {}", id);
+        attributes.addFlashAttribute("newName", new String());
+        return new RedirectView(request.getHeader("referer"), true);
     }
 
     @GetMapping({"/bank/{id}"})
@@ -73,7 +85,7 @@ public class BankController {
     }
 
     @GetMapping({"/bind/bank/{bankId}/client/{clientId}"})
-    public RedirectView bind1BankAndClient(
+    public RedirectView bindBankAndClient(
             @PathVariable(name = "bankId") String bankId,
             @PathVariable(name = "clientId") String clientId,
             HttpServletRequest request
@@ -112,20 +124,8 @@ public class BankController {
         return new RedirectView("/bank", true);
     }
 
-    @GetMapping({"/edit/bank/{id}"})
-    public RedirectView editBank(
-            Model model,
-            @PathVariable(name = "id") String id,
-            RedirectAttributes attributes,
-            HttpServletRequest request
-    ) throws CreditProcessorException {
-        logger.info("edit bank  {}", id);
-        attributes.addFlashAttribute("newName", new String());
-        return new RedirectView(request.getHeader("referer"), true);
-    }
-
     @PostMapping({"/save/bank/{id}"})
-    public RedirectView creditSave(
+    public RedirectView saveBank(
             @ModelAttribute BankDto newBank,
             @PathVariable(name = "id") String id,
             HttpServletRequest request

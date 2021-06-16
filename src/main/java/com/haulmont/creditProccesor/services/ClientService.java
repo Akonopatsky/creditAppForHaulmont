@@ -14,4 +14,8 @@ public interface ClientService {
     List<ClientDto> findAll();
 
     List<ClientDto> findByBank(String id) throws CreditProcessorException;
+
+    void delete(ClientDto clientDto) throws CreditProcessorException;
+
+    void create(ClientDto clientDto) throws CreditProcessorException;
 }

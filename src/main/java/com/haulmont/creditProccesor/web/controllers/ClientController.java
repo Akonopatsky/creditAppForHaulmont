@@ -42,7 +42,8 @@ public class ClientController {
     @GetMapping({"/client"})
     public String clientsView(Model model) {
         logger.info("clientsView ");
-        return "clientservice.html";
+        model.addAttribute("editClient", new ClientDto());
+        return "clientService.html";
     }
 
     @GetMapping({"/client/{id}"})
@@ -61,11 +62,20 @@ public class ClientController {
         return "client.html";
     }
 
-    @PostMapping({"/save/client"})
-    public RedirectView clientSave(@ModelAttribute ClientDto newClient) throws CreditProcessorException {
-        logger.info("new client {}", newClient);
-        clientService.save(newClient);
-        return new RedirectView("/clientService/", true);
+    @PostMapping({"/new/client"})
+    public RedirectView createClient(@ModelAttribute ClientDto editClient) throws CreditProcessorException {
+        logger.info("new client {}", editClient);
+        clientService.create(editClient);
+        return new RedirectView("/client", true);
+    }
+
+    @PostMapping({"/save/client/{id}"})
+    public RedirectView clientSave(@ModelAttribute ClientDto editClient,
+                                   @PathVariable(name = "id") String id) throws CreditProcessorException {
+        editClient.setId(id);
+        logger.info("new client {}", editClient);
+        clientService.save(editClient);
+        return new RedirectView("/client", true);
     }
 
     @GetMapping({"/client/{id}/bank"})
@@ -134,15 +144,33 @@ public class ClientController {
         return new RedirectView(request.getHeader("referer"), true);
     }
 
+    @GetMapping({"/delete/client/{id}"})
+    public RedirectView deleteClient(
+            @PathVariable(name = "id") String id
+    ) throws CreditProcessorException {
+        logger.info("delete client  {}", id);
+        ClientDto clientDto = clientService.findById(id);
+        clientService.delete(clientDto);
+        return new RedirectView("/client", true);
+    }
+
+
+    @GetMapping({"/edit/client/{id}"})
+    public RedirectView editBank(
+            Model model,
+            @PathVariable(name = "id") String id,
+            RedirectAttributes attributes,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
+        logger.info("edit client  {}", id);
+        attributes.addFlashAttribute("editClient", new ClientDto());
+        return new RedirectView(request.getHeader("referer"), true);
+    }
+
+
     @ModelAttribute("strategyList")
     public List<String> strategyList() {
         return new ArrayList<>(payStrategyRegistry.getAllKeys());
-    }
-
-    @ModelAttribute("newClient")
-    public ClientDto getEmptyClientDto() {
-        logger.info("create empty client object");
-        return new ClientDto();
     }
 
     @ModelAttribute("offer")

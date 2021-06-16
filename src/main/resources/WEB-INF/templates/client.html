@@ -10,6 +10,9 @@
 <div class="wrapper">
     <div class="col-100">
         <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+    </div>
+    <div class="col-50">
+
         <div th:object="${client}">
             <p><span class="field">Client name: </span><span th:text="*{name}"> client name </span></p>
             <p><span class="field">phone number: </span> <span th:text="*{phoneNumber}"> client phonenumber </span></p>
@@ -18,9 +21,64 @@
             </p>
         </div>
     </div>
+
     <div class="col-50">
+        <div th:if="${editClient}">
+            <div class="container">
+                <form id="edit-form" method="post"
+                      th:action="@{/save/client/__${client.id}__}"
+                      th:object="${editClient}"
+                      accept-charset="utf-8">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name-input">Name:</label>
+                        </div>
+                        <div class="col-75">
+                            <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name-input">Passport number:</label>
+                        </div>
+                        <div class="col-75">
+                            <input id="name-input" type="text" th:field="*{passportNumber}"
+                                   th:placeholder="*{passportNumber}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name-input">Phone number:</label>
+                        </div>
+                        <div class="col-75">
+                            <input id="name-input" type="text" th:field="*{phoneNumber}"
+                                   th:placeholder="*{phoneNumber}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="name-input">E-mail:</label>
+                        </div>
+                        <div class="col-75">
+                            <input id="name-input" type="text" th:field="*{email}" th:placeholder="*{email}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" style="width:100px">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-100">
+        <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</d></a>
         <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
-        <h1>List of banks</h1>
+        <a class="act_button" th:href="@{/delete/client/__${client.id}__}">delete</a>
+    </div>
+
+    <div class="col-50">
+        <h1>Choose bank to get credits</h1>
         <div class="list">
             <ul th:each="bank : ${bankList}">
                 <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}__/credit}"
@@ -30,7 +88,21 @@
         </div>
     </div>
     <div class="col-50">
+
+        <div class="list" th:unless="${#lists.isEmpty(creditList)}">
+            <h1 th:text="'Bank: ' + ${bank.name} + ' credits: '">Available credits </h1>
+            <ul th:each="credit : ${creditList}">
+                <li><a th:href="@{/client/__${client.id}__/credit/__${credit.id}__}"
+                       th:object="${choosenCredit}"
+                       target="_self"
+                       th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.creditLimit} + ' rate: ' + ${credit.interestRate}">
+                    credit </a>
+                </li>
+            </ul>
+        </div>
+
         <div th:if="${choosenCredit}">
+            <h1>New credit Offer</h1>
             <div th:object="${choosenCredit}">
                 <p>limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
                 <p>interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
@@ -77,17 +149,7 @@
             </div>
 
         </div>
-        <div class="list" th:unless="${#lists.isEmpty(creditList)}">
-            <h1 th:text="'Bank: ' + ${bank.name} + ' credits: '">Available credits </h1>
-            <ul th:each="credit : ${creditList}">
-                <li><a th:href="@{/client/__${client.id}__/credit/__${credit.id}__}"
-                       th:object="${choosenCredit}"
-                       target="_self"
-                       th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.creditLimit} + ' rate: ' + ${credit.interestRate}">
-                    credit </a>
-                </li>
-            </ul>
-        </div>
+
     </div>
     <div class="col-100">
         <h1>Credit offer list</h1>

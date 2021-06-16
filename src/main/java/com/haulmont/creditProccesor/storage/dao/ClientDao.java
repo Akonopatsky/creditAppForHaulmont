@@ -18,4 +18,5 @@ public interface ClientDao<T> {
 
     List<T> findAll();
 
+    void delete(T client);
 }

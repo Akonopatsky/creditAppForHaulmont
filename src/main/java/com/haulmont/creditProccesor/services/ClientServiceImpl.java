@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -32,12 +34,20 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public void create(ClientDto clientDto) {
+        logger.info("create client {}", clientDto);
+        clientDao.save(mapper.getNewClient(clientDto));
+    }
+
+    @Override
     public void save(ClientDto clientDto) throws CreditProcessorException {
         logger.info("save client {}", clientDto);
-        if (clientDao.findByPassportNumber(clientDto.getPassportNumber()).isPresent()) {
-            throw new CreditProcessorException("passport number " + clientDto.getPassportNumber() + " is present in base");
-        }
-        clientDao.save(mapper.getNewClient(clientDto));
+        Client client = clientDao.findById(clientDto.getId());
+        client.setName(clientDto.getName());
+        client.setEmail(clientDto.getEmail());
+        client.setPassportNumber(clientDto.getPassportNumber());
+        client.setPhoneNumber(clientDto.getPhoneNumber());
+        clientDao.save(client);
     }
 
     @Override
@@ -57,5 +67,15 @@ public class ClientServiceImpl implements ClientService {
         return mapper.convertToDtoList(
                 new ArrayList<>(bankDao.findById(id).getClientSet()));
     }
+
+    @Override
+    @Transactional
+    public void delete(ClientDto clientDto) throws CreditProcessorException {
+        Client client = clientDao.findById(clientDto.getId());
+        clientDao.delete(client);
+
+    }
+
+
 }
 

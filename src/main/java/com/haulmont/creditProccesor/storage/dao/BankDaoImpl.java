@@ -35,6 +35,9 @@ public class BankDaoImpl implements BankDao<Bank> {
 
     @Override
     public void delete(Bank bank) {
+        Set<Client> clientSet = new HashSet<>(bank.getClientSet());
+        clientSet.forEach(bank::removeClient);
+        bankRepository.save(bank);
         bankRepository.delete(bank);
     }
 }

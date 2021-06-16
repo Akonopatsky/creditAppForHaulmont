@@ -87,9 +87,6 @@ public class BankServiceImpl implements BankService {
     @Transactional
     public void delete(BankDto bankDto) throws CreditProcessorException {
         Bank bank = bankDao.findById(bankDto.getId());
-        Set<Client> clientSet = new HashSet<>(bank.getClientSet());
-        clientSet.forEach(bank::removeClient);
-        bankDao.save(bank);
         bankDao.delete(bank);
     }
 }

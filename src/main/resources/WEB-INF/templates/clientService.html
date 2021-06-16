@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Client service</title>
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+    <h1>New client</h1>
+    <div th:fragment="createClient">
+        <div class="container">
+            <form id="create-form" method="post"
+                  th:action="@{/save/client}"
+                  th:object="${editClient}"
+                  accept-charset="utf-8">
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Name:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{name}" th:placeholder="*{name}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Passport number:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{passportNumber}"
+                               th:placeholder="*{passportNumber}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">Phone number:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{phoneNumber}"
+                               th:placeholder="*{phoneNumber}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="name-input">E-mail:</label>
+                    </div>
+                    <div class="col-75">
+                        <input id="name-input" type="text" th:field="*{email}" th:placeholder="*{email}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" style="width:100px">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-50">
+        <h1>List of client</h1>
+        <div class="list">
+            <div th:fragment="clientList">
+                <ul th:each="client : ${clientList}">
+                    <li><a th:href="@{/client/{id}(id=${client.id})}"
+                           target="_self"
+                           th:text="'client: ' + ${client.name}">client: name </a></th>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

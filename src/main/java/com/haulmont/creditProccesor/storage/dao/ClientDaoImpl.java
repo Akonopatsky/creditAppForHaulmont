@@ -7,9 +7,7 @@ import com.haulmont.creditProccesor.model.Client;
 import com.haulmont.creditProccesor.storage.repositities.ClientRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class ClientDaoImpl implements ClientDao<Client> {
@@ -39,6 +37,14 @@ public class ClientDaoImpl implements ClientDao<Client> {
     @Override
     public List<Client> findAll() {
         return (List<Client>)clientRepository.findAll();
+    }
+
+    @Override
+    public void delete(Client client) {
+        Set<Bank> bankSet = new HashSet<>(client.getBankSet());
+        bankSet.forEach(client::removeBank);
+        clientRepository.save(client);
+        clientRepository.delete(client);
     }
 
 }

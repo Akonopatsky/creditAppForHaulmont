@@ -1,5 +1,7 @@
 package com.haulmont.creditProccesor.web.dto;
 
+import java.text.DecimalFormat;
+
 public class CreditDto {
     private String id;
 
@@ -12,6 +14,11 @@ public class CreditDto {
     private String bankId;
 
     public CreditDto() {
+    }
+
+    public String getCreditLimitFormatted() {
+        DecimalFormat dF = new DecimalFormat("#.##");
+        return dF.format(this.creditLimit);
     }
 
     public String getId() {

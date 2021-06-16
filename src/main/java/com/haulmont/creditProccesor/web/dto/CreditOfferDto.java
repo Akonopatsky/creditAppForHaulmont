@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.web.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -74,4 +75,5 @@ public class CreditOfferDto {
     public void setPaymentList(List<PaymentDto> paymentList) {
         this.paymentList = paymentList;
     }
+
 }

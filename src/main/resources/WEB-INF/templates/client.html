@@ -18,8 +18,6 @@
             <p><span class="field">passport number: </span><span class="entity" th:text="*{passportNumber}"> client passportNumber </span>
             <p><span class="field">phone number: </span> <span th:text="*{phoneNumber}"> client phone number </span></p>
             <p><span class="field">e-mail: </span><span th:text="*{email}"> client e-mail </span></p>
-
-            </p>
         </div>
     </div>
 
@@ -74,7 +72,7 @@
 
     <div class="col-100">
         <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
-        <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</d></a>
+        <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</a>
         <a class="act_button" th:href="@{/delete/client/__${client.id}__}">delete</a>
     </div>
 
@@ -96,7 +94,7 @@
                 <li><a th:href="@{/client/__${client.id}__/credit/__${credit.id}__}"
                        th:object="${choosenCredit}"
                        target="_self"
-                       th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.creditLimit} + ' rate: ' + ${credit.interestRate}">
+                       th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.getCreditLimitFormatted()} + ' rate: ' + ${credit.interestRate}">
                     credit </a>
                 </li>
             </ul>
@@ -105,7 +103,7 @@
         <div th:if="${choosenCredit}">
             <h1>New credit Offer</h1>
             <div th:object="${choosenCredit}">
-                <p>limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
+                <p>limit: <span th:text="*{getCreditLimitFormatted()}"> 500 000 </span></p>
                 <p>interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
                 <p>period: <span th:text="*{period}"> 15 </span> month</p>
             </div>
@@ -134,7 +132,7 @@
                             <label for="payStrategy">Pay strategy: </label>
                         </div>
                         <div class="col-75">
-                            <select th:field="*{payStrategy}">
+                            <select id="payStrategy" th:field="*{payStrategy}">
                                 <option th:each="strategy : ${strategyList}"
                                         th:value="${strategy}"
                                         th:text="${strategy}">strategy
@@ -161,7 +159,7 @@
                        th:text="'amount: ' + ${offer.creditAmount} +
                        ', pay strategy: ' + ${offer.payStrategy} +
                        ' begin date: ' + ${offer.beginDate}">
-                    bank name </a></th>
+                    bank name </a>
                 </li>
             </ul>
         </div>

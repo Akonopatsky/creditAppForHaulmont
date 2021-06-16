@@ -1,5 +1,6 @@
 package com.haulmont.creditProccesor.web.dto;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class PaymentDto {
@@ -40,4 +41,13 @@ public class PaymentDto {
         this.amountOfInterest = amountOfInterest;
     }
 
+    @Override
+    public String toString() {
+        DecimalFormat dF = new DecimalFormat("#.##");
+        return "Payment " +
+                "date=" + date +
+                "  amountOfPayment=" + dF.format(amountOfPayment) +
+                "  amountOfBody=" + dF.format(amountOfBody) +
+                "  amountOfInterest=" + dF.format(amountOfInterest);
+    }
 }

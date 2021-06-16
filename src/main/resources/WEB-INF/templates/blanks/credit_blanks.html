@@ -11,7 +11,9 @@
     <ul th:each="credit : ${creditList}">
         <li><a th:href="@{/credit/__${credit.id}__}"
                target="_self"
-               th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.creditLimit} + ' rate: ' + ${credit.interestRate}"> credit </a></th>
+               th:text="'period: ' + ${credit.period} +
+               ' limit: ' + ${credit.getCreditLimitFormatted()} +
+               ' rate: ' + ${credit.interestRate}"> credit </a>
         </li>
     </ul>
 </div>
@@ -19,7 +21,7 @@
 <h1>Credit View</h1>
 <div th:fragment="credit">
     <div th:object="${credit}">
-        <p>Credit limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
+        <p>Credit limit: <span th:text="*{getCreditLimitFormatted()}"> 500 000 </span></p>
         <p>Credit interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
         <p>Credit period: <span th:text="*{period}"> 15 </span>month</p>
     </div>

@@ -13,7 +13,7 @@
         <h1>Credit</h1>
         <div class="list">
             <div th:object="${credit}">
-                <p>Credit limit: <span th:text="*{creditLimit}"> 500 000 </span></p>
+                <p>Credit limit: <span th:text="*{getCreditLimitFormatted()}"> 500 000 </span></p>
                 <p>Credit interest rate: <span th:text="*{interestRate}"> 15 </span> %</p>
                 <p>Credit period: <span th:text="*{period}"> 15 </span> month</p>
             </div>
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="col-100">
-        <a class="act_button" th:href="@{/edit/credit/__${credit.id}__}">edit</d></a>
+        <a class="act_button" th:href="@{/edit/credit/__${credit.id}__}">edit</a>
         <a class="act_button" th:href="@{/delete/credit/__${credit.id}__}">delete</a>
     </div>
 </div>

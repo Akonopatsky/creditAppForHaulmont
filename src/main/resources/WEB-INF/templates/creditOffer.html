@@ -15,9 +15,13 @@
             <div th:object="${offer}">
                 <p><span class="field">Credit amount: </span><span th:text="*{creditAmount}"> 500 000 </span></p>
                 <p><span class="field">beginDate: </span><span th:text="*{beginDate}">16.06.2021</span></p>
-<!--                <p><span class="field">Strategy: </span><span th:text="*{payStrategy}"> annuity </span>month</p>-->
-                <div th:each="payment : *{paymentList}">
-                    <div th:text="${payment.date}"></div>
+                <!--                <p><span class="field">Strategy: </span><span th:text="*{payStrategy}"> annuity </span>month</p>-->
+                <div th:each="payment : ${paymentList}">
+                    <div
+                            th:text="'date ' + ${payment.date} +
+                            'amount: ' + ${payment.amountOfPayment} +
+                            'body amount: ' + ${payment.amountOfBody} +
+                            'amount of interest: ' +  ${payment.amountOfinterest}"></div>
                 </div>
             </div>
         </div>

@@ -26,17 +26,18 @@
     text-decoration: none;
     text-align: center;
     color: #500;
+    border-radius: 5px;
 }
 
 .act_button:hover {
+
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #fcfff0, #e9e9c0);
     color: #4008;
+    border-radius: 5px;
 }
 
 .top_button {
-    /*    width: 50px;
-        height: 15px;*/
     margin-left: 20px;
     margin-right: 20px;
     border: 1px solid #fff;
@@ -116,7 +117,7 @@
 
 h1 {
     font-size: 17px;
-    color: darkslateblue;
+    color: #6ec635;
 }
 
 input[type=text], textarea {

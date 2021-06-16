@@ -1,5 +1,8 @@
 package com.haulmont.creditProccesor.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
@@ -37,16 +40,17 @@ public class Bank {
     }
 
     public boolean addClient(Client client) {
-        clientSet.add(client);
+        if(!clientSet.add(client)) {return false;}
         return client.addBank(this);
+    }
+
+    public boolean removeClient(Client client) {
+        clientSet.remove(client);
+        return client.removeBank(this);
     }
 
     public boolean addCredit(Credit credit) {
         return creditSet.add(credit);
-    }
-
-    public boolean removeClient(Client client) {
-        return clientSet.remove(client);
     }
 
     public boolean removeCredit(Client credit) {
@@ -59,6 +63,10 @@ public class Bank {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Client> getClientSet() {

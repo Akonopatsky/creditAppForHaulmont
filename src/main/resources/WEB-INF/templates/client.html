@@ -95,9 +95,9 @@
             <ul th:each="offer : ${offerList}">
                 <li><a th:href="@{/offer/__${offer.id}__}"
                        target="_self"
-                       th:text="'pay strategy: ' + ${offer.payStrategy} +
-                       ' amount: ' + ${offer.creditAmount} +
-                       'begin date: ' + ${offer.beginDate}">
+                       th:text="'amount: ' + ${offer.creditAmount} +
+                       ', pay strategy: ' + ${offer.payStrategy} +
+                       ' begin date: ' + ${offer.beginDate}">
                     bank name </a></th>
                 </li>
             </ul>

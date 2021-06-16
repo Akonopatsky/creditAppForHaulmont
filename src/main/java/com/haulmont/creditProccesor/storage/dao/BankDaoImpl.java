@@ -32,4 +32,9 @@ public class BankDaoImpl implements BankDao<Bank> {
     public List<Bank> findAll() {
         return new ArrayList<>((Collection<? extends Bank>) bankRepository.findAll());
     }
+
+    @Override
+    public void delete(Bank bank) {
+        bankRepository.delete(bank);
+    }
 }

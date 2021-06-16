@@ -12,7 +12,16 @@
     <div th:insert="/blanks/client_blanks.html :: clientCreate"></div>
     <div class="col-50">
         <h1>List of client</h1>
-        <div class="list" th:insert="/blanks/client_blanks.html :: clientList"></div>
+        <div class="list">
+            <div th:fragment="clientList">
+                <ul th:each="client : ${clientList}">
+                    <li><a th:href="@{/client/{id}(id=${client.id})}"
+                           target="_self"
+                           th:text="'client: ' + ${client.name}">client: name </a></th>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -6,7 +6,9 @@ import com.haulmont.creditProccesor.web.dto.BankDto;
 import java.util.List;
 
 public interface BankService {
-    void save(BankDto bankDto);
+    void create(BankDto bankDto) throws CreditProcessorException;
+
+    void save(BankDto bankDto) throws CreditProcessorException;
 
     BankDto findById(Object id) throws CreditProcessorException;
 
@@ -16,4 +18,5 @@ public interface BankService {
 
     boolean bankAddClient(String bankId, String clientId) throws CreditProcessorException;
 
+    void delete(BankDto bank) throws CreditProcessorException;
 }

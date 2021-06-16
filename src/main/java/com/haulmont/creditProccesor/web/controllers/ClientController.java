@@ -39,7 +39,7 @@ public class ClientController {
         this.payStrategyRegistry = payStrategyRegistry;
     }
 
-    @GetMapping({"/clientService"})
+    @GetMapping({"/client"})
     public String clientsView(Model model) {
         logger.info("clientsView ");
         return "clientservice.html";
@@ -127,12 +127,10 @@ public class ClientController {
             @PathVariable(name = "creditId") String creditId,
             HttpServletRequest request
     ) throws CreditProcessorException {
-        logger.info("new credit iffer {}", offer);
+        logger.info("new credit offer {}", offer);
         offer.setClientId(clientId);
         offer.setCreditId(creditId);
-        CreditOfferDto creditOfferDto2 = creditOfferService.save(offer);
-        CreditOfferDto creditOfferDto = creditOfferService.findById(creditOfferDto2.getId());
-        System.out.println("!!!" + creditOfferDto2.getPaymentList());
+        creditOfferService.save(offer);
         return new RedirectView(request.getHeader("referer"), true);
     }
 

@@ -31,7 +31,7 @@ public class Credit {
     @ManyToOne()
     private Bank bank;
 
-    @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private final List<CreditOffer> creditOfferList = new ArrayList<>();
 
     public Credit() {

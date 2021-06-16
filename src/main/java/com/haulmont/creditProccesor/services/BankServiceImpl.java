@@ -18,10 +18,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class BankServiceImpl implements BankService{
+public class BankServiceImpl implements BankService {
     private static final Logger logger = LoggerFactory.getLogger(BankServiceImpl.class);
 
     private final BankMapper bankMapper;
@@ -39,9 +41,17 @@ public class BankServiceImpl implements BankService{
     }
 
     @Override
-    public void save(BankDto bankDto) {
+    public void create(BankDto bankDto) throws CreditProcessorException {
         logger.info("save bank {}", bankDto);
         bankDao.save(bankMapper.getNewBank(bankDto));
+    }
+
+    @Override
+    public void save(BankDto bankDto) throws CreditProcessorException {
+        logger.info("save bank {}", bankDto);
+        Bank bank = bankDao.findById(bankDto.getId());
+        bank.setName(bankDto.getName());
+        bankDao.save(bank);
     }
 
     @Override
@@ -73,5 +83,13 @@ public class BankServiceImpl implements BankService{
         return result;
     }
 
-
+    @Override
+    @Transactional
+    public void delete(BankDto bankDto) throws CreditProcessorException {
+        Bank bank = bankDao.findById(bankDto.getId());
+        Set<Client> clientSet = new HashSet<>(bank.getClientSet());
+        clientSet.forEach(bank::removeClient);
+        bankDao.save(bank);
+        bankDao.delete(bank);
+    }
 }

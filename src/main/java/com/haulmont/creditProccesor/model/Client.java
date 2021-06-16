@@ -84,8 +84,16 @@ public class Client {
         if (bankSet.contains(bank)) {
             return true;
         }
-        this.bankSet.add(bank);
+        bankSet.add(bank);
         return bank.addClient(this);
+    }
+
+    public boolean removeBank(Bank bank) {
+        if (!bankSet.contains(bank)) {
+            return true;
+        }
+        bankSet.remove(bank);
+        return bank.removeClient(this);
     }
 
     public String getEmail() {
@@ -118,4 +126,6 @@ public class Client {
                 ", passportNumber='" + passportNumber + '\'' +
                 '}';
     }
+
+
 }

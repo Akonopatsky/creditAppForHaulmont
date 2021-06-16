@@ -7,11 +7,13 @@ import com.haulmont.creditProccesor.services.CreditService;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
 import com.haulmont.creditProccesor.web.dto.CreditDto;
+import com.haulmont.creditProccesor.web.dto.CreditOfferDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,28 +32,18 @@ public class BankController {
         this.creditService = creditService;
     }
 
-/*    @GetMapping({"/"})
-    public String mainView(Model model, @ModelAttribute("bankNew") BankDto bankNew) {
-        return "index.html";
-    }*/
-
-    @GetMapping({"/","/bankService"})
+    @GetMapping({"/", "/bank"})
     public String clientsView(Model model) {
         logger.info("bankView ");
         model.addAttribute("newBank", new BankDto());
         return "bankservice.html";
     }
 
-    @GetMapping({"/bank/list"})
-    public String bankListView() {
-        return "bank_list.html";
-    }
-
-    @PostMapping({"/bank/save"})
-    public RedirectView bankSave(@ModelAttribute BankDto newBank) {
+    @PostMapping({"/new/bank"})
+    public RedirectView bankSave(@ModelAttribute BankDto newBank) throws CreditProcessorException {
         logger.info("new bank {}", newBank.getName());
-        bankService.save(newBank);
-        return new RedirectView("/bankService", true);
+        bankService.create(newBank);
+        return new RedirectView("/bank", true);
     }
 
     @GetMapping({"/bank/{id}"})
@@ -110,14 +102,44 @@ public class BankController {
         return new RedirectView("/bank/" + bankId, true);
     }
 
-    @GetMapping({"/credit/{id}"})
-    public String creditView(
-            Model model,
+    @GetMapping({"/delete/bank/{id}"})
+    public RedirectView deleteBank(
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
-        CreditDto credit = creditService.findById(id);
-        model.addAttribute("credit", credit);
-        return "credit.html";
+        logger.info("delete bank  {}", id);
+        BankDto bank = bankService.findById(id);
+        bankService.delete(bank);
+        return new RedirectView("/bank", true);
+    }
+
+    @GetMapping({"/edit/bank/{id}"})
+    public RedirectView editBank(
+            Model model,
+            @PathVariable(name = "id") String id,
+            RedirectAttributes attributes,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
+        logger.info("edit bank  {}", id);
+        attributes.addFlashAttribute("newName", new String());
+        return new RedirectView(request.getHeader("referer"), true);
+    }
+
+    @PostMapping({"/save/bank/{id}"})
+    public RedirectView creditSave(
+            @ModelAttribute BankDto newBank,
+            @PathVariable(name = "id") String id,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
+        BankDto bank = bankService.findById(id);
+        logger.info("Change bank name {} -> {}", bank.getName(), newBank.getName());
+        bank.setName(newBank.getName());
+        bankService.save(bank);
+        return new RedirectView(request.getHeader("referer"), true);
+    }
+
+    @GetMapping({"/bank/list"})
+    public String bankListView() {
+        return "bank_list.html";
     }
 
     @ModelAttribute("bankList")

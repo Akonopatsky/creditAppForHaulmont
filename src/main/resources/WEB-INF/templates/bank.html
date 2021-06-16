@@ -9,19 +9,44 @@
 <body>
 <div class="wrapper">
     <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+
     <div class="col-100">
         <h1>Bank</h1>
         <div class="list" th:insert="/blanks/bank_blanks.html :: bank"></div>
 
+        <div th:if="${newName}">
+            <div class="container">
+                <form action="#" th:action="@{/save/bank/__${bank.id}__/}"
+                      th:object="${newBank}" method="post">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="bank_name">New bank name: </label>
+                        </div>
+                        <div class="col-75">
+                            <input id="bank_name" type="text" th:field="*{name}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" style="width:100px" name="save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-100">
+            <a class="act_button" th:href="@{/edit/bank/__${bank.id}__}">edit</d></a>
+            <a class="act_button" th:href="@{/bank/__${bank.id}__/client}">add client</a>
+            <a class="act_button" th:href="@{/create/credit/bank/__${bank.Id}__}">new credit</a>
+            <a class="act_button" th:href="@{/delete/bank/__${bank.id}__}">delete</a>
+        </div>
     </div>
     <div class="col-100">
         <div class="col-50">
-            <a class="act_button" th:href="@{/bank/__${bank.id}__/client}">add client</a>
+
             <h1>List of client</h1>
-            <div class="list" th:insert="/blanks/client_blanks.html :: clientList"></div>
+            <div class="list" th:insert="/clientservice.html :: clientList"></div>
         </div>
         <div class="col-50">
-            <a class="act_button" th:href="@{/create/credit/bank/__${bank.Id}__}">New credit</a>
+
             <h1>List of credit</h1>
             <div class="list" th:insert="/blanks/credit_blanks.html :: creditList"></div>
         </div>

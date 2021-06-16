@@ -37,7 +37,7 @@ public class CreditOffer {
     @Column(name = "beginDate")
     private LocalDate beginDate;
 
-    @OneToMany(mappedBy = "creditOffer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "creditOffer", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Payment> paymentList = new ArrayList<>();
 
     @Column(name = "payStrategy")

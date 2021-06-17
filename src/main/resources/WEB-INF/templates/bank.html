@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+    <div th:insert="/main_blanks.html :: top_menu"></div>
 
     <div class="col-100">
         <h1>Bank</h1>
@@ -52,7 +52,16 @@
         <div class="col-50">
 
             <h1>List of credit</h1>
-            <div class="list" th:insert="/blanks/credit_blanks.html :: creditList"></div>
+            <div th:fragment="creditList">
+                <ul th:each="credit : ${creditList}">
+                    <li><a th:href="@{/credit/__${credit.id}__}"
+                           target="_self"
+                           th:text="'period: ' + ${credit.period} +
+               ' limit: ' + ${credit.getCreditLimitFormatted()} +
+               ' rate: ' + ${credit.interestRate}"> credit </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

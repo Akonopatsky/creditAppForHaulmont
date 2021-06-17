@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div th:insert="/blanks/main_blanks.html :: top_menu"></div>
+    <div th:insert="/main_blanks.html :: top_menu"></div>
     <h1>Choose client</h1>
     <div th:fragment="chooseClient">
         <ul th:each="client : ${clientList}">

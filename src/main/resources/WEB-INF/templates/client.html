@@ -81,7 +81,7 @@
         <div class="list">
             <ul th:each="bank : ${bankList}">
                 <li><a th:href="@{/client/__${client.id}__/bank/__${bank.id}__/credit}"
-                       th:text=" ${bank.name}">bank name </a>
+                       th:text="'bank: '+ ${bank.name}">bank name </a>
                 </li>
             </ul>
         </div>

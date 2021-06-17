@@ -138,6 +138,10 @@ input[type=text], select {
     resize: vertical;
 }
 
+button[type=submit] {
+    border-radius: 4px;
+    border: 1px solid #559655;
+}
 
 label {
     padding: 6px 6px 6px 0;

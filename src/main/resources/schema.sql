@@ -1,11 +1,23 @@
-create table banks
+CREATE TABLE IF NOT EXISTS banks
 (
     id   binary(255)  not null,
     name varchar(255) not null,
     primary key (id)
 );
 
-create table clients
+CREATE TABLE IF NOT EXISTS credits
+(
+    id            binary(255) not null,
+    credit_limit  double,
+    interest_rate double,
+    period        integer,
+    bank_id       binary(255),
+    primary key (id),
+    foreign key (bank_id)
+        references banks (id) on delete cascade
+);
+
+CREATE TABLE IF NOT EXISTS clients
 (
     id              binary(255) not null,
     email           varchar(255),
@@ -15,24 +27,18 @@ create table clients
     primary key (id)
 );
 
-create table bank_client
+CREATE TABLE IF NOT EXISTS bank_client
 (
     bank_id   binary(255) not null,
     client_id binary(255) not null,
-    primary key (bank_id, client_id)
+    primary key (bank_id, client_id),
+    foreign key (client_id)
+        references clients (id) on delete cascade,
+    foreign key (bank_id)
+        references banks (id) on delete restrict
 );
 
-create table credits
-(
-    id            binary(255) not null,
-    credit_limit  double,
-    interest_rate double,
-    period        integer,
-    bank_id       binary(255),
-    primary key (id)
-);
-
-create table credit_offers
+CREATE TABLE IF NOT EXISTS credit_offers
 (
     id            binary(255) not null,
     begin_date    date,
@@ -40,10 +46,14 @@ create table credit_offers
     pay_strategy  varchar(255),
     client_id     binary(255),
     credit_id     binary(255),
-    primary key (id)
+    primary key (id),
+    foreign key (client_id)
+        references clients on delete cascade,
+    foreign key (credit_id)
+        references credits on delete cascade
 );
 
-create table payments
+CREATE TABLE IF NOT EXISTS payments
 (
     id                 binary(255) not null,
     amount_of_body     double,
@@ -51,20 +61,9 @@ create table payments
     amount_of_paymant  double,
     date               date,
     offer_id           binary(255),
-    primary key (id)
+    primary key (id),
+    foreign key (offer_id)
+        references credit_offers on delete cascade
 );
 
-alter table credit_offers
-    add constraint FKjaio5buq4xxw081c8ill1b5da
-        foreign key (credit_id)
-            references credits;
 
-alter table credits
-    add constraint FKt3c6cd1lq2lsiclu6bh2pux2y
-        foreign key (bank_id)
-            references banks;
-
-alter table payments
-    add constraint FKje8kfcgubvupfdnhaj1keyy47
-        foreign key (offer_id)
-            references credit_offers;

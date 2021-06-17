@@ -45,9 +45,9 @@ public class PaymentDto {
     public String toString() {
         DecimalFormat dF = new DecimalFormat("#.##");
         return "Payment " +
-                "date=" + date +
-                "  amountOfPayment=" + dF.format(amountOfPayment) +
-                "  amountOfBody=" + dF.format(amountOfBody) +
-                "  amountOfInterest=" + dF.format(amountOfInterest);
+                "date: " + date +
+                "  payment = " + dF.format(amountOfPayment) +
+                "  body = " + dF.format(amountOfBody) +
+                "  interest = " + dF.format(amountOfInterest);
     }
 }

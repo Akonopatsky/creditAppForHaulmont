@@ -27,7 +27,6 @@ public class CreditOffer {
     private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER)
-/*    @JoinColumn(name = "credit_id")*/
     private Credit credit;
 
     @Column(name = "creditAmount")

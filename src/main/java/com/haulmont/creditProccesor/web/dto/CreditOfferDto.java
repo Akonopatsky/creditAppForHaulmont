@@ -7,18 +7,17 @@ import java.util.List;
 public class CreditOfferDto {
 
     private String id;
-
     private String payStrategy;
-
     private String clientId;
-
     private String creditId;
-
     private double creditAmount;
-
     private LocalDate beginDate;
-
     private List<PaymentDto> paymentList;
+
+    public String getInterest() {
+        DecimalFormat dF = new DecimalFormat("#.##");
+        return dF.format(paymentList.stream().mapToDouble(payment -> payment.getAmountOfInterest()).sum());
+    }
 
     public String getId() {
         return id;

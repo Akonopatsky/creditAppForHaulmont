@@ -4,6 +4,7 @@ import com.haulmont.creditProccesor.model.Bank;
 import com.haulmont.creditProccesor.web.dto.BankDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,9 @@ public class BankMapper {
     }
 
     public List<BankDto> convertToDtoList(List<Bank> bankList) {
-        return bankList.stream().map(bank -> convertToDto(bank)).collect(Collectors.toList());
+        return bankList.stream().map(bank -> convertToDto(bank))
+                .sorted(Comparator.comparing(BankDto::getName))
+                .collect(Collectors.toList());
     }
 
     public BankDto convertToDto(Bank bank) {

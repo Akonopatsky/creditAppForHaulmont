@@ -4,6 +4,7 @@ import com.haulmont.creditProccesor.model.Client;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,8 @@ public class ClientMapper {
     }
 
     public List<ClientDto> convertToDtoList(List<Client> clientSet) {
-        return clientSet.stream().map(this::convertToDto).collect(Collectors.toList());
+        return clientSet.stream().map(this::convertToDto)
+                .sorted(Comparator.comparing(ClientDto::getName))
+                .collect(Collectors.toList());
     }
-
 }

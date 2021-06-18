@@ -7,6 +7,7 @@ import com.haulmont.creditProccesor.storage.dao.CreditDao;
 import com.haulmont.creditProccesor.storage.dao.CreditOfferDao;
 import com.haulmont.creditProccesor.storage.repositities.*;
 import org.javamoney.moneta.Money;
+import org.javamoney.moneta.spi.AbstractAmountFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.money.MonetaryAmount;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -31,7 +33,8 @@ class DaoTests {
     private CreditDao<Credit> creditDao;
     @Autowired
     private BankDao<Bank> bankDao;
-
+    @Autowired
+    private MoneyFactory factory;
 
     @Test
     @Transactional
@@ -39,7 +42,7 @@ class DaoTests {
         LogManager.getLogManager().reset();
         Bank bank = new Bank("bank1");
         bankDao.save(bank);
-        Money creditAmount = Money.of(100_000, "RUB");
+        Money creditAmount =factory.getMoneyOf(100_000);
         Credit credit = new Credit(
                 creditAmount,
                 120,
@@ -57,7 +60,7 @@ class DaoTests {
                 .client(client)
                 .payStrategy(new PayStrategyAnnuity())
                 .build();
-        Money monthAmount = Money.of(14676.33, "RUB");
+        Money monthAmount = factory.getMoneyOf(14676.33);
         List<Payment> paymentList = creditOffer.getPaymentList();
         creditOfferDao.save(creditOffer);
         List<CreditOffer> creditOfferList = creditOfferDao.findAll();

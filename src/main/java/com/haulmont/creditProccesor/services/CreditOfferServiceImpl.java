@@ -7,7 +7,6 @@ import com.haulmont.creditProccesor.storage.dao.ClientDao;
 import com.haulmont.creditProccesor.storage.dao.CreditDao;
 import com.haulmont.creditProccesor.storage.dao.CreditOfferDao;
 import com.haulmont.creditProccesor.web.dto.ClientDto;
-import com.haulmont.creditProccesor.web.dto.CreditDto;
 import com.haulmont.creditProccesor.web.dto.CreditOfferDto;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class CreditOfferServiceImpl implements CreditOfferService {
@@ -27,13 +25,15 @@ public class CreditOfferServiceImpl implements CreditOfferService {
     private final ClientDao<Client> clientDao;
     private final CreditOfferMapper creditOfferMapper;
     private final PayStrategyRegistry<String, PayStrategy> payStrategyRegistry;
+    private final MoneyFactory moneyFactory;
 
-    public CreditOfferServiceImpl(CreditOfferDao<CreditOffer> creditOfferDao, CreditDao<Credit> creditDao, ClientDao<Client> clientDao, CreditOfferMapper creditOfferMapper, PayStrategyRegistry<String, PayStrategy> payStrategyRegistry) {
+    public CreditOfferServiceImpl(CreditOfferDao<CreditOffer> creditOfferDao, CreditDao<Credit> creditDao, ClientDao<Client> clientDao, CreditOfferMapper creditOfferMapper, PayStrategyRegistry<String, PayStrategy> payStrategyRegistry, MoneyFactory moneyFactory) {
         this.creditOfferDao = creditOfferDao;
         this.creditDao = creditDao;
         this.clientDao = clientDao;
         this.creditOfferMapper = creditOfferMapper;
         this.payStrategyRegistry = payStrategyRegistry;
+        this.moneyFactory = moneyFactory;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CreditOfferServiceImpl implements CreditOfferService {
         Credit credit = creditDao.findById(creditOfferDto.getCreditId());
         CreditOffer creditOffer = new CreditOffer.OfferBuilder()
                 .payStrategy(payStrategyRegistry.get(creditOfferDto.getPayStrategy().toUpperCase()))
-                .creditAmount(Money.of(creditOfferDto.getCreditAmount(), "RUB"))
+                .creditAmount(moneyFactory.getMoneyOf(creditOfferDto.getCreditAmount()))
                 .beginDate(creditOfferDto.getBeginDate())
                 .credit(credit)
                 .client(client)

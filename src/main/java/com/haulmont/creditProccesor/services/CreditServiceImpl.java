@@ -4,13 +4,13 @@ import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
 import com.haulmont.creditProccesor.model.Bank;
 import com.haulmont.creditProccesor.model.Client;
 import com.haulmont.creditProccesor.model.Credit;
+import com.haulmont.creditProccesor.model.MoneyFactory;
 import com.haulmont.creditProccesor.services.mappers.BankMapper;
 import com.haulmont.creditProccesor.services.mappers.CreditMapper;
 import com.haulmont.creditProccesor.storage.dao.BankDao;
 import com.haulmont.creditProccesor.storage.dao.ClientDao;
 import com.haulmont.creditProccesor.storage.dao.CreditDao;
 import com.haulmont.creditProccesor.web.dto.CreditDto;
-import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,13 +29,15 @@ public class CreditServiceImpl implements CreditService {
     private final BankDao<Bank> bankDao;
     private final ClientDao<Client> clientDao;
     private final CreditDao<Credit> creditDao;
+    private final MoneyFactory moneyFactory;
 
-    public CreditServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client> clientDao, CreditDao<Credit> creditDao) {
+    public CreditServiceImpl(BankMapper bankMapper, CreditMapper creditMapper, BankDao<Bank> bankDao, ClientDao<Client> clientDao, CreditDao<Credit> creditDao, MoneyFactory moneyFactory) {
         this.bankMapper = bankMapper;
         this.creditMapper = creditMapper;
         this.bankDao = bankDao;
         this.clientDao = clientDao;
         this.creditDao = creditDao;
+        this.moneyFactory = moneyFactory;
     }
 
     @Override
@@ -67,7 +69,7 @@ public class CreditServiceImpl implements CreditService {
     @Transactional
     public void save(CreditDto creditDto) throws CreditProcessorException {
         Credit credit = creditDao.findById(creditDto.getId());
-        credit.setCreditLimit(Money.of(creditDto.getCreditLimit(), "RUB"));
+        credit.setCreditLimit(moneyFactory.getMoneyOf(creditDto.getCreditLimit()));
         credit.setInterestRate(creditDto.getInterestRate());
         credit.setPeriod(Period.ofMonths(creditDto.getPeriod()));
         creditDao.save(credit);

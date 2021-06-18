@@ -1,6 +1,7 @@
 package com.haulmont.creditProccesor.web.controllers;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.model.Bank;
 import com.haulmont.creditProccesor.services.BankService;
 import com.haulmont.creditProccesor.services.ClientService;
 import com.haulmont.creditProccesor.services.CreditService;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -144,6 +146,7 @@ public class BankController {
     @ModelAttribute("bankList")
     List<BankDto> getAllBanks() {
         return bankService.findAll();
+
     }
 
     @ModelAttribute("newBank")

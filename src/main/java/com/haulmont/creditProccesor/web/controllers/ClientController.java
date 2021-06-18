@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -55,6 +56,7 @@ public class ClientController {
         ClientDto client = clientService.findById(id);
         List<BankDto> bankList = bankService.findByClient(client.getId());
         List<CreditOfferDto> offerList = creditOfferService.findByClient(client);
+        bankList.sort(Comparator.comparing(BankDto::getName));
         model.addAttribute("client", client);
         model.addAttribute("bankList", bankList);
         model.addAttribute("offerList", offerList);

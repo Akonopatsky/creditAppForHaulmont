@@ -73,7 +73,7 @@
 	<build>
 		<resources>
 			<resource>
-				<directory>src/main/webapp</directory>
+				<directory>target</directory>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>

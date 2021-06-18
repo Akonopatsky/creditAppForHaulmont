@@ -36,12 +36,11 @@
     <h1>List of banks</h1>
     <div th:fragment="BankList">
         <ul th:each="bank : ${bankList}">
-            <li>bank: <a th:href="@{/bank/{id}(id=${bank.id})}"
-                   th:text="${bank.name}">bank name </a></th>
+            <li><a th:href="@{/bank/{id}(id=${bank.id})}"
+                   th:text="'bank: ' + ${bank.name}">bank name </a>
             </li>
         </ul>
     </div>
-</div>
 </div>
 </body>
 

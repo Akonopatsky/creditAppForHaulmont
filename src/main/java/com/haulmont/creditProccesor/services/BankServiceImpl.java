@@ -89,4 +89,12 @@ public class BankServiceImpl implements BankService {
         Bank bank = bankDao.findById(bankDto.getId());
         bankDao.delete(bank);
     }
+
+    @Override
+    public void bankRemoveClient(String bankId, String clientId) throws CreditProcessorException {
+        Bank bank = bankDao.findById(bankId);
+        Client client = clientDao.findById(clientId);
+        bank.removeClient(client);
+        bankDao.save(bank);
+    }
 }

@@ -73,7 +73,7 @@
     <div class="col-100">
         <a class="act_button" th:href="@{/client/__${client.id}__/bank}">add bank</a>
         <a class="act_button" th:href="@{/edit/client/__${client.id}__}">edit</a>
-        <a class="act_button" th:href="@{/delete/client/__${client.id}__}">delete</a>
+        <a class="act_button" th:href="@{/delete/client/__${client.id}__}">delete client</a>
     </div>
 
     <div class="col-50">
@@ -92,7 +92,7 @@
             <h1 th:text="'Bank: ' + ${bank.name} + ' credits: '">Available credits </h1>
             <ul th:each="credit : ${creditList}">
                 <li><a th:href="@{/client/__${client.id}__/credit/__${credit.id}__}"
-                       th:object="${choosenCredit}"
+                       th:object="${chosenCredit}"
                        target="_self"
                        th:text="'period: ' + ${credit.period} + ' limit: ' + ${credit.getCreditLimitFormatted()} + ' rate: ' + ${credit.interestRate}">
                     credit </a>
@@ -100,19 +100,19 @@
             </ul>
         </div>
 
-        <div th:if="${choosenCredit}">
+        <div th:if="${chosenCredit}">
             <h1>New credit Offer</h1>
-            <div th:object="${choosenCredit}">
+            <div th:object="${chosenCredit}">
                 <p>limit: <span th:text="*{getCreditLimitFormatted()}"> 500 000 </span></p>
                 <p>interest rate: <span th:text="*{interestRate}"> 15 </span>%</p>
                 <p>period: <span th:text="*{period}"> 15 </span> month</p>
             </div>
             <div class="container">
-                <form action="#" th:action="@{/save/offer/client/__${client.id}__/credit/__${choosenCredit.id}__}"
+                <form action="#" th:action="@{/save/offer/client/__${client.id}__/credit/__${chosenCredit.id}__}"
                       th:object="${offer}" method="post">
                     <div class="row">
                         <div class="col-25">
-                            <label for="amount" th:text="'Amount limit '+ ${choosenCredit.creditLimit}">Amount
+                            <label for="amount" th:text="'Limit '+ ${chosenCredit.getCreditLimitFormatted()}">Amount
                                 limit:</label>
                         </div>
                         <div class="col-75">

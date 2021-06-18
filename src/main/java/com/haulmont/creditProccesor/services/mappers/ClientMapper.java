@@ -12,8 +12,9 @@ import java.util.stream.Collectors;
 public class ClientMapper {
     public Client getNewClient(ClientDto clientDto) {
         return new Client(clientDto.getName(),
+                clientDto.getPassportNumber(),
                 clientDto.getPhoneNumber(),
-                clientDto.getPassportNumber());
+                clientDto.getEmail());
     }
 
     public ClientDto convertToDto(Client client) {

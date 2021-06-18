@@ -1,6 +1,7 @@
 package com.haulmont.creditProccesor.web.controllers;
 
 import com.haulmont.creditProccesor.Exceptions.CreditProcessorException;
+import com.haulmont.creditProccesor.model.PayStrategyAnnuity;
 import com.haulmont.creditProccesor.model.PayStrategyRegistry;
 import com.haulmont.creditProccesor.services.*;
 import com.haulmont.creditProccesor.web.dto.BankDto;
@@ -29,10 +30,16 @@ public class ClientController {
     private final BankService bankService;
     private final CreditService creditService;
     private final CreditOfferService creditOfferService;
-    private final PayStrategyRegistry payStrategyRegistry;
+    private final PayStrategyRegistry<String, PayStrategyAnnuity> payStrategyRegistry;
 
 
-    public ClientController(ClientService clientService, BankService bankService, CreditService creditService, CreditOfferService creditOfferService, PayStrategyRegistry payStrategyRegistry) {
+    public ClientController(
+            ClientService clientService,
+            BankService bankService,
+            CreditService creditService,
+            CreditOfferService creditOfferService,
+            PayStrategyRegistry<String, PayStrategyAnnuity> payStrategyRegistry
+    ) {
         this.clientService = clientService;
         this.bankService = bankService;
         this.creditService = creditService;
@@ -71,9 +78,11 @@ public class ClientController {
     }
 
     @PostMapping({"/save/client/{id}"})
-    public RedirectView clientSave(@ModelAttribute ClientDto editClient,
-                                   @PathVariable(name = "id") String id,
-                                   HttpServletRequest request) throws CreditProcessorException {
+    public RedirectView clientSave(
+            @ModelAttribute ClientDto editClient,
+            @PathVariable(name = "id") String id,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
         editClient.setId(id);
         logger.info("new client {}", editClient);
         clientService.save(editClient);
@@ -90,7 +99,7 @@ public class ClientController {
         model.addAttribute("client", client);
         List<BankDto> bankList = bankService.findAll();
         model.addAttribute("bankList", bankList);
-        return "chooseBank.html";
+        return "chooseAddBank.html";
     }
 
     @GetMapping({"/bind/client/{clientId}/bank/{bankId}"})
@@ -98,7 +107,7 @@ public class ClientController {
             @PathVariable(name = "clientId") String clientId,
             @PathVariable(name = "bankId") String bankId
     ) throws CreditProcessorException {
-        logger.info("client {} add bank {}", clientId);
+        logger.info("client {} add bank {}", clientId, bankId);
         bankService.bankAddClient(bankId, clientId);
         return new RedirectView("/client/" + clientId, true);
     }
@@ -127,7 +136,7 @@ public class ClientController {
             RedirectAttributes attributes,
             HttpServletRequest request
     ) throws CreditProcessorException {
-        attributes.addFlashAttribute("choosenCredit", creditService.findById(creditId));
+        attributes.addFlashAttribute("chosenCredit", creditService.findById(creditId));
         attributes.addFlashAttribute("payStrategyList", payStrategyRegistry.getAllKeys());
         return new RedirectView(request.getHeader("referer"), true);
     }
@@ -172,7 +181,7 @@ public class ClientController {
 
     @ModelAttribute("strategyList")
     public List<String> strategyList() {
-        return new ArrayList<>(payStrategyRegistry.getAllKeys());
+        return new ArrayList<String>(payStrategyRegistry.getAllKeys());
     }
 
     @ModelAttribute("offer")

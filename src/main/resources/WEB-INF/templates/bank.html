@@ -37,10 +37,11 @@
             </div>
         </div>
         <div class="col-100">
-            <a class="act_button" th:href="@{/edit/bank/__${bank.id}__}">edit</d></a>
-            <a class="act_button" th:href="@{/bank/__${bank.id}__/client}">add client</a>
+            <a class="act_button" th:href="@{/edit/bank/__${bank.id}__}">edit name</a>
+            <a class="act_button" th:href="@{/add/bank/__${bank.id}__/client}">add client</a>
+            <a class="act_button" th:href="@{/remove/bank/__${bank.id}__/client}">remove client</a>
             <a class="act_button" th:href="@{/create/credit/bank/__${bank.Id}__}">new credit</a>
-            <a class="act_button" th:href="@{/delete/bank/__${bank.id}__}">delete</a>
+            <a class="act_button" th:href="@{/delete/bank/__${bank.id}__}">delete bank</a>
         </div>
     </div>
     <div class="col-100">
@@ -50,7 +51,6 @@
             <div class="list" th:insert="/clientService.html :: clientList"></div>
         </div>
         <div class="col-50">
-
             <h1>List of credit</h1>
             <div th:fragment="creditList">
                 <ul th:each="credit : ${creditList}">

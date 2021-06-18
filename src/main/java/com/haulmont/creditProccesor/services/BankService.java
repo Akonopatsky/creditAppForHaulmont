@@ -19,4 +19,6 @@ public interface BankService {
     boolean bankAddClient(String bankId, String clientId) throws CreditProcessorException;
 
     void delete(BankDto bank) throws CreditProcessorException;
+
+    void bankRemoveClient(String bankId, String clientId) throws CreditProcessorException;
 }

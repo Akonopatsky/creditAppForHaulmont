@@ -53,7 +53,7 @@ public class BankController {
             @PathVariable(name = "id") String id,
             RedirectAttributes attributes,
             HttpServletRequest request
-    ) throws CreditProcessorException {
+    ) {
         logger.info("edit bank  {}", id);
         attributes.addFlashAttribute("newName", new String());
         return new RedirectView(request.getHeader("referer"), true);
@@ -73,8 +73,8 @@ public class BankController {
         return "bank.html";
     }
 
-    @GetMapping({"/bank/{id}/client"})
-    public String chooseClient(
+    @GetMapping({"/add/bank/{id}/client"})
+    public String chooseAddClient(
             Model model,
             @PathVariable(name = "id") String id
     ) throws CreditProcessorException {
@@ -82,7 +82,19 @@ public class BankController {
         model.addAttribute("bank", bank);
         List<ClientDto> clientList = clientService.findAll();
         model.addAttribute("clientList", clientList);
-        return "chooseClient.html";
+        return "chooseAddClient.html";
+    }
+
+    @GetMapping({"/remove/bank/{id}/client"})
+    public String chooseRemoveClient(
+            Model model,
+            @PathVariable(name = "id") String id
+    ) throws CreditProcessorException {
+        BankDto bank = bankService.findById(id);
+        model.addAttribute("bank", bank);
+        List<ClientDto> clientList = clientService.findByBank(bank.getId());
+        model.addAttribute("clientList", clientList);
+        return "chooseRemoveClient.html";
     }
 
     @GetMapping({"/bind/bank/{bankId}/client/{clientId}"})
@@ -91,8 +103,19 @@ public class BankController {
             @PathVariable(name = "clientId") String clientId,
             HttpServletRequest request
     ) throws CreditProcessorException {
-        logger.info("bank {} add client {}", bankId);
+        logger.info("bank {} add client {}", bankId, clientId);
         bankService.bankAddClient(bankId, clientId);
+        return new RedirectView("/bank/" + bankId, true);
+    }
+
+    @GetMapping({"/unBind/bank/{bankId}/client/{clientId}"})
+    public RedirectView unBindBankAndClient(
+            @PathVariable(name = "bankId") String bankId,
+            @PathVariable(name = "clientId") String clientId,
+            HttpServletRequest request
+    ) throws CreditProcessorException {
+        logger.info("bank {} remove client {}", bankId, clientId);
+        bankService.bankRemoveClient(bankId, clientId);
         return new RedirectView("/bank/" + bankId, true);
     }
 
@@ -110,7 +133,7 @@ public class BankController {
             @PathVariable(name = "bankId") String bankId
     ) throws CreditProcessorException {
         newCredit.setBankId(bankId);
-        logger.info("new credit {} , {}, {}", newCredit);
+        logger.info("new credit {}", newCredit);
         creditService.createCredit(newCredit);
         return new RedirectView("/bank/" + bankId, true);
     }

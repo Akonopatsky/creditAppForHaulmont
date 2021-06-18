@@ -20,14 +20,14 @@ public class Client {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "passportNumber")
+    private String passportNumber;
+
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "passportNumber")
-    private String passportNumber;
 
     @ManyToMany(mappedBy = "clientSet")
     private final Set<Bank> bankSet = new HashSet<>();
@@ -35,17 +35,11 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String phoneNumber, String passportNumber) {
+    public Client(String name, String passportNumber, String phoneNumber, String email) {
         this.name = name;
-        this.phoneNumber = phoneNumber;
         this.passportNumber = passportNumber;
-    }
-
-    public Client(UUID id, String name, String phoneNumber, String passportNumber) {
-        this.id = id;
-        this.name = name;
         this.phoneNumber = phoneNumber;
-        this.passportNumber = passportNumber;
+        this.email = email;
     }
 
     public UUID getId() {

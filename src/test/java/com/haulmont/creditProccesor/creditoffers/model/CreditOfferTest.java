@@ -23,7 +23,7 @@ class CreditOfferTest {
                 creditAmount,
                 120,
                 Period.ofMonths(12));
-        Client client = new Client("testClient", "33333 33", "2322214124");
+        Client client = new Client("testClient", "33333 33", "2322214124", "dff@mail.ru");
         CreditOffer creditOffer = new CreditOffer.OfferBuilder()
                 .beginDate(LocalDate.of(2021, 5, 29))
                 .credit(credit)

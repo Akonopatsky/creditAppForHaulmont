@@ -18,7 +18,7 @@
 }
 
 .act_button {
-    width: 80px;
+    width: 100px;
     height: 17px;
     border: 1px solid #100;
     display: inline-block;
@@ -27,6 +27,19 @@
     text-align: center;
     color: #500;
     border-radius: 5px;
+}
+
+.small_button {
+    width: 50px;
+    height: 12px;
+    border: 1px solid #100;
+    display: inline-block;
+    padding: 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 9px;
+    color: #500;
+    border-radius: 3px;
 }
 
 .act_button:hover {
@@ -103,7 +116,6 @@
     padding-right: 10px;
     padding-left: 10px;
     alignment: left;
-    color: slategray;
     color: darkslateblue;
 }
 

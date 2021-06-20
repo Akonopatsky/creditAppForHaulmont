@@ -53,7 +53,7 @@ public class BankController {
             HttpServletRequest request
     ) {
         logger.info("edit bank  {}", id);
-        attributes.addFlashAttribute("newName", new String());
+        attributes.addFlashAttribute("newName", "");
         return new RedirectView(request.getHeader("referer"), true);
     }
 

@@ -60,9 +60,8 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public List<CreditDto> findByBank(String id) throws CreditProcessorException {
-        List<CreditDto> creditDtoList = creditMapper.convertToDtoList(
+        return creditMapper.convertToDtoList(
                 new ArrayList<>(bankDao.findById(id).getCreditSet()));
-        return creditDtoList;
     }
 
     @Override

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Credit offer</title>
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="/blanks/main_template.html :: top_menu"></div>
+    <div class="col-100">
+        <h1>Available credits</h1>
+        <div class="list" th:insert="/blanks/credit_blanks.html :: creditList"></div>
+    </div>
+
+</div>
+</body>
+</html>

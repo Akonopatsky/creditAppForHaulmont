@@ -1,10 +1,6 @@
 package com.haulmont.creditProccesor.creditoffers.model;
 
-import com.haulmont.creditProccesor.business.*;
-import com.haulmont.creditProccesor.business.model.Client;
-import com.haulmont.creditProccesor.business.model.Credit;
-import com.haulmont.creditProccesor.business.model.CreditOffer;
-import com.haulmont.creditProccesor.business.model.Payment;
+import com.haulmont.creditProcessor.model.*;
 import org.javamoney.moneta.Money;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +23,7 @@ class CreditOfferTest {
                 creditAmount,
                 120,
                 Period.ofMonths(12));
-        Client client = new Client("testClient", "33333 33", "2322214124");
+        Client client = new Client("testClient", "33333 33", "2322214124", "dff@mail.ru");
         CreditOffer creditOffer = new CreditOffer.OfferBuilder()
                 .beginDate(LocalDate.of(2021, 5, 29))
                 .credit(credit)

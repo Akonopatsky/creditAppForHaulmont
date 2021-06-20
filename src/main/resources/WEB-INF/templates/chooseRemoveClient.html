@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Choose client</title>
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="/main_blanks.html :: top_menu"></div>
+    <h1>Choose client</h1>
+    <div th:fragment="chooseClient">
+        <ul th:each="client : ${clientList}">
+            <li><a th:href="@{/unBind/bank/__${bank.id}__/client/__${client.id}__}"
+                   target="_self"
+                   th:text="${client.name}"
+                   th:method="put"> client name </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" media="all" href="../static/css/style.css" th:href="@{/static/css/style.css}"/>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Credit</title>
+</head>
+<body>
+<div class="wrapper">
+    <div th:insert="/main_blanks.html :: top_menu"></div>
+    <h1 style="color: #aa0000">Error</h1>
+    <div th:text="${error}">error</div>
+</div>
+</body>
+</html>

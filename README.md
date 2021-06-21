@@ -4,7 +4,7 @@ Test Task
 Prerequisites
 -------------
 
-* java 11
+* java 8
 * maven 3
 
 Build and Run
